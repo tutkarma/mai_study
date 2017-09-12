@@ -19,7 +19,6 @@ void TList::Push(Trapeze &obj) {
     if (index == 0) {
         this->PushFirst(obj);
     } else if (index == this->GetLength() - 1) {
-        std::cout << "In push in func" << std::endl;
         this->PushLast(obj);
     } else {
         this->PushAtIndex(obj, index);
@@ -29,19 +28,15 @@ void TList::Push(Trapeze &obj) {
 
 void TList::PushAtIndex(Trapeze &obj, int32_t ind)
 {
-    std::cout << "In func in ind" << std::endl;
     auto *newItem = new TListItem(obj);
     auto *tmp = this->head;
-    for(int32_t i = 0; i < ind; ++i){
-        std::cout << "idu po listu" << std::endl;
+    for(int32_t i = 1; i < ind; ++i){
         tmp = tmp->GetNext();
     }
-    std::cout << "stavlu item" << std::endl;
-    tmp->SetPrev(newItem);
-    newItem->SetNext(tmp);
-    tmp->GetPrev()->SetNext(newItem);
-    newItem->SetPrev(tmp->GetPrev());
-
+    newItem->SetNext(tmp->GetNext());
+    newItem->SetPrev(tmp);
+    tmp->SetNext(newItem);
+    tmp->GetNext()->SetPrev(newItem);
 }
 
 void TList::PushLast(Trapeze &obj)
@@ -84,14 +79,14 @@ Trapeze TList::Pop()
     std::cout << "Enter index = ";
     std::cin >> ind;
     Trapeze res;
-    if (ind > this->GetLength() || ind < 0 || this->IsEmpty()) {
+    if (ind > this->GetLength() - 1 || ind < 0 || this->IsEmpty()) {
         std::cout << "change index(pop)" << std::endl;
         return res;
     }
 
     if (ind == 0) {
         res = this->PopFirst();
-    } else if (ind == this->GetLength()) {
+    } else if (ind == this->GetLength() - 1) {
         res = this->PopLast();
     } else {
         res = this->PopAtIndex(ind);
@@ -107,10 +102,8 @@ Trapeze TList::PopAtIndex(int32_t ind)
         tmp = tmp->GetNext();
     }
     auto res = tmp->GetFigure();
-    auto *nextItem = tmp->GetNext();
-    auto *prevItem = tmp->GetPrev();
-    nextItem->SetPrev(prevItem);
-    prevItem->SetNext(nextItem);
+    tmp->GetNext()->SetPrev(tmp->GetPrev());
+    tmp->GetPrev()->SetNext(tmp->GetNext());
     delete tmp;
     return res;
 }
