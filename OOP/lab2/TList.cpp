@@ -28,8 +28,8 @@ void TList::Push(Trapeze &obj) {
 
 void TList::PushAtIndex(Trapeze &obj, int32_t ind)
 {
-    auto *newItem = new TListItem(obj);
-    auto *tmp = this->head;
+    TListItem *newItem = new TListItem(obj);
+    TListItem *tmp = this->head;
     for(int32_t i = 1; i < ind; ++i){
         tmp = tmp->GetNext();
     }
@@ -41,9 +41,8 @@ void TList::PushAtIndex(Trapeze &obj, int32_t ind)
 
 void TList::PushLast(Trapeze &obj)
 {
-    std::cout << "In push last" << std::endl;
-    auto *newItem = new TListItem(obj);
-    auto *tmp = this->head;
+    TListItem *newItem = new TListItem(obj);
+    TListItem *tmp = this->head;
 
     while (tmp->GetNext() != nullptr) {
         tmp = tmp->GetNext();
@@ -54,8 +53,8 @@ void TList::PushLast(Trapeze &obj)
 
 void TList::PushFirst(Trapeze &obj)
 {
-    auto *newItem = new TListItem(obj);
-    auto *oldHead = this->head;
+    TListItem *newItem = new TListItem(obj);
+    TListItem *oldHead = this->head;
     this->head = newItem;
     if(oldHead != nullptr) {
         newItem->SetNext(oldHead);
@@ -80,7 +79,7 @@ Trapeze TList::Pop()
     std::cin >> ind;
     Trapeze res;
     if (ind > this->GetLength() - 1 || ind < 0 || this->IsEmpty()) {
-        std::cout << "change index(pop)" << std::endl;
+        std::cout << "Change index" << std::endl;
         return res;
     }
 
@@ -97,11 +96,11 @@ Trapeze TList::Pop()
 
 Trapeze TList::PopAtIndex(int32_t ind)
 {
-    auto *tmp = this->head;
+    TListItem *tmp = this->head;
     for(int32_t i = 0; i < ind; ++i) {
         tmp = tmp->GetNext();
     }
-    auto res = tmp->GetFigure();
+    Trapeze res = tmp->GetFigure();
     tmp->GetNext()->SetPrev(tmp->GetPrev());
     tmp->GetPrev()->SetNext(tmp->GetNext());
     delete tmp;
@@ -111,13 +110,13 @@ Trapeze TList::PopAtIndex(int32_t ind)
 Trapeze TList::PopFirst()
 {
     if (this->GetLength() == 1) {
-        auto res = this->head->GetFigure();
+        Trapeze res = this->head->GetFigure();
         delete this->head;
         this->head = nullptr;
         return res;
     }
-    auto *removed = this->head;
-    auto res = removed->GetFigure();
+    TListItem *removed = this->head;
+    Trapeze res = removed->GetFigure();
     this->head = this->head->GetNext();
     this->head->SetPrev(nullptr);
     delete removed;
@@ -127,17 +126,16 @@ Trapeze TList::PopFirst()
 Trapeze TList::PopLast()
 {
     if (this->GetLength() == 1) {
-        auto res = this->head->GetFigure();
+        Trapeze res = this->head->GetFigure();
         delete this->head;
         this->head = nullptr;
         return res;
     }
-
-    auto *tmp = this->head;
+    TListItem *tmp = this->head;
     while (tmp->GetNext()) {
         tmp = tmp->GetNext();
     }
-    auto res = tmp->GetFigure();
+    Trapeze res = tmp->GetFigure();
     tmp->GetPrev()->SetNext(nullptr);
     delete tmp;
     return res;
@@ -152,7 +150,7 @@ std::ostream& operator<<(std::ostream &os, const TList &list)
     }
 
 
-    auto *tmp = list.head;
+    TListItem *tmp = list.head;
     for(int32_t i = 0; tmp; ++i) {
         os << "idx: " << i << "   " << tmp->GetFigure() << std::endl;
         tmp = tmp->GetNext();
@@ -163,7 +161,7 @@ std::ostream& operator<<(std::ostream &os, const TList &list)
 
 TList::~TList()
 {
-    auto *tmp = head;
+    TListItem *tmp = head;
     while (head) {
         head = head->GetNext();
         delete tmp;

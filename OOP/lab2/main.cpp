@@ -5,7 +5,6 @@
 int main()
 {
     int act = 0;
-    //uint32_t kek = 0;
     TList list;
     Trapeze trapeze;
     std::cout << "Choose an operation:" << std::endl;
@@ -18,8 +17,6 @@ int main()
         case 1:
             std::cin >> trapeze;
             list.Push(trapeze);
-            //kek = list.GetLength();
-            //std::cout << kek << std::endl;
             break;
         case 2:
             trapeze = list.Pop();

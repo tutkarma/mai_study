@@ -25,16 +25,10 @@ TListItem* TListItem::GetPrev()
 
 void TListItem::SetNext(TListItem *item)
 {
-    /*auto *oldNext = this->next;
-    this->next = item;
-    item->next = oldNext;*/
     this->next = item;
 }
 
 void TListItem::SetPrev(TListItem *item)
 {
-    /*auto *oldPrev = this->prev;
-    this->prev = item;
-    item->prev = oldPrev;*/
     this->prev = item;
 }
