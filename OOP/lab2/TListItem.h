@@ -13,6 +13,7 @@ public:
     TListItem* GetPrev();
     void SetNext(TListItem *item);
     void SetPrev(TListItem *item);
+    friend std::ostream& operator<<(std::ostream &os, const TListItem &obj);
 
     virtual ~TListItem(){};
 

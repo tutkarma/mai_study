@@ -49,6 +49,7 @@ void TList::PushLast(Trapeze &obj)
     }
     tmp->SetNext(newItem);
     newItem->SetPrev(tmp);
+    newItem->SetNext(nullptr);
 }
 
 void TList::PushFirst(Trapeze &obj)
@@ -97,15 +98,18 @@ Trapeze TList::Pop()
 Trapeze TList::PopAtIndex(int32_t ind)
 {
     TListItem *tmp = this->head;
-    for(int32_t i = 0; i < ind; ++i) {
+    for(int32_t i = 0; i < ind - 1; ++i) {
         tmp = tmp->GetNext();
     }
-    Trapeze res = tmp->GetFigure();
-    tmp->GetNext()->SetPrev(tmp->GetPrev());
-    tmp->GetPrev()->SetNext(tmp->GetNext());
-    delete tmp;
+    TListItem *removed = tmp->GetNext();
+    Trapeze res = removed->GetFigure();
+    TListItem *nextItem = removed->GetNext();
+    tmp->SetNext(nextItem);
+    nextItem->SetPrev(tmp);
+    delete removed;
     return res;
 }
+
 
 Trapeze TList::PopFirst()
 {
@@ -115,11 +119,11 @@ Trapeze TList::PopFirst()
         this->head = nullptr;
         return res;
     }
-    TListItem *removed = this->head;
-    Trapeze res = removed->GetFigure();
+    TListItem *tmp = this->head;
+    Trapeze res = tmp->GetFigure();
     this->head = this->head->GetNext();
     this->head->SetPrev(nullptr);
-    delete removed;
+    delete tmp;
     return res;
 }
 
@@ -132,12 +136,13 @@ Trapeze TList::PopLast()
         return res;
     }
     TListItem *tmp = this->head;
-    while (tmp->GetNext()) {
+    while(tmp->GetNext()->GetNext()) {
         tmp = tmp->GetNext();
     }
-    Trapeze res = tmp->GetFigure();
-    tmp->GetPrev()->SetNext(nullptr);
-    delete tmp;
+    TListItem *removed = tmp->GetNext();
+    Trapeze res = removed->GetFigure();
+    tmp->SetNext(removed->GetNext());
+    delete removed;
     return res;
 }
 
@@ -152,7 +157,8 @@ std::ostream& operator<<(std::ostream &os, const TList &list)
 
     TListItem *tmp = list.head;
     for(int32_t i = 0; tmp; ++i) {
-        os << "idx: " << i << "   " << tmp->GetFigure() << std::endl;
+        os << "idx: " << i << "   ";
+        os << *tmp << std::endl;
         tmp = tmp->GetNext();
     }
 
@@ -161,11 +167,11 @@ std::ostream& operator<<(std::ostream &os, const TList &list)
 
 TList::~TList()
 {
-    TListItem *tmp = head;
+    TListItem *tmp;
     while (head) {
+        tmp = head;
         head = head->GetNext();
         delete tmp;
-        tmp = head;
     }
 }
 

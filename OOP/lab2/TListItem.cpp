@@ -32,3 +32,9 @@ void TListItem::SetPrev(TListItem *item)
 {
     this->prev = item;
 }
+
+std::ostream& operator<<(std::ostream &os, const TListItem &obj)
+{
+    os << "(" << obj.item << ")" << std::endl;
+    return os;
+}
