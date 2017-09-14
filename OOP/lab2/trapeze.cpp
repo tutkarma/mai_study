@@ -56,7 +56,7 @@ Trapeze::~Trapeze()
 
 std::ostream& operator <<(std::ostream &os, const Trapeze &obj)
 {
-    os << "(" << obj.small_base << " " << obj.big_base << " " << obj.l_side << " " << obj.r_side << ")" << std::endl;
+    os << obj.small_base << " " << obj.big_base << " " << obj.l_side << " " << obj.r_side;
     return os;
 }
 
