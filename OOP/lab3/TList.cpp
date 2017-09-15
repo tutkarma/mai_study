@@ -159,12 +159,15 @@ std::ostream& operator<<(std::ostream &os, const TList &list)
     return os;
 }
 
+void TList::Del()
+{
+    while(!this->IsEmpty()) {
+        this->PopFirst();
+        --length;
+    }
+}
+
 TList::~TList()
 {
-    std::shared_ptr<TListItem> tmp = head;
-    while (head) {
-        head = head->GetNext();
-        tmp = head;
-    }
 }
 
