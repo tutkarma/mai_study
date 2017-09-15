@@ -22,31 +22,32 @@ int main(void)
 {
     int32_t act = 0;
     TList list;
-    std::shared_ptr<Figure> ptr;
+    std::shared_ptr<Figure> ptr, ptr1, ptr2, ptr3;
     do {
         menu();
         std::cin >> act;
         switch(act) {
             case 1:
-                ptr = std::shared_ptr<Figure>(new Trapeze(std::cin));
-                list.Push(ptr);
+                ptr1 = std::make_shared<Trapeze>(std::cin);
+                list.Push(ptr1);
                 break;
             case 2:
-                ptr = std::shared_ptr<Figure>(new Rhomb(std::cin));
-                list.Push(ptr);
+                ptr2 = std::make_shared<Rhomb>(std::cin);
+                list.Push(ptr2);
                 break;
             case 3:
-                ptr = std::shared_ptr<Figure>(new Pentagon(std::cin));
-                list.Push(ptr);
+                ptr3 = std::make_shared<Pentagon>(std::cin);
+                list.Push(ptr3);
                 break;
             case 4:
                 ptr = list.Pop();
-                std::cout << ptr.use_count() << std::endl;
+                //std::cout << ptr.use_count() << std::endl;
                 break;
             case 5:
                 std::cout << list << std::endl;
                 break;
             case 0:
+                list.Del();
                 break;
             default:
                 std::cout << "Incorrect command" << std::endl;;
