@@ -40,7 +40,7 @@ Trapeze::Trapeze(const Trapeze& orig)
     r_side = orig.r_side;
 }
 
-double Trapeze::Square() //blet
+double Trapeze::Square()
 {
     if (big_base > small_base && small_base > 0) {
         return double(((small_base + big_base) / 2) * sqrt(l_side * l_side - 1 / 4 * 
