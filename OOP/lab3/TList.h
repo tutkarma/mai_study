@@ -16,7 +16,7 @@ public:
     uint32_t GetLength();
     std::shared_ptr<Figure> Pop();
     friend std::ostream& operator<<(std::ostream &os, const TList &list);
-    void Del();
+    //void Del();
     virtual ~TList();
 
 private:
