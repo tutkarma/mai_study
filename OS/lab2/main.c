@@ -11,10 +11,8 @@
 //Child: reads from P2_READ, writes on P2_WRITE
 #define P1_READ    0
 #define P2_WRITE   1
-#define P2_READ    2
-#define P1_WRITE   3
 
-int fd[4];
+int fd[2];
 
 int Fib(int n)
 {
@@ -31,7 +29,9 @@ int Fib(int n)
     if (pid1 == 0) { // child process 1 (fib(n-1))
         buf1 = Fib(n - 1);
         close(fd[P1_READ]);
-        write(fd[P2_WRITE], &buf1, sizeof(buf1));
+        if(write(fd[P2_WRITE], &buf1, sizeof(buf1)) == -1) {
+            perror("write");
+        }
         exit(0);
     } else if (pid1 < 0) {
         perror("fork");
@@ -40,7 +40,9 @@ int Fib(int n)
         if (pid2 == 0) { // child process 2 (fib(n-2))
             buf2 = Fib(n - 2);
             close(fd[P1_READ]);
-            write(fd[P2_WRITE], &buf2, sizeof(buf2));
+            if(write(fd[P2_WRITE], &buf2, sizeof(buf2)) == -1) {
+                perror("write");
+            }
             exit(0);
         } else if (pid2 < 0) {
             perror("fork");
@@ -54,12 +56,13 @@ int Fib(int n)
         perror("waitpid");
     }
 
-    close(fd[P2_READ]);
-    read(fd[P1_READ], &bufread1, sizeof(bufread1));
-    read(fd[P1_READ], &bufread2, sizeof(bufread2));
+    if(read(fd[P1_READ], &bufread1, sizeof(bufread1)) == -1) {
+        perror("read");
+    }
+    if(read(fd[P1_READ], &bufread2, sizeof(bufread2)) == -1) {
+        perror("read");
+    }
     res = bufread1 + bufread2;
-    close(fd[P1_READ]);
-    write(fd[P1_WRITE], &res, sizeof(res));
 
     return res;
 }
