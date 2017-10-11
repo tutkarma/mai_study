@@ -28,7 +28,7 @@ void TStackItem<T>::SetNext(TStackItem<T> *item)
 }
 
 template <class T>
-TStackItem<T> &TStackItem::GetNext() const
+TStackItem<T> &TStackItem<T>::GetNext() const
 {
     return *next;
 }
@@ -38,3 +38,9 @@ TStackItem<T>::~TStackItem()
 {
     delete value;
 }
+
+
+typedef unsigned char Byte;
+
+template class
+TStackItem<void *>;

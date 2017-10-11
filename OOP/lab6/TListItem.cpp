@@ -9,6 +9,9 @@ TListItem<T>::TListItem(const std::shared_ptr<T> &obj)
     this->prev = nullptr;
 }
 
+template <class T> TAllocationBlock
+TListItem<T>::listitem_allocator(sizeof(TListItem<T>), 100);
+
 template <class T>
 std::shared_ptr<T> TListItem<T>::GetFigure() const
 {
@@ -47,7 +50,7 @@ std::ostream& operator<<(std::ostream &os, const TListItem<T> &obj)
 }
 
 template <class T>
-void *TListItem<T>::operator new(int32_t size)
+void *TListItem<T>::operator new(size_t size)
 {
     return listitem_allocator.Allocate();
 }

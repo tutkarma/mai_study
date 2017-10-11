@@ -43,7 +43,7 @@ void TStack<T>::Pop()
 template <class T>
 T &TStack<T>::Top()
 {
-    return head->Get();
+    return head->Pop();
 }
 
 template <class T>
@@ -54,3 +54,8 @@ TStack<T>::~TStack()
         delete tmp;
     }
 }
+
+typedef unsigned char Byte;
+
+template class
+TStack<void *>;

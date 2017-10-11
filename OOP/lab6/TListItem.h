@@ -17,7 +17,7 @@ public:
     void SetPrev(std::shared_ptr<TListItem<T>> item);
     template <class A> friend std::ostream& operator<<(std::ostream &os, const TListItem<A> &obj);
 
-    void *operator new(int32_t size);
+    void *operator new(size_t size);
     void operator delete(void *ptr);
 
     virtual ~TListItem(){};

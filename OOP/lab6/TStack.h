@@ -23,4 +23,6 @@ public:
 private:
     TStackItem<T> *head;
     uint32_t count;
-}
+};
+
+#endif

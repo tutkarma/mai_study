@@ -19,13 +19,8 @@ public:
     virtual ~TAllocationBlock();
 
 private:
-//    int32_t _size;
-//    int32_t _count;
-
     Byte *_used_blocks;
     TStack<void *>_free_blocks;
-//    void *mem;
-//    int32_t _free_count;
 };
 
 #endif /* TALLOCATIONBLOCK_H */
