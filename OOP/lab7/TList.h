@@ -2,9 +2,10 @@
 #define TLIST_H
 
 #include <cstdint>
-#include "../figure/trapeze.h"
-#include "../figure/rhomb.h"
-#include "../figure/pentagon.h"
+#include "trapeze.h"
+#include "rhomb.h"
+#include "pentagon.h"
+#include "TStack.h"
 #include "TIterator.h"
 #include "TListItem.h"
 
@@ -15,7 +16,7 @@ public:
     TList();
     virtual ~TList();
 
-    void PushBack(F *figure);
+    void PushBack(F &figure);
     const bool IsEmpty() const;
     uint32_t GetLength();
     void Pop();

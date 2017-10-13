@@ -65,5 +65,4 @@ void TListItem<T>::operator delete(void *ptr)
 #include "TStack.h"
 #include "figure.h"
 template class TListItem<TStack<Figure>>;
-template class TListItem<Figure>;
-template std::ostream& operator<<(std::ostream &out, const TListItem<TStack<Figure>, Figure> &obj);
+template std::ostream& operator<<(std::ostream &out, const TListItem<TStack<Figure>> &obj);

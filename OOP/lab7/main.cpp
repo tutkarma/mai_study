@@ -2,9 +2,6 @@
 #include <memory>
 #include <cstdlib>
 #include <cstring>
-#include "../figure/trapeze.h"
-#include "../figure/rhomb.h"
-#include "../figure/pentagon.h"
 #include "TList.h"
 
 void menu()
@@ -23,36 +20,48 @@ void menu()
 int main(void)
 {
     int32_t act = 0;
-    TList<Figure> list;
-    std::shared_ptr<Figure> ptr;
+    TList<TStack<Figure>, Figure> list;
+    //std::shared_ptr<Figure> ptr;
     do {
         menu();
         std::cin >> act;
         switch(act) {
             case 1:
-                ptr = std::make_shared<Trapeze>(std::cin);
-                list.PushBack(ptr);
+                //ptr = std::make_shared<Trapeze>(std::cin);
+                //list.PushBack(new Trapeze(std::cin));
                 break;
             case 2:
-                ptr = std::make_shared<Rhomb>(std::cin);
-                list.PushBack(ptr);
+                //ptr = std::make_shared<Rhomb>(std::cin);
+                //list.PushBack(new Rhomb(std::cin));
                 break;
             case 3:
-                ptr = std::make_shared<Pentagon>(std::cin);
-                list.PushBack(ptr);
+                //ptr = std::make_shared<Pentagon>(std::cin);
+                //list.PushBack(new Pentagon(std::cin));
                 break;
             case 4:
                 list.Pop();
                 break;
             case 5:
+                double val;
+                std::cout << "1. Lesser or Equal" << std::endl;
+                std::cout << "2. Greater or Equal" << std::endl;
 
+                std::cin >> act;
+                std::cout << "Enter the value: " << std::endl;
+                std::cin >> val;
+
+                if(act == 1) {
+                    list.RemoveLesser(val);
+                } else if (act == 2) {
+                    list.RemoveGreater(val);
+                }
                 break;
             case 6:
                 std::cout << "1. Trapeze" << std::endl;
                 std::cout << "2. Rhomb" << std::endl;
                 std::cout << "3. Pentagon" << std::endl;
                 std::cin >> act;
-                list.RemoveByType(index);
+                list.RemoveByType(act);
                 break;
             case 7:
                 std::cout << list << std::endl;

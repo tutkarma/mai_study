@@ -2,7 +2,8 @@
 #define TLISTITEM_H
 
 #include <memory>
-#include "../allocate/TAllocationBlock.h"
+#include "TAllocationBlock.h"
+#include "TStack.h"
 
 template <class T>
 class TListItem

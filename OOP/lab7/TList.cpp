@@ -1,6 +1,7 @@
 #include "TList.h"
 #include <iostream>
 #include <cstdint>
+#include "TStack.h"
 
 template <class T, class F>
 TList<T, F>::TList()
@@ -10,23 +11,23 @@ TList<T, F>::TList()
 }
 
 template <class T, class F>
-void TList<T, F>::PushBack(const F& item)
+void TList<T, F>::PushBack(F &figure)
 {
     std::shared_ptr<TListItem<T>> tmp = this->head;
-    TListItem *newelem = new TListItem<T>();
+    TListItem<T> *newelem = new TListItem<T>();
     std::shared_ptr<TListItem<T>> newElem(newelem);
     if (this->IsEmpty()) {
         tmp = newElem;
-        tmp->next = nullptr;
-        tmp->prev = nullptr;
+        tmp->GetNext() = nullptr;
+        tmp->GetPrev() = nullptr;
     } else {
-        while(tmp->next != nullptr)
-            tmp = tmp->next;
-        if (tmp->item->count >= 4) {
-            tmp->next = newElem;
+        while(tmp->GetNext() != nullptr)
+            tmp = tmp->GetNext();
+        if (tmp->GetFigure()->GetSize() >= 4) {
+            tmp->GetNext() = newElem;
         }
     }
-    tmp->item->Push(figure);
+    tmp->GetFigure()->Push(figure);
     ++length;
 }
 
@@ -50,10 +51,10 @@ void TList<T, F>::Pop()
         std::cout << "List is empty." << std::endl;
     } else {
         std::shared_ptr<TListItem<T>> tmp = this->head;
-        while(tmp->next != nullptr)
-            tmp = tmp->next;
-        tmp->item->Pop();
-        if(tmp->item->IsEmpty()) {
+        while(tmp->GetNext() != nullptr)
+            tmp = tmp->GetNext();
+        tmp->GetFigure()->Pop();
+        if(tmp->GetFigure()->IsEmpty()) {
             tmp = nullptr;
         }
     }
@@ -61,8 +62,8 @@ void TList<T, F>::Pop()
 }
 
 
-template <class A, class B>
-std::ostream& operator<<(std::ostream &os, const TList<A, B> &list)
+template <class T, class F>
+std::ostream& operator<<(std::ostream &os, const TList<T, F> &list)
 {
     if (list.IsEmpty()) {
         os << "The list is empty." << std::endl;
@@ -71,11 +72,11 @@ std::ostream& operator<<(std::ostream &os, const TList<A, B> &list)
 
     std::shared_ptr<TListItem<T>> cur(list.head);
     while(cur->GetNext() != nullptr) {
-        cur->GetFigure()->Print();
+        cur->GetFigure()->Top();
         os << std::endl;
         cur = cur->GetNext();
     }
-    cur->GetFigure()->Print();
+    cur->GetFigure()->Top();
     os << std::endl;
     /*for(int32_t i = 0; tmp; ++i) {
         os << "idx: " << i << "   ";
@@ -116,39 +117,39 @@ TList<T, F>::~TList()
 template <class T, class F>
 void TList<T,F>::RemoveGreater(double value)
 {
-    std::shared_ptr<TListItem<T>> iter(this.head);
-    while(iter->next != nullptr) {
-        iter->item->RemGreater(figure);
-        iter = iter->next;
+    std::shared_ptr<TListItem<T>> iter(this->head);
+    while(iter->GetNext() != nullptr) {
+        iter->GetFigure()->RemGreater(value);
+        iter = iter->GetNext();
     }
-    iter->item->RemGreater(figure);
-    this->RemoveEmpty();
+    iter->GetFigure()->RemGreater(value);
+    //this->RemoveEmpty(); //вроде как сдвинуть все во внутренних контейнерах к началу списка
 }
 
 template <class T, class F>
 void TList<T,F>::RemoveLesser(double value)
 {
-    std::shared_ptr<TListItem<T>> iter(this.head);
-    while(iter->next != nullptr) {
-        iter->item->RemLesser(figure);
-        iter = iter->next;
+    std::shared_ptr<TListItem<T>> iter(this->head);
+    while(iter->GetNext() != nullptr) {
+        iter->GetFigure()->RemLesser(value);
+        iter = iter->GetNext();
     }
-    iter->item->RemLesser(figure);
-    this->RemoveEmpty();
+    iter->GetFigure()->RemLesser(value);
+    //this->RemoveEmpty();
 }
 
 
 template <class T, class F>
-void TList<T,F>::RemoveByType(Figure *figure)
+void TList<T,F>::RemoveByType(const int& type)
 {
-    std::shared_ptr<TListItem<T>> iter(this.head);
+    std::shared_ptr<TListItem<T>> iter(this->head);
 
-    while(iter->next != nullptr) {
-        iter->item->RemByType(figure);
-        iter = iter->next;
+    while(iter->GetNext() != nullptr) {
+        iter->GetFigure()->RemByType(type);
+        iter = iter->GetNext();
     }
-    iter->item->RemByType(figure);
-    this->RemoveEmpty();
+    iter->GetFigure()->RemByType(type);
+    //this->RemoveEmpty();
 }
 
 

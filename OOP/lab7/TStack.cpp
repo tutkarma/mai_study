@@ -65,18 +65,16 @@ void TStack<T>::RemByType(const int& type)
 
     TStack<T> *tmp = new TStack<T>();
 
-    TStackItem<T> *tmp = this->head;
     for(uint32_t i = this->count; i > 0; --i) {
-        if(this->head->value->Type() == type) {
+        if(this->head->Pop().Type() == type) {
             this->Pop();
         } else {
-            tmp->Push(this->head->value);
+            tmp->Push(this->head->Pop());
         }
     }
     for(uint32_t i = tmp->count; i > 0; --i) {
-        this->Push(tmp->head->value);
+        this->Push(tmp->head->Pop());
     }
-    delete tmp;
 }
 
 template <class T>
@@ -88,18 +86,16 @@ void TStack<T>::RemLesser(double value)
 
     TStack<T> *tmp = new TStack<T>();
 
-    TStackItem<T> *tmp = this->head;
     for(uint32_t i = this->count; i > 0; --i) {
-        if(this->head->value->Square() < value) {
+        if(this->head->Pop().Square() <= value) {
             this->Pop();
         } else {
-            tmp->Push(this->head->value);
+            tmp->Push(this->head->Pop());
         }
     }
     for(uint32_t i = tmp->count; i > 0; --i) {
-        this->Push(tmp->head->value);
+        this->Push(tmp->head->Pop());
     }
-    delete tmp;
 }
 
 template <class T>
@@ -111,21 +107,20 @@ void TStack<T>::RemGreater(double value)
 
     TStack<T> *tmp = new TStack<T>();
 
-    TStackItem<T> *tmp = this->head;
     for(uint32_t i = this->count; i > 0; --i) {
-        if(this->head->value->Square() > value) {
+        if(this->head->Pop().Square() >= value) {
             this->Pop();
         } else {
-            tmp->Push(this->head->value);
+            tmp->Push(this->head->Pop());
         }
     }
     for(uint32_t i = tmp->count; i > 0; --i) {
-        this->Push(tmp->head->value);
+        this->Push(tmp->head->Pop());
     }
-    delete tmp;
 }
 
 typedef unsigned char Byte;
 
-template class
-TStack<void *>;
+
+#include "figure.h"
+template class TStack<Figure>;
