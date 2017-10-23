@@ -10,19 +10,19 @@
 #include <limits.h>
 #include <string.h>
 
-#define DEC_SIZE 40 // for print
-#define NUMBER_SIZE 32 // count digit
+#define DEC_SIZE 40
+#define NUMBER_SIZE 32
 #define FILE_SIZE 100
 
-typedef unsigned __int128 uint128_t;
+typedef unsigned __int128 int128_t;
 
 void *thread_function(void *);
 pthread_mutex_t mutex1 = PTHREAD_MUTEX_INITIALIZER;
-int  counter = 0;
+int counter = 0;
 
 typedef struct _params {
     long long nc;
-    uint128_t localsum;
+    int128_t localsum;
     unsigned int counter;
     off_t start_pos;
     long long cc; //thread count controller
@@ -37,7 +37,7 @@ const char *file_name = "test.dat";
 void init(Params *ptr, Command *command, long long num_count);
 void generate();
 void parse_commdand_line(int argc, char **argv, Command *command);
-void print_u128_u_v2(uint128_t u128);
+void print_int128(int128_t u128);
 
 
 int main(int argc, char **argv)
@@ -45,14 +45,12 @@ int main(int argc, char **argv)
     Command command;
     parse_commdand_line(argc, argv, &command);
 
-    //pthread_t thread_id[NTHREADS];
     if (command.threads_num * sizeof(Params) + command.threads_num * sizeof(pthread_t) > command.memory_set) {
         fprintf(stderr, "%s\n", "Too much threads for this amount of memory");
-        exit(-1);
+        exit(EXIT_FAILURE);
     }
     pthread_t *thread_id = (pthread_t *) malloc(command.threads_num * sizeof(pthread_t));
 
-    //Params params[NTHREADS];
     Params *params = (Params *) malloc(command.threads_num * sizeof(Params));
 
     int i, j;
@@ -71,11 +69,11 @@ int main(int argc, char **argv)
         pthread_join(thread_id[j], NULL); 
     }
 
-    uint128_t sum = 0;
+    int128_t sum = 0;
     for (int i = 0; i < command.threads_num; ++i) {
         sum += params[i].localsum;
     }
-    print_u128_u_v2(sum);
+    print_int128(sum);
     return 0;
 }
 
@@ -91,10 +89,10 @@ void init(Params *ptr, Command *command, long long num_count)
         ptr[i].nc = num_count;
         ptr[i].localsum = 0;
         ptr[i].counter = 0;
-        ptr[i].start_pos = i * (ptr[i-1].cc * (NUMBER_SIZE + 1));
+        ptr[i].start_pos = i * (ptr[i - 1].cc * (NUMBER_SIZE + 1));
         ptr[i].cc = ptr[i-1].cc;
     }
-    ptr[command->threads_num - 1].cc += num_count % command->threads_num; 
+    ptr[command->threads_num - 1].cc += num_count % command->threads_num;
 }
 
 void generate()
@@ -104,7 +102,11 @@ void generate()
     srand(time(NULL));
     for (int i = 0; i < FILE_SIZE; ++i) {
         for (int i = 0; i < NUMBER_SIZE; ++i) {
-            buf[i] = '0' + (((int) rand()) % 16);//!
+            if (((int) rand()) % 2 == 0) {
+                buf[i] = '0' + (((int) rand()) % 10);
+            } else {
+                buf[i] = 'A' + (((int) rand()) % 6);
+            }
         }
         write(fd, &buf, NUMBER_SIZE);
         write(fd, "\n", 1);
@@ -112,10 +114,9 @@ void generate()
     close(fd);
 }
 
-void print_u128_u_v2(uint128_t u128)
+void print_int128(int128_t u128)
 {
-    printf("HEX: %llx\n", (unsigned long long)(u128 & 0xFFFFFFFFFFFFFFFF));
-    printf("DEC: ");
+    printf("DEC: \n");
     char buf[DEC_SIZE + 1];
     int i;
     for (i = 0; i < DEC_SIZE; ++i) {
@@ -133,12 +134,38 @@ void print_u128_u_v2(uint128_t u128)
     }
 }
 
-
-uint128_t atobigint(char *str)
+int is_num(char *s)
 {
-    uint128_t res = 0;
+    return (*s >= '0' && *s <= '9');
+}
+
+int hex_to_dec(char *s)
+{
+    if(*s == 'A')
+        return 10;
+    if(*s == 'B')
+        return 11;
+    if(*s == 'C')
+        return 12;
+    if(*s == 'D')
+        return 13;
+    if(*s == 'E')
+        return 14;
+    if(*s == 'F')
+        return 15;
+    return 0;
+}
+
+int128_t atobigint(char *str)
+{
+    int128_t res = 0;
     while (*str) {
-        res = res * 16 + (*str - '0');
+        if(is_num(str))
+            res = res * 16 + (*str - '0');
+        else {
+            int kek = hex_to_dec(str);
+            res = res * 16 + kek;
+        }
         ++str; 
     }
     return res;
@@ -157,17 +184,17 @@ void *thread_function(void *dummyPtr)
     {
         read(fd,buf,NUMBER_SIZE);
         buf[NUMBER_SIZE] = '\0'; //important
-        uint128_t s;
+        int128_t s;
         s = atobigint(buf);
         s /= ptr->nc;
         ptr->localsum += s;
-        read(fd,&c,1);
+        read(fd, &c, 1);
         if (c != '\n' && c != '\0') {
-            fprintf(stderr, "%s %d\n","c = ",c);
-            fprintf(stderr, "%s %ld\n","start pos = ",ptr->start_pos);
-            fprintf(stderr, "%s %lld\n","cc  = ",ptr->cc);
+            fprintf(stderr, "%s %d\n","c = ", c);
+            fprintf(stderr, "%s %ld\n","start pos = ", ptr->start_pos);
+            fprintf(stderr, "%s %lld\n","cc  = ", ptr->cc);
             fprintf(stderr, "%s\n", "format error");
-            exit(-1);
+            exit(EXIT_FAILURE);
         }
     }
     close(fd);
@@ -179,7 +206,7 @@ void parse_commdand_line(int argc, char **argv, Command *command)
 {
     if (argc != 3) {
         fprintf(stderr, "%s\n","Usage: ThreadsNumber RAM");
-        exit(-1);
+        exit(EXIT_FAILURE);
     }
     command->threads_num = atoi(argv[1]);
     command->memory_set = atoi(argv[2]);
