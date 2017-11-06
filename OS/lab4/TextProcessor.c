@@ -476,6 +476,6 @@ void replace(const int32_t fd, const int32_t fileSize,  const int32_t RAMLimit, 
         return;
     }
 
-    int32_t newFileSize = removeOldString(fd, fileSize, size, from, from + sizeOldStr);
+    int32_t newFileSize = removeOldString(fd, fileSize, RAMLimit, from, from + sizeOldStr);
     insertNewString(fd, newFileSize, RAMLimit, newString, from, from + sizeNewStr);
 }
