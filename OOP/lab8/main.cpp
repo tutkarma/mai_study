@@ -14,8 +14,8 @@ void menu()
     std::cout << "2) Add rhomb" << std::endl;
     std::cout << "3) Add pentagon" << std::endl;
     std::cout << "4) Delete figure from list" << std::endl;
-    std::cout << "5) Print list"  << std::endl;
-    std::cout << "6) Print list with iterator"  << std::endl;
+    std::cout << "5) Sort list"  << std::endl;
+    std::cout << "6) Print list"  << std::endl;
     std::cout << "0) Exit" << std::endl;
 }
 
@@ -58,9 +58,6 @@ int main(void)
                 break;
             case 6:
                 if(!list.IsEmpty()) {
-                    //for(auto i : list) {
-                    //    i->Print();
-                    //} 
                     std::cout << list << std::endl;
                 } else {
                     std::cout << "List is empty." << std::endl;
@@ -76,6 +73,3 @@ int main(void)
     } while (act);
     return 0;
 }
-
-
-//поправить удаление из начала

@@ -5,7 +5,7 @@
 template <class T>
 TList<T>::TList()
 {
-    head = std::make_shared<TListItem<T>>(); //nullptr;
+    head = std::make_shared<TListItem<T>>();
     length = 0;
 }
 
@@ -33,7 +33,7 @@ template <class T>
 void TList<T>::PushAtIndex(std::shared_ptr<T> &obj, int32_t ind)
 {
     std::shared_ptr<TListItem<T>> newItem = std::make_shared<TListItem<T>>(obj);
-    std::shared_ptr<TListItem<T>> tmp = this->head->GetNext();//this->head;
+    std::shared_ptr<TListItem<T>> tmp = this->head->GetNext();
     for(int32_t i = 1; i < ind; ++i){
         tmp = tmp->GetNext();
     }
@@ -47,7 +47,7 @@ template <class T>
 void TList<T>::PushLast(std::shared_ptr<T> &obj)
 {
     std::shared_ptr<TListItem<T>> newItem = std::make_shared<TListItem<T>>(obj);
-    std::shared_ptr<TListItem<T>> tmp = this->head->GetNext();//this->head;
+    std::shared_ptr<TListItem<T>> tmp = this->head->GetNext();
 
     while (tmp->GetNext() != nullptr) {
         tmp = tmp->GetNext();
@@ -61,8 +61,7 @@ template <class T>
 void TList<T>::PushFirst(std::shared_ptr<T> &obj)
 {
     std::shared_ptr<TListItem<T>> newItem = std::make_shared<TListItem<T>>(obj);
-    std::shared_ptr<TListItem<T>> oldHead = this->head->GetNext();//this->head;
-    //this->head = newItem;
+    std::shared_ptr<TListItem<T>> oldHead = this->head->GetNext();
     this->head->SetNext(newItem);
     if(oldHead != nullptr) {
         newItem->SetNext(oldHead);
@@ -108,7 +107,7 @@ std::shared_ptr<T> TList<T>::Pop()
 template <class T>
 std::shared_ptr<T> TList<T>::PopAtIndex(int32_t ind)
 {
-    std::shared_ptr<TListItem<T>> tmp = this->head->GetNext();//this->head;
+    std::shared_ptr<TListItem<T>> tmp = this->head->GetNext();
     for(int32_t i = 0; i < ind - 1; ++i) {
         tmp = tmp->GetNext();
     }
@@ -124,16 +123,13 @@ template <class T>
 std::shared_ptr<T> TList<T>::PopFirst()
 {
     if (this->GetLength() == 1) {
-        std::shared_ptr<T> res = this->head->GetNext()->GetFigure();//this->head->GetFigure();
-        //this->head = nullptr;
-        this->head->GetNext() = nullptr;
+        std::shared_ptr<T> res = this->head->GetNext()->GetFigure();
+        this->head->SetNext(nullptr);
         return res;
     }
-    std::shared_ptr<TListItem<T>> tmp = this->head->GetNext();//this->head;
+    std::shared_ptr<TListItem<T>> tmp = this->head->GetNext();
     std::shared_ptr<T> res = tmp->GetFigure();
-    //this->head = this->head->GetNext();
-    this->head->GetNext() = this->head->GetNext()->GetNext();
-    //this->head->SetPrev(nullptr);
+    this->head->SetNext(this->head->GetNext()->GetNext());
     this->head->GetNext()->SetPrev(nullptr);
     return res;
 }
@@ -142,12 +138,11 @@ template <class T>
 std::shared_ptr<T> TList<T>::PopLast()
 {
     if (this->GetLength() == 1) {
-        std::shared_ptr<T> res = this->head->GetNext()->GetFigure();//this->head->GetFigure();
-        //this->head = nullptr;
-        this->head->GetNext() = nullptr;
+        std::shared_ptr<T> res = this->head->GetNext()->GetFigure();
+        this->head->SetNext(nullptr);
         return res;
     }
-    std::shared_ptr<TListItem<T>> tmp = this->head->GetNext();//this->head;
+    std::shared_ptr<TListItem<T>> tmp = this->head->GetNext();
     while(tmp->GetNext()->GetNext()) {
         tmp = tmp->GetNext();
     }
@@ -166,7 +161,7 @@ std::ostream& operator<<(std::ostream &os, const TList<T> &list)
         return os;
     }
 
-    std::shared_ptr<TListItem<T>> tmp = list.head->GetNext();//list.head;
+    std::shared_ptr<TListItem<T>> tmp = list.head->GetNext();
     for(int32_t i = 0; tmp; ++i) {
         os << "idx: " << i << "   ";
         tmp->GetFigure()->Print();
