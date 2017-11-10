@@ -159,19 +159,19 @@ std::ostream& operator<<(std::ostream &os, const TList &list)
     return os;
 }
 
-/*void TList::Del()
+void TList::Del()
 {
     while(!this->IsEmpty()) {
         this->PopFirst();
         --length;
     }
-}*/
+}
 
 TList::~TList()
 {
-    while(!this->IsEmpty()) {
+/*    while(!this->IsEmpty()) {
         this->PopFirst();
         --length;
-    }
+    }*/
 }
 

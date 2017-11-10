@@ -22,7 +22,7 @@ int main(void)
 {
     int32_t act = 0;
     TList list;
-    std::shared_ptr<Figure> ptr, ptr2;
+    std::shared_ptr<Figure> ptr;
     do {
         menu();
         std::cin >> act;
@@ -40,14 +40,13 @@ int main(void)
                 list.Push(ptr);
                 break;
             case 4:
-                ptr2 = list.Pop();
-                //std::cout << ptr.use_count() << std::endl;
+                list.Pop();
                 break;
             case 5:
                 std::cout << list << std::endl;
                 break;
             case 0:
-                //list.Del();
+                list.Del();
                 break;
             default:
                 std::cout << "Incorrect command" << std::endl;;

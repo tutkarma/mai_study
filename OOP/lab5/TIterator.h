@@ -30,6 +30,16 @@ public:
         return cur;
     }
 
+    void operator--() {
+        cur = cur->GetPrev();
+    }
+
+    TIterator operator-- (int) {
+        TIterator cur(*this);
+        --(*this);
+        return cur;
+    }
+
     bool operator== (const TIterator &i) {
         return (cur == i.cur);
     }

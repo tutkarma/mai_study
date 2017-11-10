@@ -41,7 +41,7 @@ int main(void)
                 list.Push(ptr);
                 break;
             case 4:
-                ptr = list.Pop();
+                list.Pop();
                 break;
             case 5:
                 std::cout << list << std::endl;

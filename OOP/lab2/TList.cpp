@@ -154,7 +154,6 @@ std::ostream& operator<<(std::ostream &os, const TList &list)
         return os;
     }
 
-
     TListItem *tmp = list.head;
     for(int32_t i = 0; tmp; ++i) {
         os << "idx: " << i << "   ";
