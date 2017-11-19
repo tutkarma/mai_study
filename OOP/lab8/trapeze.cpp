@@ -43,9 +43,16 @@ Trapeze::Trapeze(const Trapeze &orig)
 
 double Trapeze::Square()
 {
-    double h = std::sqrt(l_side * l_side - 0.25 * std::pow((l_side * l_side - r_side * r_side)
-        / (big_base - small_base) + big_base - small_base, 2.0));
-    return (big_base + small_base) / 2 + h;
+    double sqr;
+    try {
+        double h = std::sqrt(l_side * l_side - 0.25 * std::pow((l_side * l_side - r_side * r_side)
+            / (big_base - small_base) + big_base - small_base, 2.0));
+        sqr =  (big_base + small_base) / 2 + h;
+        sqr = (sqr == sqr) ? sqr : -1;
+    } catch(...) {
+        sqr = -1;
+    }
+    return sqr;
 }
 
 void Trapeze::Print()
