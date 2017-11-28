@@ -1,0 +1,5 @@
+Последовательность команд для подключения динамической либы:
+echo $LD_LIBRARY_PATH
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/mai_study/OS/lab5
+export LD_LIBRARY_PATH
+./main-dyn
