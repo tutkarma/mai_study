@@ -4,4 +4,6 @@
 
 1. Сортировка за линейное время: Radix Sort
 
-2. Словарь: Patricia
+2-3. Словарь: Patricia
+
+4. Поиск подстроки: Aho-Corasick (with wild card)
