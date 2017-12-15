@@ -7,3 +7,5 @@
 2-3. Словарь: Patricia
 
 4. Поиск подстроки: Aho-Corasick (with wild card)
+
+5. Суффиксные деревья: Suffix array
