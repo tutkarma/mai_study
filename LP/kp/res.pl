@@ -222,9 +222,9 @@ relative(X, Y, Res):-
 
 transform([_],[]):-!. % переделевает цепочку родственников в цепочку родства
 transform([First,Second|Tail],ResList):-
-    length([First,Second|Tail],B),
-    A is B - 1,
-    length(ResList,A),
+    %length([First,Second|Tail],B),
+    %A is B - 1,
+    %length(ResList,A),
     check_link(Relation,First,Second),
     ResList = [Relation|Tmp],
     transform([Second|Tail],Tmp),!.
@@ -372,6 +372,7 @@ ask_question(List):-
     !.
 
 /*          Анализ предложений          */
+/* обрабатываются только шаблонные вопросы, это не очень хорошо */
 
 % who is *name* s brother?
 % is *name* *name* s son ?
