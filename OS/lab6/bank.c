@@ -65,6 +65,29 @@ void ClientDBDestroy(ClientDB *cDB)
     *cDB = NULL;
 }
 
+/*void ClientDBSave(ClientDB cDB, int file)
+{
+    if (file < 0) {
+        printf("Cannot open file\n");
+    } else {
+        for (int i = 0; i < cDB->size; ++i) {
+            write(file, &cDB->clients[i], sizeof(Client));
+        }
+    }
+}
+
+void ClientDBLoad(ClientDB cDB, int file)
+{
+    if (file < 0) {
+        printf("Cannot open file\n");
+    } else {
+        Client cl;
+        while (read(file, cl, sizeof(Client))) {
+            MoneyPut(cl->client, cl->sum, cDB);
+        }
+    }
+}*/
+
 void ClientAccIncrease(Client cl, int sum)
 {
     cl->sum += sum;

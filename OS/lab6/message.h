@@ -12,8 +12,9 @@ typedef struct _msg {
     int sum;
     int action;
     ID receiverClient;
+    void *requester;
     char message[STR_SIZE];
+    char fileName[STR_SIZE];
 } MsgData;
-
 
 #endif

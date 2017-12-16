@@ -31,6 +31,9 @@ void ClientDBPrint(ClientDB cDB);
 Client ClientFind(ClientDB cDB, int clientint);
 void ClientDBDestroy(ClientDB *cDB);
 
+//void ClientDBSave(ClientDB cDB, int file);
+//void ClientDBLoad(ClientDB cDB, int file);
+
 void ClientAccIncrease(Client cl, int sum);
 void ClientAccDecrease(Client cl, int sum);
 int ClientHasEnoughMoney(Client cl, int sum);
