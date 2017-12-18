@@ -4,7 +4,6 @@
 #define TIME_GAME 1
 #define STEP_GAME 2
 
-    /* Create a field for game */
 void fieldCreate(Cell field[][10])
 {
     /* initialization */
@@ -18,7 +17,6 @@ void fieldCreate(Cell field[][10])
         }
     }
 
-    /* fox placement */
     srand(time(NULL));
     for (int k = 0; k < 8; ++k) {
         int i = rand() % 10;
@@ -28,7 +26,6 @@ void fieldCreate(Cell field[][10])
     }
 }
 
-    /* counting of foxes */
 void countOfFoxs(Cell field[][10])
 {
     for (int i = 0; i < 10; ++i) {
@@ -73,7 +70,8 @@ void countOfFoxs(Cell field[][10])
         }
     }
 }
-    /* a copy of struct "Argumets" */
+
+
 void copy(Args *tmp, Args *tmp2)
 {
     for(int i = 0; i < 10; ++i) {
@@ -83,7 +81,6 @@ void copy(Args *tmp, Args *tmp2)
     }
 }
 
-    /* a sorting of results */
 void sort(Result *table, size_t n)
 {
     Result tmp;
@@ -98,7 +95,6 @@ void sort(Result *table, size_t n)
     }
 }
 
-    /* print of results */
 void printRes(Result *tmp, size_t n)
 {
     for (int i = 0; i < n; ++i) {
