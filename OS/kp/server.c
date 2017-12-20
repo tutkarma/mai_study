@@ -205,12 +205,12 @@ int main(int argc, char **argv)
                 strcpy(userWithMinSteps, table[0].name);
                 int modeUserWithMinSteps = table[0].mode;
                 int minSteps = table[0].steps;
-                for (int i = 0; i < num; ++i) {
+                /*for (int i = 0; i < num; ++i) {
                     if (table[i].steps < minSteps) {
                         strcpy(userWithMinSteps, table[i].name);
                         modeUserWithMinSteps = table[i].mode;
                     }
-                }
+                }*/
 
                 if (modeUserWithMinSteps == STEP_GAME) {
                     tableUpdate(db, userWithMinSteps, 1, minSteps);
