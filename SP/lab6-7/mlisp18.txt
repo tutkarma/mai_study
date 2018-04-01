@@ -1,0 +1,117 @@
+# $mlisp18
+     $id     $idq     $dec    $zero 
+   $bool     $str        (        ) 
+       +        -        *        / 
+       <        =        >       <= 
+      >=      and      not       or 
+    cond     else       if      let 
+  define  display  newline     set! 
+
+#
+       S -> PROG #1
+    PROG -> CALCS1 #2 |
+            DEFS #3 |
+            DEFS CALCS1 #4
+  CALCS1 -> CALCS #5
+   CALCS -> CALC #6 |
+            CALCS CALC #7
+    CALC -> E1 #8 |
+            BOOL #9 |
+            STR #10 |
+            DISPSET #11
+      E1 -> E #12
+       E -> $id #13 |
+            CONST #14 |
+            ADD #15 |
+            SUB #16 |
+            DIV #17 |
+            MUL #18 |
+            COND #19 |
+            IF #20 |
+            CPROC #21
+   CONST -> $zero #22 |
+            $dec #23
+     ADD -> HADD E1 ) #24
+    HADD -> ( + #25 |
+            HADD E1 #26
+     SUB -> HSUB E1 ) #27
+    HSUB -> ( - #28 |
+            HSUB E1 #29
+     DIV -> HDIV E1 ) #30
+    HDIV -> ( / #31 |
+            HDIV E1 #32
+     MUL -> HMUL E1 ) #33
+    HMUL -> ( * #34 |
+            HMUL E1 #35
+    COND -> HCOND ELSE ) #36 |
+            HCOND CLAUS ) #37
+   HCOND -> ( cond #38 |
+            HCOND CLAUS #39
+   CLAUS -> HCLAUS E1 ) #40
+  HCLAUS -> ( BOOL #41 |
+            HCLAUS DISPSET #42
+    ELSE -> HELSE E1 ) #43
+   HELSE -> ( else #44 |
+            HELSE DISPSET #45
+      IF -> IFTRUE E1 ) #46
+  IFTRUE -> HIF E #47
+     HIF -> ( if BOOL #48
+    CPROC -> HCPROC ) #49
+   HCPROC -> ( $id #50 |
+            HCPROC E #51
+    BOOL -> $bool #52 |
+            CPRED #53 |
+            REL #54 |
+            OR #55 |
+            AND #56 |
+            ( not BOOL ) #57
+   CPRED -> HCPRED ) #58
+  HCPRED -> ( $idq #59 |
+            HCPRED E #60
+     REL -> HREL E1 ) #61
+    HREL -> ( < E #62 |
+            ( = E #63 |
+            ( > E #64 |
+            ( >= E #65 |
+            ( <= E #66
+      OR -> HOR BOOL ) #67
+     HOR -> ( or #68 |
+            HOR BOOL #69
+     AND -> HAND BOOL ) #70
+    HAND -> ( and #71 |
+            HAND BOOL #72
+     STR -> $str #73 |
+            SIF #74
+     SIF -> SIFTRUE STR ) #75
+ SIFTRUE -> HIF STR #76
+     SET -> HSET E1 ) #77
+    HSET -> ( set! $id #78
+ DISPSET -> ( display E1 ) #79 |
+            ( display BOOL ) #80 |
+            ( display STR ) #81 |
+            ( newline ) #82 |
+            SET #83
+    DEFS -> DEF #84 |
+            DEFS DEF #85
+     DEF -> PRED #86 |
+            VAR #87 |
+            PROC #88
+    PRED -> HPRED BOOL ) #89
+   HPRED -> PDPAR ) #90
+   PDPAR -> ( define ( $idq #91 |
+            PDPAR $id #92
+     VAR -> VARINI ) #93
+  VARINI -> HVAR CONST #94
+    HVAR -> ( define $id #95
+    PROC -> HPROC LETLOC ) #96 |
+            HPROC E1 ) #97
+   HPROC -> PCPAR ) #98 |
+            HPROC DISPSET #99
+   PCPAR -> ( define ( $id #100 |
+            PCPAR $id #101
+  LETLOC -> HLETLOC E1 ) #102
+ HLETLOC -> LTVAR ) #103 |
+            HLETLOC DISPSET #104
+   LTVAR -> ( let ( CPROC #105 |
+            LTVAR CPROC #106
+

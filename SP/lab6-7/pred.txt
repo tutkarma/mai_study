@@ -1,0 +1,19 @@
+# $pred
+   $id   $dec  $zero  $bool 
+  $idq      (      )      < 
+define     or      +
+#
+  PRED -> HPRED BOOL ) #1
+ HPRED -> PDPAR ) #2
+ PDPAR -> ( define ( $idq #3 |
+          PDPAR $id #4
+  BOOL -> $bool #5 |
+          REL #6 |
+          ( or BOOL BOOL ) #7
+   REL -> ( < E E ) #8
+ CONST -> $dec #9 |
+          $zero #10
+     E -> CONST #11 |
+          $id #12 |
+          ( + E E ) #13
+
