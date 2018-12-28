@@ -1,0 +1,81 @@
+    public void getPoints() {
+        BufferedReader file = new BufferedReader(new InputStreamReader(System.in));
+        String filename = getLine(file);
+        FileReader fr = null;
+        try {
+            fr = new FileReader(filename);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        BufferedReader in = new BufferedReader(fr);
+
+        String input;
+        String[] parsed;
+        input = getLine(in);
+        N = Integer.parseInt(input);
+
+
+        int n,m;
+        parsed = getLines(in);
+        n = Integer.parseInt(parsed[0]);
+        m = Integer.parseInt(parsed[1]);
+
+        Vector<Vector<Point>> points = new Vector<>();
+        for (int i = 0; i < 2; i++) {
+            Vector<Point> v1 = new Vector<>();
+            Vector<Point> v2 = new Vector<>();
+
+            parsed = getLines(in);
+            for (int j = 0; j < n; j++) {
+                v1.add(new Point(
+                        Double.parseDouble(parsed[j * 3]),
+                        Double.parseDouble(parsed[j * 3 + 1]),
+                        Double.parseDouble(parsed[j * 3 + 2]), 1
+                        ));
+            }
+
+            parsed = getLines(in);
+            for (int j = 0; j < m; j++) {
+                v2.add(new Point(
+                        Double.parseDouble(parsed[j * 3]),
+                        Double.parseDouble(parsed[j * 3 + 1]),
+                        Double.parseDouble(parsed[j * 3 + 2]), 1
+                ));
+            }
+            points.add(v1);
+            points.add(v2);
+        }
+
+        System.out.println(N + "\n" + n + " " + m);
+        for (int i = 0; i < points.size(); i++) {
+            Vector<Point> pts = points.get(i);
+            for (int j = 0; j < pts.size(); j++) {
+                System.out.println(pts.get(j).x + " " + pts.get(j).y + " " + pts.get(j).z);
+            }
+            System.out.print("\n");
+        }
+
+    }
+
+    private String getLine(BufferedReader in) {
+        String input = null;
+        try {
+            input = in.readLine();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return input;
+    }
+
+    private String[] getLines(BufferedReader in) {
+        String[] input = null;
+        try {
+            input = in.readLine().split("\\s");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return input;
+    }
