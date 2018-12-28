@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="kekos" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="550.0" minWidth="600.0" prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <VBox prefHeight="59.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="64.0" text="red">
+                     <padding>
+                        <Insets left="10.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <Slider fx:id="redSlider" blockIncrement="17.0" majorTickUnit="17.0" max="255.0" minorTickCount="17" showTickLabels="true" showTickMarks="true">
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Slider>
+               </children>
+            </VBox>
+            <VBox prefHeight="59.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="64.0" text="green">
+                     <padding>
+                        <Insets left="10.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <Slider fx:id="greenSlider" blockIncrement="17.0" majorTickUnit="17.0" max="255.0" minorTickCount="17" showTickLabels="true" showTickMarks="true">
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Slider>
+               </children>
+            </VBox>
+            <VBox prefHeight="59.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="64.0" text="blue">
+                     <padding>
+                        <Insets left="10.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <Slider fx:id="blueSlider" blockIncrement="17.0" majorTickUnit="17.0" max="255.0" minorTickCount="17" showTickLabels="true" showTickMarks="true">
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Slider>
+               </children>
+            </VBox>
+            <VBox prefHeight="59.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="64.0" text="red">
+                     <padding>
+                        <Insets left="10.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <Slider fx:id="redSlider5" blockIncrement="17.0" majorTickUnit="17.0" max="255.0" minorTickCount="17" showTickLabels="true" showTickMarks="true">
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Slider>
+               </children>
+            </VBox>
+            <VBox prefHeight="59.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="64.0" text="red">
+                     <padding>
+                        <Insets left="10.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <Slider fx:id="redSlider4" blockIncrement="17.0" majorTickUnit="17.0" max="255.0" minorTickCount="17" showTickLabels="true" showTickMarks="true">
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Slider>
+               </children>
+            </VBox>
+            <VBox prefHeight="59.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="64.0" text="red">
+                     <padding>
+                        <Insets left="10.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <Slider fx:id="redSlider3" blockIncrement="17.0" majorTickUnit="17.0" max="255.0" minorTickCount="17" showTickLabels="true" showTickMarks="true">
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Slider>
+               </children>
+            </VBox>
+            <VBox prefHeight="59.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="64.0" text="red">
+                     <padding>
+                        <Insets left="10.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <Slider fx:id="redSlider2" blockIncrement="17.0" majorTickUnit="17.0" max="255.0" minorTickCount="17" showTickLabels="true" showTickMarks="true">
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Slider>
+               </children>
+            </VBox>
+            <VBox prefHeight="59.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="64.0" text="red">
+                     <padding>
+                        <Insets left="10.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <Slider fx:id="redSlider1" blockIncrement="17.0" majorTickUnit="17.0" max="255.0" minorTickCount="17" showTickLabels="true" showTickMarks="true">
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Slider>
+               </children>
+            </VBox>
+            <VBox prefHeight="59.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="64.0" text="red">
+                     <padding>
+                        <Insets left="10.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <Slider fx:id="redSlider9" blockIncrement="17.0" majorTickUnit="17.0" max="255.0" minorTickCount="17" showTickLabels="true" showTickMarks="true">
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Slider>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
