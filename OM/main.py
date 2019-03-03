@@ -75,8 +75,8 @@ def classical_method(coefs, x_prev, h, eps):
     print("df/dx2 = {0}x2 - x1 + {1}".format(coefs_dx2[0], coefs_dx2[1]))
 
     print("System of equations:")
-    print("{0}x1 - x2 + {1} = 0".format(coefs[2] * 2, coefs[0]))
-    print("{0}x2 - x1 + {1} = 0".format(coefs[3] * 2, coefs[1]))
+    print("{0}x1 - x2 + {1} = 0".format(coefs_dx1[0], coefs_dx1[1]))
+    print("{0}x2 - x1 + {1} = 0".format(coefs_dx2[0], coefs_dx2[1]))
 
     a = np.array([[coefs_dx1[0], -1], [-1, coefs_dx2[0]]])
     b = np.array([-coefs_dx1[1], -coefs_dx2[1]])
