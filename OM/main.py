@@ -66,7 +66,7 @@ def sylvester_criterion(hess):
     return 0
 
 
-def classical_method(coefs, x_prev, h, eps):
+def classical_method(coefs):
     get_info("Calssical method", coefs)
 
     coefs_dx1 = [coefs[2] * 2, coefs[0]]
@@ -81,6 +81,7 @@ def classical_method(coefs, x_prev, h, eps):
     a = np.array([[coefs_dx1[0], -1], [-1, coefs_dx2[0]]])
     b = np.array([-coefs_dx1[1], -coefs_dx2[1]])
     stationary_root = np.linalg.solve(a, b)
+    print("Stationary root: {0}".format(stationary_root))
 
     hess = [[coefs_dx1[0], -1], [-1, coefs_dx2[0]]]
     print("Hessian matrix:")
@@ -106,8 +107,8 @@ def gradient_descent(coefs, x_prev, h, eps):
         print("grad(f(x^{0})) = {1}". format(k, grad(x_prev, coefs)))
 
         gr = grad(x_prev, coefs)
-        print("x = {0} - {1} * {2}".format(x_prev, h, gr))
         x = [i - h * j for i, j in zip(x_prev, gr)]
+        print("x = {0} - {1} * {2} = {3}".format(x_prev, h, gr, x))
 
         while f(x, coefs) >= f(x_prev, coefs):
             print("Checking the condition f(x^(k+1)) < f(x^(k)):")
@@ -144,7 +145,6 @@ def quickest_descent(coefs, x_prev, h, eps):
         k += 1
 
 
-
 if __name__ == '__main__':
     '''x1 = int(input("Coefficient x1 = "))
     x2 = int(input("Coefficient x2 = "))
@@ -158,6 +158,6 @@ if __name__ == '__main__':
     x_0 = [2, 3]
     h = 0.1
     eps = 0.9
-    classical_method(coefs, x_0, h, eps)
+    classical_method(coefs)
     gradient_descent(coefs, x_0, h, eps)
     quickest_descent(coefs, x_0, h, eps)
