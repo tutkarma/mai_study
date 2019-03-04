@@ -1,5 +1,27 @@
+#!/usr/bin/python3
+
 import numpy as np
+import getopt
+import sys
 from math import sqrt
+
+
+USAGE = """
+Syntax: main.py [--methods=#]
+
+  Flags:
+    methods=#
+        Numbers of methods to use. By default all method are used.
+
+        1 -- Classical method
+        2 -- Gradient descent method
+        3 -- Quickest descent method
+
+    Example:
+        --methods=1,3
+"""
+
+CNT_METHODS = 3
 
 
 def get_info(method, coefs, x0=None, h=None, eps=None):
@@ -15,7 +37,7 @@ def get_info(method, coefs, x0=None, h=None, eps=None):
 
 
 def f(x, coefs):
-    return coefs[2] * x[0]**2 - x[0] * x[1] + coefs[3] * x[1]**2 + coefs[0] * x[0] + coefs[1] * x[1] + 13
+    return coefs[2] * x[0]**2 - x[0] * x[1] + coefs[3] * x[1]**2 + coefs[0] * x[0] + coefs[1] * x[1] + coefs[4]
 
 
 def grad(x, coefs):
@@ -95,6 +117,7 @@ def classical_method(coefs):
         print("max -- {0}".format(stationary_root))
     else:
         print("No solution")
+    print("\n\n")
 
 
 def gradient_descent(coefs, x_prev, h, eps):
@@ -125,6 +148,7 @@ def gradient_descent(coefs, x_prev, h, eps):
 
         k += 1
         x_prev = x
+    print("\n\n")
 
 
 def quickest_descent(coefs, x_prev, h, eps):
@@ -143,21 +167,55 @@ def quickest_descent(coefs, x_prev, h, eps):
         print("x^({0}) = {1}".format(k, x))
         x_prev = x
         k += 1
+    print("\n\n")
+
+
+def print_usage(message):
+    print(USAGE)
+    if message:
+        sys.exit('\nFATAL ERROR: ' + message)
+    else:
+        sys.exit(1)
+
+
+def parse_args(args):
+    try:
+        opts, args = getopt.getopt(args, '', ['help', 'methods='])
+    except getopt.GetoptError:
+        print_usage('Invalid arguments.')
+
+    methods = [i for i in range(1, CNT_METHODS + 1)]
+
+    for (opt, val) in opts:
+        if opt == '--help':
+            print_usage(None)
+        elif opt == '--methods':
+            try:
+                methods = set(map(int, val.split(',')))
+            except ValueError:
+                print_usage('Methods must be comma separated list.')
+
+            for v in methods:
+                if v not in range(1, CNT_METHODS + 1):
+                    print_usage('Incorrect methods')
+
+    return methods
 
 
 if __name__ == '__main__':
-    '''x1 = int(input("Coefficient x1 = "))
-    x2 = int(input("Coefficient x2 = "))
-    x12 = int(input("Coefficient x1^2 = "))
-    x22 = int(input("Coefficient x2^2 = "))
-    coefs = (x1, x2, x12, x22)
-    x0 = list(map(int, input("Vector x_0 (two values) = ")))
-    h = int(input("h = "))
-    eps = int(input("eps = "))'''
-    coefs = [14, -7, 7, 7, 13] # x1, x2, x1^2, x2^2, свободный коэф
+    methods = parse_args(sys.argv[1:])
+    print("Enter coefs of the function (x1, x2, x1^2, x2^2, free coef)")
+    print("Example:\n14 -7 7 7 13")
+    coefs = list(map(int, input().split()))
+    #coefs = [14, -7, 7, 7, 13] # x1, x2, x1^2, x2^2, свободный коэф
     x_0 = [2, 3]
     h = 0.1
     eps = 0.9
-    classical_method(coefs)
-    gradient_descent(coefs, x_0, h, eps)
-    quickest_descent(coefs, x_0, h, eps)
+
+    for i in methods:
+        if i == 1:
+            classical_method(coefs)
+        elif i == 2:
+            gradient_descent(coefs, x_0, h, eps)
+        elif i == 3:
+            quickest_descent(coefs, x_0, h, eps)
