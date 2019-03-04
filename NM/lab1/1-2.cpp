@@ -3,9 +3,9 @@
 
 int main()
 {
-    std::vector<double> A = {2.0, 4.0, -3.0, 3.0};
+    std::vector<double> A = {0.0, 2.0, 4.0, -3.0, 3.0};
     std::vector<double> B = {15.0, -15.0, 11.0, 16.0, 8.0};
-    std::vector<double> C = {8.0, 4.0, 5.0, -7.0};
+    std::vector<double> C = {8.0, 4.0, 5.0, -7.0, 0.0};
     std::vector<double> D = {92.0, -84.0, -77.0, 15.0, -11.0};
     std::vector<double> P, Q, X(D.size());
 
