@@ -17,16 +17,20 @@ Syntax: main.py [--methods=#]
         2 -- Gradient descent method
         3 -- Quickest descent method with step type 1
         4 -- Quickest descent method with step type 3
+        5 -- Gradient descent method for poorly conditioned function
 
     Example:
         --methods=1,3
 """
 
-CNT_METHODS = 4
+CNT_METHODS = 5
+STEP_TYPES = [1, 3]
 
 
-def get_info(method, coefs, x0=None, h=None, eps=None):
+def get_info(method, coefs, x0=None, h=None, eps=None, step_type=None):
     print(method)
+    if step_type:
+        print("Step type {0}".format(step_type))
     print("f(x) = {0}x1^2 - x1x2 + {1}x2^2 + {2}x1 + {3}x2 + {4}".format(
         coefs[2], coefs[3], coefs[0], coefs[1], coefs[4]))
     if x0:
@@ -59,36 +63,36 @@ def finish_iter_proccess(x, coefs, eps):
     return grad_val(x, coefs) < eps
 
 
-def get_step_type1(k, x, coefs, gr):
+def get_step(k, x, coefs, gr, step_type):
     print("Find h")
-    print("x^({0}) = {1} - h * {2}".format(k, x, gr))
-    coef0 = coefs[2] * x[0] ** 2 - x[0] * x[1] + coefs[3] * x[1] ** 2 + \
-            coefs[0] * x[0] + coefs[1] * x[1] + coefs[4]
 
-    coef1 = -2 * coefs[2] * x[0] * gr[0] + x[0] * gr[1] + x[1] * gr[0] - \
-            2 * coefs[3] * x[1] * gr[1] - coefs[0] * gr[0] - coefs[1] * gr[1] # h
+    if step_type == 1:
+        print("x^({0}) = {1} - h * {2}".format(k, x, gr))
+        coef0 = coefs[2] * x[0] ** 2 - x[0] * x[1] + coefs[3] * x[1] ** 2 + \
+                coefs[0] * x[0] + coefs[1] * x[1] + coefs[4]
 
-    coef2 = coefs[2] * gr[0] ** 2 - gr[0] * gr[1] + coefs[3] * gr[1] ** 2 # h^2
+        coef1 = -2 * coefs[2] * x[0] * gr[0] + x[0] * gr[1] + x[1] * gr[0] - \
+                2 * coefs[3] * x[1] * gr[1] - coefs[0] * gr[0] - coefs[1] * gr[1] # h
 
-    print("f(x) = {0}h^2 + {1}h + {2}".format(coef2, coef1, coef0))
-    print("df = {0}h + {1}".format(coef2 * 2, coef1))
+        coef2 = coefs[2] * gr[0] ** 2 - gr[0] * gr[1] + coefs[3] * gr[1] ** 2 # h^2
 
-    return (-coef1) / (coef2 * 2)
+        print("f(x) = {0}h^2 + {1}h + {2}".format(coef2, coef1, coef0))
+        print("df = {0}h + {1}".format(coef2 * 2, coef1))
 
+        return (-coef1) / (coef2 * 2)
 
-def get_step_type3(k, x, coefs, grad):
-    print("Find h")
-    dx1 = grad[0]
-    dx2 = grad[1]
+    elif step_type == 3:
+        dx1 = gr[0]
+        dx2 = gr[1]
 
-    ch = dx1 ** 2 + dx2 ** 2
-    zn = 2 * (coefs[2] * dx1 * dx1 - dx1 * dx2 + coefs[3] * dx2 * dx2)
+        ch = dx1 ** 2 + dx2 ** 2
+        zn = 2 * (coefs[2] * dx1 * dx1 - dx1 * dx2 + coefs[3] * dx2 * dx2)
 
-    print("h^({0}) = (dx1 ** 2 + dx2 ** 2) / (2 * (d^2x1 * dx1 * dx1 - dx1 * dx2 + d^2x2 * dx2 * dx2)) = "
-        "({1} ** 2 + {2} ** 2) / (2 * ({3} * {4} * {5} - {6} * {7} + {8} * {9} * {10})) ".format(
-        k, dx1, dx2, coefs[2], dx1, dx1, dx1, dx2, coefs[3], dx2, dx2))
+        print("h^({0}) = (dx1 ** 2 + dx2 ** 2) / (2 * (d^2x1 * dx1 * dx1 - dx1 * dx2 + d^2x2 * dx2 * dx2)) = "
+            "({1} ** 2 + {2} ** 2) / (2 * ({3} * {4} * {5} - {6} * {7} + {8} * {9} * {10})) ".format(
+            k, dx1, dx2, coefs[2], dx1, dx1, dx1, dx2, coefs[3], dx2, dx2))
 
-    return ch / zn
+        return ch / zn
 
 
 def sylvester_criterion(hess):
@@ -104,7 +108,8 @@ def sylvester_criterion(hess):
     return 0
 
 
-def classical_method(coefs):
+def classical_method(init_conds):
+    coefs = init_conds['coefs']
     get_info("Calssical method", coefs)
 
     coefs_dx1 = [coefs[2] * 2, coefs[0]]
@@ -136,18 +141,24 @@ def classical_method(coefs):
     print("\n\n")
 
 
-def gradient_descent(coefs, x_prev, h, eps):
+def gradient_descent(init_conds, poor_cond_func=False):
+    coefs, x_prev, h, eps = init_conds['coefs'], init_conds['x_0'], init_conds['h'], init_conds['eps']
     get_info("Gradient descent method", coefs, x0=x_prev, h=h, eps=eps)
 
     k = 0
     while not finish_iter_proccess(x_prev, coefs, eps):
         print("---------")
         print("Iteration #{}".format(k))
-        print("grad(f(x^{0})) = {1}". format(k, grad(x_prev, coefs)))
-
         gr = grad(x_prev, coefs)
-        x = [i - h * j for i, j in zip(x_prev, gr)]
-        print("x = {0} - {1} * {2} = {3}".format(x_prev, h, gr, x))
+        print("grad(f(x^{0})) = {1}". format(k, gr))
+
+        if poor_cond_func:
+            gr_val = grad_val(x_prev, coefs)
+            x = [i - h * j / gr_val for i, j in zip(x_prev, gr)]
+            print("x = {0} - {1} * {2} / {3} = {4}".format(x_prev, h, gr, gr_val, x))
+        else:
+            x = [i - h * j for i, j in zip(x_prev, gr)]
+            print("x = {0} - {1} * {2} = {3}".format(x_prev, h, gr, x))
 
         while f(x, coefs) >= f(x_prev, coefs):
             print("Checking the condition f(x^(k+1)) < f(x^(k)):")
@@ -167,8 +178,9 @@ def gradient_descent(coefs, x_prev, h, eps):
     print("\n\n")
 
 
-def quickest_descent(coefs, x_prev, h, eps, step_type):
-    get_info("Quickest descent method", coefs, x0=x_prev, h=h, eps=eps)
+def quickest_descent(init_conds, step_type):
+    coefs, x_prev, h, eps = init_conds['coefs'], init_conds['x_0'], init_conds['h'], init_conds['eps']
+    get_info("Quickest descent method", coefs, x0=x_prev, h=h, eps=eps, step_type=step_type)
 
     k = 0
     while not finish_iter_proccess(x_prev, coefs, eps):
@@ -177,11 +189,7 @@ def quickest_descent(coefs, x_prev, h, eps, step_type):
         gr = grad(x_prev, coefs)
         print("grad(f(x^({0}))) = {1}". format(k, gr))
 
-        if step_type == 1:
-            h = get_step_type1(k, x_prev, coefs, gr)
-        elif step_type == 3:
-            h = get_step_type3(k, x_prev, coefs, gr)
-
+        h = get_step(k, x_prev, coefs, gr, step_type)
         print("h^({0}) = {1}".format(k, h))
         x = [i - h * j for i, j in zip(x_prev, gr)]
         print("x^({0}) = {1}".format(k, x))
@@ -228,16 +236,22 @@ if __name__ == '__main__':
     print("Example:\n14 -7 7 7 13")
     coefs = list(map(int, input().split()))
     #coefs = [14, -7, 7, 7, 13] # x1, x2, x1^2, x2^2, свободный коэф
-    x_0 = [2, 3]
-    h = 0.1
-    eps = 0.9
+
+    init_conds = {
+                    'coefs': coefs,
+                    'x_0': [2, 3],
+                    'h': 0.1,
+                    'eps': 0.9
+                 }
 
     for i in methods:
         if i == 1:
-            classical_method(coefs)
+            classical_method(init_conds)
         elif i == 2:
-            gradient_descent(coefs, x_0, h, eps)
+            gradient_descent(init_conds)
         elif i == 3:
-            quickest_descent(coefs, x_0, h, eps, 1)
+            quickest_descent(init_conds, STEP_TYPES[0])
         elif i == 4:
-            quickest_descent(coefs, x_0, h, eps, 3)
+            quickest_descent(init_conds, STEP_TYPES[1])
+        elif i == 5:
+            gradient_descent(init_conds, poor_cond_func=True)
