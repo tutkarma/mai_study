@@ -31,7 +31,6 @@ Syntax: main.py [--methods=#] [--max-iter=#] [--output=<filename>]
     Example:
         --max-iter=5
 
-    In progress:
     output=<filename>
         Write output to file.
     Example:
@@ -329,7 +328,6 @@ def gauss_seidel(init_conds):
             x_prev = x
 
         l += 1
-
     print("\n\n")
 
 
@@ -351,6 +349,7 @@ def parse_args(args):
 
     methods = [i for i in range(1, CNT_METHODS + 1)]
     max_iter = None
+    filename = None
 
     for (opt, val) in opts:
         if opt == '--help':
@@ -370,13 +369,13 @@ def parse_args(args):
             except ValueError:
                 print_usage('Limit of iteration must be number.')
         elif opt == '--output':
-            pass
+            filename = val
 
-    return (methods, max_iter)
+    return (methods, max_iter, filename)
 
 
 def main():
-    methods, max_iter = parse_args(sys.argv[1:])
+    methods, max_iter, filename = parse_args(sys.argv[1:])
     print("Enter coefs of the function (x1, x2, x1^2, x2^2, free coef)")
     print("Example:\n14 -7 7 7 13")
     coefs = list(map(int, input().split()))
@@ -389,6 +388,10 @@ def main():
                     'eps': 0.9,
                     'max_iter': max_iter if max_iter is not None else MAX_ITER
                  }
+
+    if filename is not None:
+        f = open(filename, 'w+')
+        sys.stdout = f
 
     for i in methods:
         if i == 1:
@@ -405,6 +408,9 @@ def main():
             coordinate_descent(init_conds)
         elif i == 7:
             gauss_seidel(init_conds)
+
+    if filename is not None:
+        f.close()
 
 
 if __name__ == '__main__':
