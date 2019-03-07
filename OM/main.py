@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 
-import numpy as np
 import getopt
 import sys
+import enum
 from math import sqrt
+
+import numpy as np
 
 
 USAGE = """
@@ -19,6 +21,7 @@ Syntax: main.py [--methods=#] [--max-iter=#] [--output=<filename>]
         4 -- Quickest descent method with step type 3
         5 -- Gradient descent method for poorly conditioned function
         6 -- Coordinate descent method
+        7 -- Gauss–Seidel method
 
     Example:
         --methods=1,3
@@ -36,22 +39,31 @@ Syntax: main.py [--methods=#] [--max-iter=#] [--output=<filename>]
 
 """
 
-CNT_METHODS = 6
-STEP_TYPES = [1, 3]
-FINISH_ITER_TYPES = [1, 3]
+CNT_METHODS = 7
+MAX_ITER = 10000
+
+
+class Step(enum.Enum):
+    type1 = 1
+    type3 = 3
+
+
+class FinishIteration(enum.Enum):
+    type1 = 1
+    type3 = 3
 
 
 def get_info(method, coefs, x0=None, h=None, eps=None, step_type=None):
     print(method)
-    if step_type:
-        print("Step type {0}".format(step_type))
+    if step_type is not None:
+        print("Step type {0}".format(step_type.value))
     print("f(x) = {0}x1^2 - x1x2 + {1}x2^2 + {2}x1 + {3}x2 + {4}".format(
         coefs[2], coefs[3], coefs[0], coefs[1], coefs[4]))
-    if x0:
+    if x0 is not None:
         print("x_0 = ({0} {1})^T".format(x0[0], x0[1]))
-    if h:
+    if h is not None:
         print("h = {0}".format(h))
-    if eps:
+    if eps is not None:
         print("eps = {0}".format(eps))
 
 
@@ -85,11 +97,11 @@ def finish_iter_proccess_type_3(k, x, coefs, eps):
     return dx_k < eps
 
 
-def finish_iter_proccess(k, x, coefs, eps, finish_type):
+def finish_iter_proccess(x, coefs, eps, finish_type, k=None):
     print("Сhecking the condition of the end iterative process:")
-    if finish_type == 1:
+    if finish_type == FinishIteration.type1:
         return finish_iter_proccess_type_1(x, coefs, eps)
-    elif finish_type == 3:
+    elif finish_type == FinishIteration.type3:
         return finish_iter_proccess_type_3(k, x, coefs, eps)
 
 
@@ -126,10 +138,10 @@ def get_step_type_3(k, coefs, gr):
 def get_step(k, x, coefs, gr, step_type):
     print("Find h")
 
-    if step_type == 1:
+    if step_type == Step.type1:
         return get_step_type_1(k, x, coefs, gr)
 
-    elif step_type == 3:
+    elif step_type == Step.type3:
         return get_step_type_3(k, coefs, gr)
 
 
@@ -185,7 +197,7 @@ def gradient_descent(init_conds, poor_cond_func=False):
     get_info("Gradient descent method", coefs, x0=x_prev, h=h, eps=eps)
 
     k = 0
-    while not finish_iter_proccess(x_prev, coefs, eps, FINISH_ITER_TYPES[0]) and k < max_iter:
+    while not finish_iter_proccess(x_prev, coefs, eps, FinishIteration.type1) and k < max_iter:
         print("---------")
         print("Iteration #{}".format(k + 1))
         gr = grad(x_prev, coefs)
@@ -223,7 +235,7 @@ def quickest_descent(init_conds, step_type):
     get_info("Quickest descent method", coefs, x0=x_prev, h=h, eps=eps, step_type=step_type)
 
     k = 0
-    while not finish_iter_proccess(x_prev, coefs, eps, FINISH_ITER_TYPES[0]) and k < max_iter:
+    while not finish_iter_proccess(x_prev, coefs, eps, FinishIteration.type1) and k < max_iter:
         print("---------")
         print("Iteration #{}".format(k + 1))
         gr = grad(x_prev, coefs)
@@ -251,21 +263,21 @@ def coordinate_descent(init_conds):
             print("Iteration #{}".format(k + n * l + 1))
             gr = grad(x_prev, coefs)
             dx = gr[k]
-            print("df(x^({0})) / dx_{1} = {2}".format(k + n * l - 1, k, dx))
+            print("df(x^({0})) / dx_{1} = {2}".format(k + n * l, k + 1, dx))
 
-            if finish_iter_proccess(k, x_prev, coefs, eps, FINISH_ITER_TYPES[1]):
+            if finish_iter_proccess(x_prev, coefs, eps, FinishIteration.type3, k=k):
                 print("Check derivatives from i to n:")
                 for i in range(n):
-                    if finish_iter_proccess(i, x_prev, coefs, eps, FINISH_ITER_TYPES[1]):
+                    if finish_iter_proccess(x_prev, coefs, eps, FinishIteration.type3, k=i):
                         print("\n\n")
-                        print(x_prev)
                         return
 
             e = [1 if i == k else 0 for i in range(n)]
-            print("e = {0}", e)
+            print("e = {0}".format(e))
 
             x = [i - h * j * dx for i, j in zip(x_prev, e)]
-            print("x^({0}) = {1} - {2} * {3} * {4} = {5}".format(k + n * l, x_prev, h, e, dx, x))
+            print("x^({0}) = x^({1}) - h * e_{2} * (df(x^({1})) / fx_{2}) = "
+                "{3} - {4} * {5} * {6} = {7}".format(k + n * l + 1, k + n * l, k + 1, x_prev, h, e, dx, x))
 
             while f(x, coefs) >= f(x_prev, coefs):
                 print("Checking the condition f(x^(k+nl-1)) < f(x^(k+nl)):")
@@ -282,6 +294,42 @@ def coordinate_descent(init_conds):
             x_prev = x
 
         l += 1
+    print("\n\n")
+
+
+def gauss_seidel(init_conds):
+    coefs, x_prev, h, eps = init_conds['coefs'], init_conds['x_0'], init_conds['h'], init_conds['eps']
+    max_iter = init_conds['max_iter']
+    get_info("Gauss–Seidel method", coefs, x0=x_prev, h=h, eps=eps)
+
+    n = len(x_prev)
+    l = 0
+    while l < max_iter:
+        for k in range(n):
+            print("---------")
+            print("Iteration #{}".format(k + n * l + 1))
+            gr = grad(x_prev, coefs)
+            dx = gr[k]
+            print("df(x^({0})) / dx_{1} = {2}".format(k + n * l, k + 1, dx))
+
+            if finish_iter_proccess(x_prev, coefs, eps, FinishIteration.type1, k=k):
+                print("Check derivatives from i to n:")
+                for i in range(n):
+                    if finish_iter_proccess(x_prev, coefs, eps, FinishIteration.type1, k=i):
+                        print("\n\n")
+                        return
+
+            e = [1 if i == k else 0 for i in range(n)]
+            print("e = {0}".format(e))
+            h = get_step(k, x_prev, coefs, gr, Step.type1)
+            print("h^({0}) = {1}".format(k, h))
+            x = [i - h * j * dx for i, j in zip(x_prev, e)]
+            print("x^({0}) = x^({1}) - h * e_{2} * (df(x^({1})) / fx_{2}) = "
+                "{3} - {4} * {5} * {6} = {7}".format(k + n * l + 1, k + n * l, k + 1, x_prev, h, e, dx, x))
+            x_prev = x
+
+        l += 1
+
     print("\n\n")
 
 
@@ -339,7 +387,7 @@ def main():
                     'x_0': [2, 3],
                     'h': 0.1,
                     'eps': 0.9,
-                    'max_iter': max_iter if max_iter else 10000
+                    'max_iter': max_iter if max_iter is not None else MAX_ITER
                  }
 
     for i in methods:
@@ -348,13 +396,15 @@ def main():
         elif i == 2:
             gradient_descent(init_conds)
         elif i == 3:
-            quickest_descent(init_conds, STEP_TYPES[0])
+            quickest_descent(init_conds, Step.type1)
         elif i == 4:
-            quickest_descent(init_conds, STEP_TYPES[1])
+            quickest_descent(init_conds, Step.type3)
         elif i == 5:
             gradient_descent(init_conds, poor_cond_func=True)
         elif i == 6:
             coordinate_descent(init_conds)
+        elif i == 7:
+            gauss_seidel(init_conds)
 
 
 if __name__ == '__main__':
