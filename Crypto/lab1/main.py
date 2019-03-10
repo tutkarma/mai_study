@@ -1,6 +1,7 @@
 from random import randint
 from math import gcd, pi
 from functools import reduce
+from datetime import datetime
 
 CHECK_NUM = 1598756544210860812002683252504666631284038535154979340910964824673923578639226397918134429192737005854188177977059177858243855990803981275665690912975534091041361701843465578101733863479781680791655959578320442108371634048374313524202193198694894536452471646868825144743014452957912743920239954473534374422647748020165306769379396190044599513110393062461302839244356754741065320775011514774723155863731595182892822790709843296375075272651902641460504103291775361
 
@@ -11,7 +12,7 @@ def f(x, a, b):
 
 def is_prime(N):
     if N in (0, 1):
-          return False
+        return False
     if N == 2:
         return True
     if N % 2 == 0:
@@ -20,7 +21,7 @@ def is_prime(N):
     while s % 2 == 0:
         s //= 2
     for i in range(50):
-        a = randint(1, N-1)
+        a = randint(1, N - 1)
         exp = s
         mod = pow(a, exp, N)
         while exp != N - 1 and mod != 1 and mod != N - 1:
@@ -74,11 +75,8 @@ def factor(n, factors):
 
 
 def find_all_factors(prime_factors, all_factors):
-    if len(prime_factors) == 0:
-        all_factors.append(1)
-    elif len(all_factors) == 0:
-        all_factors.append(1)
-        all_factors.append(prime_factors[0])
+    all_factors.append(1)
+    all_factors.append(prime_factors[0])
     for i in range(1, len(prime_factors)):
         tmp = []
         for f in all_factors:
@@ -86,12 +84,6 @@ def find_all_factors(prime_factors, all_factors):
                 tmp.append(f * prime_factors[i])
         all_factors += tmp
     all_factors.sort()
-
-
-def get_info(num, factors):
-    print("Original number: {0}".format(num))
-    print("Factors:")
-    print(*factors, sep='\n')
 
 
 def pollard_rho(n):
@@ -103,17 +95,26 @@ def pollard_rho(n):
     return all_factors
 
 
+def get_info(num, factors, start_time):
+    print("Original number: {0}".format(num))
+    print("Factors:")
+    print(*factors, sep='\n')
+    print("Time: {0}".format(datetime.now() - start_time))
+
+
 if __name__ == '__main__':
     n = 0
     with open('test1', 'r') as file:
         n = int(file.read())
+    start_time = datetime.now()
     factors = pollard_rho(n)
     factors = factors[1:len(factors) - 2]
-    get_info(n, factors)
+    get_info(n, factors, start_time)
 
     factors.clear()
     with open('test2', 'r') as file:
         n = int(file.read())
+    start_time = datetime.now()
     factors.append(gcd(n, CHECK_NUM))
     factors.append(n / factors[0])
-    get_info(n, factors)
+    get_info(n, factors, start_time)
