@@ -12,30 +12,36 @@
 ### Использование ###
 
 ```
-main.py [--methods=#] [--max-iter=#] [--output=<filename>]
+Syntax: main.py [--methods=#] [--max-iter=#] [--input=<filename>]
+                [--output=<filename>]
 
-  Флаги:
+  Flags:
     methods=#
-        Номера методов, которые нужно использовать. По умолчанию используются все методы.
+        Numbers of methods to use. By default all method are used.
 
-        1 -- Классический метод
-        2 -- Метод градиентного спуска
-        3 -- Метод наискорейшего спуска с 1 выбором шага
-        4 -- Метод наискорейшего спуска с 3 выбором шага
-        5 -- Метод градиентного спуска для плохо обусловленных функций
-        6 -- Метод покоординатного спуска
-        7 -- Метод Гаусса-Зейделя
+        1 -- Classical method
+        2 -- Gradient descent method
+        3 -- Quickest descent method with step type 1
+        4 -- Quickest descent method with step type 3
+        5 -- Gradient descent method for poorly conditioned function
+        6 -- Coordinate descent method
+        7 -- Gauss–Seidel method
 
-    Пример:
+    Example:
         --methods=1,3
 
     max-iter=#
-        Максимальное количество итераций для каждого метода. По умолчанию 10000.
-    Пример:
+        Maximum number of iterations. By default it is 10000.
+    Example:
         --max-iter=5
 
+    input=<filename>
+        Read input from file.
+    Example:
+        --input=input.txt
+
     output=<filename>
-        Запись вывода в файл.
-    Пример:
+        Write output to file.
+    Example:
         --output=log.txt
 ```
