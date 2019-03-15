@@ -9,7 +9,8 @@ import numpy as np
 
 
 USAGE = """
-Syntax: main.py [--methods=#] [--max-iter=#] [--output=<filename>]
+Syntax: main.py [--methods=#] [--max-iter=#] [--input=<filename>]
+                [--output=<filename>]
 
   Flags:
     methods=#
@@ -30,6 +31,11 @@ Syntax: main.py [--methods=#] [--max-iter=#] [--output=<filename>]
         Maximum number of iterations. By default it is 10000.
     Example:
         --max-iter=5
+
+    input=<filename>
+        Read input from file.
+    Example:
+        --input=log.txt
 
     output=<filename>
         Write output to file.
@@ -343,13 +349,14 @@ def parse_args(args):
     try:
         opts, args = getopt.getopt(args, '', ['help', 'methods=',
                                                       'max-iter=',
-                                                      'output='])
+                                                      'output=',
+                                                      'input='])
     except getopt.GetoptError:
         print_usage('Invalid arguments.')
 
     methods = [i for i in range(1, CNT_METHODS + 1)]
     max_iter = None
-    filename = None
+    f_input = f_output = None
 
     for (opt, val) in opts:
         if opt == '--help':
@@ -369,16 +376,23 @@ def parse_args(args):
             except ValueError:
                 print_usage('Limit of iteration must be number.')
         elif opt == '--output':
-            filename = val
+            f_output = val
+        elif opt == '--input':
+            f_input = val
 
-    return (methods, max_iter, filename)
+    return (methods, max_iter, f_input, f_output)
 
 
 def main():
-    methods, max_iter, filename = parse_args(sys.argv[1:])
-    print("Enter coefs of the function (x1, x2, x1^2, x2^2, free coef)")
-    print("Example:\n14 -7 7 7 13")
-    coefs = list(map(int, input().split()))
+    methods, max_iter, f_input, f_output = parse_args(sys.argv[1:])
+    coefs = []
+    if f_input is None:
+        print("Enter coefs of the function (x1, x2, x1^2, x2^2, free coef)")
+        print("Example:\n14 -7 7 7 13")
+        coefs = list(map(int, input().split()))
+    else:
+        with open(f_input, 'r') as f_i:
+            coefs = list(map(int, f_i.read().split()))
     #coefs = [14, -7, 7, 7, 13] # x1, x2, x1^2, x2^2, свободный коэф
 
     init_conds = {
@@ -389,8 +403,8 @@ def main():
                     'max_iter': max_iter if max_iter is not None else MAX_ITER
                  }
 
-    if filename is not None:
-        f = open(filename, 'w+')
+    if f_output is not None:
+        f = open(f_output, 'w+')
         sys.stdout = f
 
     for i in methods:
@@ -409,7 +423,7 @@ def main():
         elif i == 7:
             gauss_seidel(init_conds)
 
-    if filename is not None:
+    if f_output is not None:
         f.close()
 
 
