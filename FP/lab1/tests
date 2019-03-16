@@ -1,0 +1,10 @@
+(castle-moves 1 1 1 1)
+"T"
+(castle-moves 4 5 7 8)
+4 ;
+8
+(castle-moves 7 7 2 4)
+7 ;
+4
+(castle-moves 2 6 6 6)
+"T"
