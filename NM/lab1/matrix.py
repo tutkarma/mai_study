@@ -1,4 +1,5 @@
 import copy
+import json
 
 
 class Vector:
@@ -24,8 +25,11 @@ class Vector:
 
     def save_to_file(self, filename):
         with open(filename, 'w') as f:
+            dict_to_json = {}
             for i, el in enumerate(self.data):
-                f.write('x{0} = {1}\n'.format(i + 1, el))
+                k = 'x{0}'.format(i + 1)
+                dict_to_json[k] = el
+            json.dump(dict_to_json, f, sort_keys=True, indent=4) # !
 
 
 class Matrix:
