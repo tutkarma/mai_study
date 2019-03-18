@@ -1,8 +1,10 @@
 import argparse
+import logging
+
 import numpy as np
 
 from matrix import TridiagonalMatrix, Vector
-from utils import read_triagonal_matrix
+from utils import read_triagonal_matrix, save_to_file
 
 
 def tma(mat, D):
@@ -32,11 +34,18 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--input', required=True, help='Input file')
     parser.add_argument('--output', required=True, help='Output file')
-    #parser.add_argument('--log', help='Logging')
-
     args = parser.parse_args()
+
+    logging.basicConfig(filename="1-2.log", level=logging.INFO)
 
     mat, D = TridiagonalMatrix(), Vector()
     read_triagonal_matrix(args.input, mat, D)
+    logging.info("Input matrix:")
+    logging.info(mat)
+    logging.info("Input vector:")
+    logging.info(D)
+
     x = tma(mat, D)
-    x.save_to_file(args.output)
+    logging.info("Answer:")
+    logging.info(x)
+    save_to_file(args.output, X=x)

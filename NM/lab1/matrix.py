@@ -20,16 +20,17 @@ class Vector:
     def __len__(self):
         return len(self.data)
 
+    def __str__(self):
+        res = '\n'
+        for i in self:
+            res += '{0}\n'.format(i)
+        return res
+
     def append(self, item):
         self.data.append(item)
 
-    def save_to_file(self, filename):
-        with open(filename, 'w') as f:
-            dict_to_json = {}
-            for i, el in enumerate(self.data):
-                k = 'x{0}'.format(i + 1)
-                dict_to_json[k] = el
-            json.dump(dict_to_json, f, sort_keys=True, indent=4) # !
+    def get_data(self):
+        return self.data
 
 
 class Matrix:
@@ -57,6 +58,17 @@ class Matrix:
 
     def __len__(self):
         return len(self.data)
+
+    def __str__(self):
+        res = '\n'
+        for i in range(self.size):
+            for j in range(self.size):
+                res += str(self.data[i][j]) + ' '
+            res += '\n'
+        return res
+
+    def get_data(self):
+        return self.data
 
     def multiply(self, other):
         other_T = list(zip(*other))
@@ -103,6 +115,17 @@ class TridiagonalMatrix:
         self.a = []
         self.b = []
         self.c = []
+
+    def __len__(self):
+        return len(self.b)
+
+    def __str__(self):
+        res = '\n'
+        res += str(self.b[0]) + ' ' + str(self.c[0]) + '\n'
+        for i in range(1, len(self) - 1):
+            res += str(self.a[i]) + ' ' + str(self.b[i]) + ' ' + str(self.c[i]) + '\n'
+        res += str(self.a[-1]) + ' ' + str(self.b[-1]) +'\n'
+        return res
 
     def debug_print(self, D):
         for i in range(self.size):

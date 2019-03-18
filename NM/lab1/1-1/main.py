@@ -1,8 +1,9 @@
 import argparse
+import logging
 from functools import reduce
 
 from matrix import Matrix, Vector
-from utils import read_matrix
+from utils import read_matrix, save_to_file
 
 
 def get_P(mat):
@@ -72,14 +73,38 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--input', required=True, help='Input file')
     parser.add_argument('--output', required=True, help='Output file')
-
     args = parser.parse_args()
+
+    logging.basicConfig(filename="1-1.log", level=logging.INFO)
+
     mat, B = Matrix(), Vector()
     read_matrix(args.input, mat, B)
+
+    logging.info("Input matrix:")
+    logging.info(mat)
+    logging.info("Input vector:")
+    logging.info(B)
+
     LU, P = LU_decomposition(mat)
+
+    logging.info("LU:")
+    logging.info(LU)
+    logging.info("P:")
+    logging.info(P)
+
     new_B = get_new_B(B, P)
     x = LU_solve(LU, new_B)
-    x.save_to_file(args.output)
+
+    logging.info("Answer:")
+    logging.info(x)
+
     inv = LU_inverse(LU)
-    inv.debug_print()
-    print(LU_determinant(LU))
+    logging.info("Inverse matrix:")
+    logging.info(inv)
+
+    det = LU_determinant(LU)
+    logging.info("Determinant:")
+    logging.info(det)
+    logging.info('\n')
+
+    save_to_file(args.output, LU=LU, X=x, inv=inv, det=det)
