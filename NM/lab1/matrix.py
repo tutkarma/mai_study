@@ -19,6 +19,9 @@ class Vector:
     def __len__(self):
         return len(self.data)
 
+    def append(self, item):
+        self.data.append(item)
+
     def save_to_file(self, filename):
         with open(filename, 'w') as f:
             for i, el in enumerate(self.data):
@@ -32,9 +35,6 @@ class Matrix:
         else:
             self.copy_constructor(orig)
 
-    def __getitem__(self, idx):
-        return self.data[idx]
-
     def non_copy_constructor(self):
         self.size = 0
         self.data = []
@@ -43,9 +43,25 @@ class Matrix:
         self.size = orig.size
         self.data = copy.deepcopy(orig.data)
 
+    def __getitem__(self, idx):
+        return self.data[idx]
+
+    def __setitem__(self, idx, item):
+        if idx >= len(self):
+            self.data.extend(idx + 1)
+        self.data[idx] = item
+
+    def __len__(self):
+        return len(self.data)
+
+    def multiply(self, other):
+        other_T = list(zip(*other))
+        result = Matrix.from_list([[sum(ea * eb for ea, eb in zip(a, b)) for b in other_T] for a in self])
+        return result
+
     def debug_print(self):
         for i in self.data:
-            print(*i, sep=" ", end=" ")
+            print(*i)
 
     def transpose(self):
         self.data = [list(i) for i in zip(*self.data)]
@@ -56,6 +72,13 @@ class Matrix:
         mat.size = len(rows)
         mat.data = rows
         return mat
+
+    @classmethod
+    def zero(cls, sz):
+        obj = Matrix()
+        obj.size = sz
+        obj.data = [[0] * sz for _ in range(sz)]
+        return obj
 
     @classmethod
     def identity(cls, sz):
