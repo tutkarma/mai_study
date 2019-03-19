@@ -1,6 +1,8 @@
 import copy
 import json
 
+from numpy.linalg import norm
+
 
 class Vector:
     def __init__(self, sz=None):
@@ -26,16 +28,37 @@ class Vector:
             res += '{0}\n'.format(i)
         return res
 
+    def __add__(self, other):
+        if isinstance(other, Matrix):
+            other_vec = sum(other.data, [])
+            added = [i + j for i, j in zip(self, other_vec)]
+        elif isinstance(other, Vector):
+            added = [i + j for i, j in zip(self, other.data)]
+        return Vector.from_list(added)
+
+    def __sub__(self, other):
+        subbed = [i - j for i, j in zip(self, other)]
+        return Vector.from_list(subbed)
+
     def append(self, item):
         self.data.append(item)
 
     def get_data(self):
         return [round(i, 4) for i in self.data]
 
+    def norm(self):
+        return max([abs(i) for i in self])
+
     @classmethod
     def from_list(cls, list_):
         vec = Vector()
         vec.data = list_
+        return vec
+
+    @classmethod
+    def copy(cls, orig):
+        vec = Vector()
+        vec.data = copy.deepcopy(orig.data)
         return vec
 
 
@@ -75,8 +98,12 @@ class Matrix:
         return [[round(j, 4) for j in i] for i in self.data]
 
     def multiply(self, other):
-        other_T = list(zip(*other))
-        result = Matrix.from_list([[sum(ea * eb for ea, eb in zip(a, b)) for b in other_T] for a in self])
+        if isinstance(other, Vector):
+            b = other.data
+            result = Vector.from_list([sum(ea * eb for ea, eb in zip(a, b)) for a in self])
+        elif isinstance(other, Matrix):
+            other_T = list(zip(*other))
+            result = Matrix.from_list([[sum(ea * eb for ea, eb in zip(a, b)) for b in other_T] for a in self])
         return result
 
     def debug_print(self):
@@ -89,6 +116,9 @@ class Matrix:
     def diag(self):
         v = Vector.from_list([self.data[i][i] for i in range(len(self))])
         return v
+
+    def norm(self):
+        return max([sum(list(map(abs, self.data[i]))) for i in range(len(self))])
 
     @classmethod
     def _make_matrix(cls, rows):
@@ -112,6 +142,20 @@ class Matrix:
     def from_list(cls, list_of_lists):
         rows = list_of_lists[:]
         return cls._make_matrix(rows)
+
+    @classmethod
+    def triangular_from_matrix(cls, orig, type_tril=None):
+        obj = Matrix(orig)
+        if type_tril == 'lower':
+            for i in range(len(orig)):
+                for j in range(i, len(orig)):
+                    obj[i][j] = 0
+        elif type_tril == 'upper':
+            for i in range(len(orig)):
+                for j in range(0, i):
+                    obj[i][j] = 0
+        return obj
+
 
 
 class TridiagonalMatrix:
