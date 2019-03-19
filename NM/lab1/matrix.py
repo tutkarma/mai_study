@@ -30,7 +30,13 @@ class Vector:
         self.data.append(item)
 
     def get_data(self):
-        return self.data
+        return [round(i, 4) for i in self.data]
+
+    @classmethod
+    def from_list(cls, list_):
+        vec = Vector()
+        vec.data = list_
+        return vec
 
 
 class Matrix:
@@ -41,11 +47,9 @@ class Matrix:
             self.copy_constructor(orig)
 
     def non_copy_constructor(self):
-        self.size = 0
         self.data = []
 
     def copy_constructor(self, orig):
-        self.size = orig.size
         self.data = copy.deepcopy(orig.data)
 
     def __getitem__(self, idx):
@@ -61,14 +65,14 @@ class Matrix:
 
     def __str__(self):
         res = '\n'
-        for i in range(self.size):
-            for j in range(self.size):
+        for i in range(len(self)):
+            for j in range(len(self)):
                 res += str(self.data[i][j]) + ' '
             res += '\n'
         return res
 
     def get_data(self):
-        return self.data
+        return [[round(j, 4) for j in i] for i in self.data]
 
     def multiply(self, other):
         other_T = list(zip(*other))
@@ -82,24 +86,26 @@ class Matrix:
     def transpose(self):
         self.data = [list(i) for i in zip(*self.data)]
 
+    def diag(self):
+        v = Vector()
+        v.set_data([self.data[i][i] for i in range(len(self))])
+        return v
+
     @classmethod
     def _make_matrix(cls, rows):
         mat = Matrix()
-        mat.size = len(rows)
         mat.data = rows
         return mat
 
     @classmethod
     def zero(cls, sz):
         obj = Matrix()
-        obj.size = sz
         obj.data = [[0] * sz for _ in range(sz)]
         return obj
 
     @classmethod
     def identity(cls, sz):
         obj = Matrix()
-        obj.size = sz
         obj.data = [[1 if i == j else 0 for j in range(sz)] for i in range(sz)]
         return obj
 
@@ -111,7 +117,6 @@ class Matrix:
 
 class TridiagonalMatrix:
     def __init__(self):
-        self.size = 0
         self.a = []
         self.b = []
         self.c = []
@@ -128,6 +133,6 @@ class TridiagonalMatrix:
         return res
 
     def debug_print(self, D):
-        for i in range(self.size):
+        for i in range(len(self)):
             print("{0} {1} {2} {3}".format(self.a[i], 
                 self.b[i], self.c[i], D[i]))

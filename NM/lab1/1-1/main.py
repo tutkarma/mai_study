@@ -7,9 +7,9 @@ from utils import read_matrix, save_to_file
 
 
 def get_P(mat):
-    p = Matrix.identity(mat.size)
-    for i in range(mat.size):
-        row = max(range(i, mat.size), key=lambda j: abs(mat[j][i]))
+    p = Matrix.identity(len(mat))
+    for i in range(len(mat)):
+        row = max(range(i, len(mat)), key=lambda j: abs(mat[j][i]))
         if i != row:
             p[i], p[row] = p[row], p[i]
     return p
@@ -28,35 +28,36 @@ def LU_decomposition(mat):
     PA = P.multiply(mat)
     LU = Matrix(PA)
 
-    for i in range(mat.size):
-        for j in range(i + 1, mat.size):
+    for i in range(len(mat)):
+        for j in range(i + 1, len(mat)):
             LU[j][i] /= LU[i][i]
-            for k in range(i + 1, mat.size):
+            for k in range(i + 1, len(mat)):
                 LU[j][k] -= LU[j][i] * LU[i][k]
 
     return LU, P
 
 
 def LU_solve(LU, B):
-    z = Vector(LU.size)
-    x = Vector(LU.size)
+    sz = len(LU)
+    z = Vector(sz)
+    x = Vector(sz)
 
     z[0] = B[0]
-    for i in range(1, LU.size):
+    for i in range(1, sz):
         s = sum([LU[i][j] * z[j] for j in range(i)])
         z[i] = B[i] - s
 
     x[-1] = z[-1] / LU[-1][-1]
-    for i in reversed(range(LU.size - 1)):
+    for i in reversed(range(sz - 1)):
         s = sum([LU[i][j] * x[j]
-                      for j in range(i + 1, LU.size)])
+                      for j in range(i + 1, sz)])
         x[i] = (z[i] - s) / LU[i][i]
 
     return x
 
 
 def LU_inverse(LU):
-    E = Matrix.identity(LU.size)
+    E = Matrix.identity(len(LU))
     x = []
     for row in E:
         x.append(LU_solve(LU, row))
@@ -66,7 +67,7 @@ def LU_inverse(LU):
 
 
 def LU_determinant(LU):
-    return reduce(lambda x, y: x * y, [LU[i][i] for i in range(LU.size)])
+    return reduce(lambda x, y: x * y, [LU[i][i] for i in range(len(LU))])
 
 
 if __name__ == '__main__':
@@ -77,8 +78,9 @@ if __name__ == '__main__':
 
     logging.basicConfig(filename="1-1.log", level=logging.INFO)
 
-    mat, B = Matrix(), Vector()
-    read_matrix(args.input, mat, B)
+    need_args = ('matrix', 'vector')
+    init_dict = read_matrix(args.input, need_args)
+    mat, B = init_dict['matrix'], init_dict['vector']
 
     logging.info("Input matrix:")
     logging.info(mat)

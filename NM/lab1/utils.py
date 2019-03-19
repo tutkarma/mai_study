@@ -2,22 +2,34 @@ import json
 
 import matrix
 
-def read_matrix(filename, matrix, vector):
+
+def read_matrix(filename, need_args):
+    init_dict = {}
     with open(filename, 'r') as json_data:
         data = json.load(json_data)[0] # !
-        matrix.size = data['size']
-        matrix.data = data['A']
-        vector.data = data['B']
+
+        for arg in need_args:
+            if arg not in data:
+                raise ValueError('No "{0}" in given data'.format(arg))
+
+            if arg == 'matrix':
+                init_dict[arg] = matrix.Matrix.from_list(data[arg])
+            elif arg == 'vector':
+                init_dict[arg] = matrix.Vector.from_list(data[arg])
+            else:
+                init_dict[arg] = data[arg]
+
+    return init_dict
 
 
 def read_triagonal_matrix(filename, matrix, vector):
     with open(filename, 'r') as json_data:
         data = json.load(json_data)[0] # !
-        matrix.size = data['size']
         matrix.a = [0] + data['A']
         matrix.b = data['B']
         matrix.c = data['C'] + [0]
         vector.data = data['D']
+
 
 def save_to_file(filename, **kwargs):
     with open(filename, 'w') as f:
