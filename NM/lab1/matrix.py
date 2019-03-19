@@ -87,8 +87,7 @@ class Matrix:
         self.data = [list(i) for i in zip(*self.data)]
 
     def diag(self):
-        v = Vector()
-        v.set_data([self.data[i][i] for i in range(len(self))])
+        v = Vector.from_list([self.data[i][i] for i in range(len(self))])
         return v
 
     @classmethod
