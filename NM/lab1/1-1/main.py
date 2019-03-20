@@ -3,7 +3,7 @@ import logging
 from functools import reduce
 
 from matrix import Matrix, Vector
-from utils import read_matrix, save_to_file
+from utils import read_data, save_to_file
 
 
 def get_P(mat):
@@ -79,7 +79,7 @@ if __name__ == '__main__':
     logging.basicConfig(filename="1-1.log", level=logging.INFO)
 
     need_args = ('matrix', 'vector')
-    init_dict = read_matrix(args.input, need_args)
+    init_dict = read_data(args.input, need_args)
     mat, B = init_dict['matrix'], init_dict['vector']
 
     logging.info("Input matrix:")

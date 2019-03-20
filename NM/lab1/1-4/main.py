@@ -2,9 +2,8 @@ import argparse
 import logging
 import math
 
-
 from matrix import Matrix, Vector
-from utils import read_matrix, save_to_file
+from utils import read_data, save_to_file
 
 
 def t(A):
@@ -63,7 +62,7 @@ if __name__ == '__main__':
     logging.basicConfig(filename="1-4.log", level=logging.INFO)
 
     need_args = ('matrix', 'eps')
-    init_dict = read_matrix(args.input, need_args)
+    init_dict = read_data(args.input, need_args)
     A, eps = init_dict['matrix'], init_dict['eps']
 
     values, vectors = jacobi_eigenvalue(A, eps)

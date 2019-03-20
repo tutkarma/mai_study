@@ -3,7 +3,7 @@ import json
 import matrix
 
 
-def read_matrix(filename, need_args):
+def read_data(filename, need_args):
     init_dict = {}
     with open(filename, 'r') as json_data:
         data = json.load(json_data)[0] # !

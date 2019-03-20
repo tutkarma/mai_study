@@ -6,7 +6,7 @@ import numpy as np
 from numpy.linalg import norm, solve, inv
 
 from matrix import Matrix, Vector
-from utils import read_matrix, save_to_file
+from utils import read_data, save_to_file
 
 
 def equivalent_form(A, B):
@@ -14,19 +14,12 @@ def equivalent_form(A, B):
     alpha = Matrix.zero(sz)
     beta = Vector(sz)
 
+    # чтобы не делить на 0, добавим небольшую константу
     for i in range(sz):
-        if A[i][i] == 0:
-            for j in range(sz):
-                if A[j][i] != 0:
-                    A[i][i], A[j][i] = A[j][i], A[i][i]
-                    B[i], B[j] = B[j], B[i]
-                    break
-
-    for i in range(sz):
-        beta[i] = B[i] / A[i][i]
+        beta[i] = B[i] / (A[i][i] + 1e-3)
         for j in range(sz):
             if i != j:
-                alpha[i][j] = -A[i][j] / A[i][i]
+                alpha[i][j] = -A[i][j] / (A[i][i] + 1e-3)
 
     return alpha, beta
 
@@ -84,7 +77,7 @@ if __name__ == '__main__':
     logging.basicConfig(filename="1-3.log", level=logging.INFO)
 
     need_args = ('matrix', 'vector', 'eps')
-    init_dict = read_matrix(args.input, need_args)
+    init_dict = read_data(args.input, need_args)
     A, B, eps = init_dict['matrix'], init_dict['vector'], init_dict['eps']
 
     alpha, beta = equivalent_form(A, B)
