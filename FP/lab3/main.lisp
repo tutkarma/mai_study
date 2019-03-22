@@ -23,11 +23,18 @@
 )
 
 
+(defun print-matrix (matrix &optional (chars 3) stream)
+  (let ((*print-right-margin* (+ 6 (* (1+ chars)
+                                      (array-dimension matrix 1)))))
+    (pprint matrix stream)
+    (values)))
+
+
 (defun matrix-tl-bl (n)
   (get-matrix n)
 )
 
 
-(print (matrix-tl-bl 1))
-(print (matrix-tl-bl 5))
-(print (matrix-tl-bl 8))
+(print-matrix (matrix-tl-bl 1))
+(print-matrix (matrix-tl-bl 5))
+(print-matrix (matrix-tl-bl 8))
