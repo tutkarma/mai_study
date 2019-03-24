@@ -2,6 +2,8 @@ import json
 
 import matrix
 
+import numpy as np
+
 
 def read_data(filename, need_args):
     init_dict = {}
@@ -42,3 +44,13 @@ def save_to_file(filename, **kwargs):
             else:
                 json_data[k] = val
         json.dump(json_data, f, sort_keys=True, indent=4)
+
+
+def complex_to_list(list_):
+    list_without_complex = []
+    for obj in list_:
+        if isinstance(obj, (complex, np.complex)):
+            list_without_complex.append([obj.real, obj.imag])
+        else:
+            list_without_complex.append(obj)
+    return list_without_complex

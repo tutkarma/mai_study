@@ -1,6 +1,7 @@
 import copy
 import json
 
+import numpy as np
 from numpy.linalg import norm
 
 
@@ -42,6 +43,9 @@ class Vector:
 
     def append(self, item):
         self.data.append(item)
+
+    def extend(self, item):
+        self.data.extend(item)
 
     def get_data(self):
         return [round(i, 4) for i in self.data]
@@ -94,6 +98,10 @@ class Matrix:
             res += '\n'
         return res
 
+    def __sub__(self, other):
+        subbed = [[self.data[i][j] - other.data[i][j] for j in range(sz)] for i in range(sz)]
+        return Matrix.from_list(subbed)
+
     def get_data(self):
         return [[round(j, 4) for j in i] for i in self.data]
 
@@ -116,6 +124,9 @@ class Matrix:
     def diag(self):
         v = Vector.from_list([self.data[i][i] for i in range(len(self))])
         return v
+
+    def get_column(self, idx):
+        return Vector.from_list([self.data[i][idx] for i in range(len(self))])
 
     def norm(self):
         return max([sum(list(map(abs, self.data[i]))) for i in range(len(self))])
