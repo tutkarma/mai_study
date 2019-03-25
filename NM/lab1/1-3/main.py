@@ -7,6 +7,7 @@ from numpy.linalg import norm, solve, inv
 
 from matrix import Matrix, Vector
 from utils import read_data, save_to_file
+from benchmark import numpy_solve
 
 
 def equivalent_form(A, B):
@@ -83,5 +84,8 @@ if __name__ == '__main__':
     alpha, beta = equivalent_form(A, B)
     x = iterative_method(alpha, beta, eps)
     x2 = seidel_method(alpha, beta, eps)
+
+    numpy_solve(A, B, x)
+    numpy_solve(A, B, x2)
 
     save_to_file(args.output, x_iter=x, x_zeidel=x2)

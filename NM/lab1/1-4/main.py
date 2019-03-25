@@ -4,6 +4,7 @@ import math
 
 from matrix import Matrix, Vector
 from utils import read_data, save_to_file
+from benchmark import numpy_eig
 
 
 def t(A):
@@ -66,4 +67,5 @@ if __name__ == '__main__':
     A, eps = init_dict['matrix'], init_dict['eps']
 
     values, vectors = jacobi_eigenvalue(A, eps)
+    numpy_eigs(A, values, vectors)
     save_to_file(args.output, eigenvalues=values, eigenvectors=vectors)

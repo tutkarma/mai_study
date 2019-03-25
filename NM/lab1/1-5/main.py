@@ -8,6 +8,7 @@ from numpy.linalg import norm
 
 from matrix import Matrix, Vector
 from utils import read_data, save_to_file, complex_to_list
+from benchmark import numpy_eig
 
 
 class TypeEig(enum.Enum):
@@ -104,5 +105,7 @@ if __name__ == '__main__':
     init_dict = read_data(args.input, need_args)
     A, eps = init_dict['matrix'], init_dict['eps']
 
-    x = complex_to_list(QR_method(A, eps))
+    tmp = QR_method(A, eps)
+    numpy_eig(A, tmp)
+    x = complex_to_list(tmp)
     save_to_file(args.output, x=x)
