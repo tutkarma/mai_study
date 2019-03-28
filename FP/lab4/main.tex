@@ -1,0 +1,99 @@
+\documentclass[12pt]{article}
+
+\usepackage{fullpage}
+\usepackage{multicol,multirow}
+\usepackage{tabularx}
+\usepackage{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection.}{0.3em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection.}{0.3em}{}
+
+\titlespacing{\section}{0pt}{*2}{*2}
+\titlespacing{\subsection}{0pt}{*1}{*1}
+\titlespacing{\subsubsection}{0pt}{*0}{*0}
+\usepackage{listings}
+\lstloadlanguages{Lisp}
+\lstset{extendedchars=false,
+    breaklines=true,
+    breakatwhitespace=true,
+    keepspaces = true,
+    tabsize=2
+}
+\begin{document}
+
+
+\section*{Отчет по лабораторной работе №\,4
+по курсу \guillemotleft  Функциональное программирование\guillemotright}
+\begin{flushright}
+Студентка группы М8О-307 МАИ \textit{Довженко Анастасия}, \textnumero 7 по списку \\
+\makebox[7cm]{Контакты: {\tt tutkarma@gmail.com} \hfill} \\
+\makebox[7cm]{Работа выполнена: 28.03.2019 \hfill} \\
+\ \\
+Преподаватель: Иванов Дмитрий Анатольевич, доц. каф. 806 \\
+\makebox[7cm]{Отчет сдан: \hfill} \\
+\makebox[7cm]{Итоговая оценка: \hfill} \\
+\makebox[7cm]{Подпись преподавателя: \hfill} \\
+
+\end{flushright}
+
+\section{Тема работы}
+Знаки и строки.
+
+\section{Цель работы}
+Научиться работать с литерами (знаками) и строками при помощи функций обработки строк и общих функций работы с последовательностями.
+
+\section{Задание (вариант №4.33)}
+Запрограммировать на языке Коммон Лисп функцию, принимающую один аргумент - строку предложения.
+
+Функция должна
+\begin{enumerate}
+\item удалить все слова с нечётными порядковыми номерами,
+\item перевернуть все слова с чётными номерами,
+\item вернуть новое предложение.
+\end{enumerate}
+
+\section{Оборудование студента}
+Ноутбук Asus UX310U, процессор Intel Core i7-6500U CPU 2.50GHz x 4, память: 8Gb, разрядность системы: 64.
+
+\section{Программное обеспечение}
+ОС Ubuntu 16.04 LTS, компилятор clisp, текстовый редактор Sublime Text 3.
+
+\section{Идея, метод, алгоритм}
+Идея в том, чтобы разбить строку на список слов, удалить нечетные элементы из списка слов, реверсировать каждый элемент списка и объединить список в строку.
+
+\section{Сценарий выполнения работы}
+
+\section{Распечатка программы и её результаты}
+
+\subsection{Исходный код}
+\lstinputlisting{./main.lisp}
+
+\subsection{Результаты работы}
+"отч от олатс"\ \\
+"в в ,йымюргу то ламердаз дан атнаилоф"\ \\ 
+"llit eid"\ \\
+"ёще хикгям ,колуб йепыв"\
+
+\section{Дневник отладки}
+\begin{tabular}{|p{50pt}|p{130pt}|p{130pt}|p{70pt}|}
+\hline
+Дата & Событие & Действие по исправлению & Примечание\\
+\hline
+\end{tabular}
+
+\section{Замечания автора по существу работы}
+Строки в Коммон Лиспе является подтипом vector, поэтому к ним применимы все функции работы с векторами и последовательностями, что очень удобно.
+
+\section{Выводы}
+Я научилась работать со строками при помощи функций обработки строк и общих функций работы с последовательностями. Также при выполнении работы мне помогли знания, полученные в предыдущих работах.
+
+\end{document}
