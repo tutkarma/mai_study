@@ -30,7 +30,7 @@ def bitcount(n):
 
 
 def mean(list_):
-    return [int(sum(i))/len(i) for i in zip(*list_)]
+    return [int(sum(i)/len(i)) for i in zip(*list_)]
 
 
 if __name__ == '__main__':
@@ -49,7 +49,7 @@ if __name__ == '__main__':
         diffs = []
         rounds = range(0, 81, 5)
         for i in rounds:
-            logging.info("Count rounds: ".format(i))
+            logging.info("Count rounds: {0}".format(i))
             output1 = sha1.sha1(input1, i)
             output2 = sha1.sha1(input2, i)
             logging.info("Output original:  {0}".format(output1))
@@ -61,6 +61,11 @@ if __name__ == '__main__':
         all_diffs.append(diffs)
 
     mean_diffs = mean(all_diffs)
+    for i, j in zip(cnt_rounds, mean_diffs):
+        print("Count rounds: {0}".format(i))
+        print("Count of different bits: {0}".format(j))
+        print("------------")
+
     plt.bar(cnt_rounds, mean_diffs, align='center')
     plt.xlabel('Count rounds')
     plt.ylabel('Count of different bits')
