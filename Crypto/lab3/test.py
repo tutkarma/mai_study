@@ -28,8 +28,20 @@ class TestSha1(unittest.TestCase):
         custom_sha1 = sha1.sha1(msg, CNT_ROUNDS)
         lib_sha1 = hashlib.sha1(msg.encode()).hexdigest()
 
-        print('... test_comparison: checking for identical digests')
+        print('... test_comparison: checking for identical digests (random string)')
         self.assertEqual(custom_sha1, lib_sha1)
+        print('... test_comparison: success')
+
+        tests = ('abc', '', 'abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq', \
+            'abcdefghbcdefghicdefghijdefghijkefghijklfghijklmghijklmnhijklmnoijklmnopjklmnopqklmnopqrlmnopqrsmnopqrstnopqrstu', \
+            'a' * 1000000)
+
+        print('... test_comparison: checking for identical digests (test cases)')
+        for test in tests:
+            print('... test: ', test if len(test) < 10**6 else 'a (1,000,000 repetitions)')
+            custom_sha1 = sha1.sha1(test, CNT_ROUNDS)
+            lib_sha1 = hashlib.sha1(test.encode()).hexdigest()
+            self.assertEqual(custom_sha1, lib_sha1)
         print('... test_comparison: success')
 
 

@@ -1,6 +1,5 @@
 import os
 import argparse
-import hashlib
 
 
 CNT_ROUNDS = 80
@@ -88,7 +87,7 @@ def sha1(msg, rounds):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--rounds', help='Count rounds')
+    parser.add_argument('--rounds', help='Count rounds (<= 80)')
     parser.add_argument('--input', required=True, help='Input file to hash')
     args = parser.parse_args()
 

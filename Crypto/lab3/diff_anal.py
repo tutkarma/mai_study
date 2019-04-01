@@ -1,10 +1,14 @@
 import random
 import string
-import bitarray
+import logging
 
+import bitarray
 import matplotlib.pyplot as plt
 
 import sha1
+
+
+CNT_TESTS = 11
 
 
 def get_random_string(N=50):
@@ -25,22 +29,39 @@ def bitcount(n):
     return bin(n).count('1')
 
 
+def mean(list_):
+    return [int(sum(i))/len(i) for i in zip(*list_)]
+
+
 if __name__ == '__main__':
-    input1 = get_random_string()
-    input2 = change_one_bit(input1)
+    logging.basicConfig(filename="analysis.log", level=logging.INFO)
 
-    cnt_rounds = []
-    diffs = []
-    rounds = range(0, 81, 5)
-    for i in rounds:
-        cnt_rounds.append(i)
-        output1 = sha1.sha1(input1, i)
-        output2 = sha1.sha1(input2, i)
-        diffs.append(bitcount(int(output1, 16) ^ int(output2, 16)))
+    all_diffs = []
+    cnt_rounds = [i for i in range(0, 81, 5)]
+    for i in range(1, CNT_TESTS):
+        logging.info("Test #{0}".format(i))
+        input1 = get_random_string()
+        input2 = change_one_bit(input1)
 
-    print(cnt_rounds)
-    print(diffs)
-    plt.bar(cnt_rounds, diffs, align='center')
+        logging.info("Input string:   {0}".format(input1))
+        logging.info("Changed string: {0}".format(input2))
+
+        diffs = []
+        rounds = range(0, 81, 5)
+        for i in rounds:
+            logging.info("Count rounds: ".format(i))
+            output1 = sha1.sha1(input1, i)
+            output2 = sha1.sha1(input2, i)
+            logging.info("Output original:  {0}".format(output1))
+            logging.info("Output changed:   {0}".format(output2))
+            res = bitcount(int(output1, 16) ^ int(output2, 16))
+            diffs.append(res)
+            logging.info("Count of different bits: {0}".format(res))
+        logging.info("------------")
+        all_diffs.append(diffs)
+
+    mean_diffs = mean(all_diffs)
+    plt.bar(cnt_rounds, mean_diffs, align='center')
     plt.xlabel('Count rounds')
     plt.ylabel('Count of different bits')
     plt.show()

@@ -1,0 +1,720 @@
+INFO:root:Test #1
+INFO:root:Input string:   4anEUatBoBW0oXMtowKNVGeL2s52z5erxgtsxfEzdJyjHeBLOJ
+INFO:root:Changed string: 4anEUatBoBW0oXMtowKNVGeL2s52z5erxgtsxfEzdJyjHeBLOK
+INFO:root:Count rounds: 
+INFO:root:Output original:  ce8a4602df9b57123175b9fc2064a8ec87a5c3e0
+INFO:root:Output changed:   ce8a4602df9b57123175b9fc2064a8ec87a5c3e0
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  4722c6a0c5419c37c6f025ea5fe71c90f8d863ae
+INFO:root:Output changed:   4722c6a0c5419c37c6f025ea5fe71c90f8d863ae
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  e0b1d2cdaf5fbdabe12bf689b68517217fe12946
+INFO:root:Output changed:   e0b1d2cdaf5fbdabe12bf689b68517217fe12946
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  7a453dec8d88ff29b4a90e9272ee7cdab003630c
+INFO:root:Output changed:   7e453dec8da8ff29b4a94e9272ee7cdab003630c
+INFO:root:Count of different bits: 3
+INFO:root:Count rounds: 
+INFO:root:Output original:  7b88f1a631e9bb3d3b1832e467444b508c6c06ca
+INFO:root:Output changed:   8685a7b588f10b7dbb7c33656a465b54ac7c16ca
+INFO:root:Count of different bits: 44
+INFO:root:Count rounds: 
+INFO:root:Output original:  34dc688d042690a036bbf559c68713506d1a49cb
+INFO:root:Output changed:   0c1365732dfc348a062fac26f705179ed7add6f5
+INFO:root:Count of different bits: 82
+INFO:root:Count rounds: 
+INFO:root:Output original:  c9492734686a9cca15190533cc105eb9c5481281
+INFO:root:Output changed:   4ac151c767c7ab2ac9dcb79cab91ecf5f803ad55
+INFO:root:Count of different bits: 86
+INFO:root:Count rounds: 
+INFO:root:Output original:  cc744e4bc683ce5c36bfbdc4a6078876261b445f
+INFO:root:Output changed:   4c5c801d368be3b0bc175bad330f454046263a32
+INFO:root:Count of different bits: 73
+INFO:root:Count rounds: 
+INFO:root:Output original:  fe3f2d4d02ee03c7dcc5405b378bbbb633c9195b
+INFO:root:Output changed:   b908b3da961f1e49a047aef352e6c8051577156f
+INFO:root:Count of different bits: 84
+INFO:root:Count rounds: 
+INFO:root:Output original:  88a2d996d49562fb40bac90d322f3a2ca4feba69
+INFO:root:Output changed:   e5d1a76d812f3b74b537f00eaadba192f39271ef
+INFO:root:Count of different bits: 93
+INFO:root:Count rounds: 
+INFO:root:Output original:  2f1bf261b14d42b6a9a3557dd924d70c8b008813
+INFO:root:Output changed:   e54b3f6a3c55726fb2c7314a64a0593444b22f28
+INFO:root:Count of different bits: 77
+INFO:root:Count rounds: 
+INFO:root:Output original:  bb1365c275c026de1cd51028eeb2f66c4d6a768d
+INFO:root:Output changed:   4e9edb3da1362f7d84d29fc2a997078f169a3544
+INFO:root:Count of different bits: 89
+INFO:root:Count rounds: 
+INFO:root:Output original:  5c4593be0df946f69879e1170bf38b7379b0d426
+INFO:root:Output changed:   5ee4396f8ce3bd33151969cd4963e77f168103c8
+INFO:root:Count of different bits: 72
+INFO:root:Count rounds: 
+INFO:root:Output original:  f0d68c6013f63edfaed2ebd0ac1737c2337227f0
+INFO:root:Output changed:   8ded2d9dce4c3b4c7fde858d689546fe60fa3a99
+INFO:root:Count of different bits: 81
+INFO:root:Count rounds: 
+INFO:root:Output original:  ee7676846eb36599d06ef641ef58f940b6e5c8f7
+INFO:root:Output changed:   3d8064c906fddd949579ae0be6d93678e8d7ad46
+INFO:root:Count of different bits: 73
+INFO:root:Count rounds: 
+INFO:root:Output original:  17d8b57c50daa2e32602e05329bbc140b172b116
+INFO:root:Output changed:   452d225427ac8910488e68fdc6a461a77c0adaaf
+INFO:root:Count of different bits: 91
+INFO:root:Count rounds: 
+INFO:root:Output original:  e311ced023176c9168b44d082e6241b1853484a7
+INFO:root:Output changed:   a7a32f4f3fabe0842cf7ce8bc92f689d746a6670
+INFO:root:Count of different bits: 77
+INFO:root:------------
+INFO:root:Test #2
+INFO:root:Input string:   hyV7qIAKg0cW05znd2tUwgqgNxLYipscseQykooHZPfx2PJrFQ
+INFO:root:Changed string: hyV7qIAKg0cW05znd2tUwgqgNxLYipscseQykooHZPfx2PJrFP
+INFO:root:Count rounds: 
+INFO:root:Output original:  ce8a4602df9b57123175b9fc2064a8ec87a5c3e0
+INFO:root:Output changed:   ce8a4602df9b57123175b9fc2064a8ec87a5c3e0
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  5ea9d2e61e8b337bfc0a7a7887a04f5c45de5daa
+INFO:root:Output changed:   5ea9d2e61e8b337bfc0a7a7887a04f5c45de5daa
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  2e5a25e5efba5237e72bcd7a17e358a170c93a2b
+INFO:root:Output changed:   2e5a25e5efba5237e72bcd7a17e358a170c93a2b
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  17dd952d850b74495ee732b530096b3e2889af34
+INFO:root:Output changed:   13dc952d84eb74495ee6f2b530096b3e2889af34
+INFO:root:Count of different bits: 9
+INFO:root:Count rounds: 
+INFO:root:Output original:  f9282f52906a9ee2bbe6ce4fd0192ce29c205b12
+INFO:root:Output changed:   3e3e1748739adea23bed2dcece17ecde7c104b12
+INFO:root:Count of different bits: 55
+INFO:root:Count rounds: 
+INFO:root:Output original:  ddf391d2744c71c7cdc09299ab9fc0000fe81cb1
+INFO:root:Output changed:   b15a9cd608c7bdda36b80093555279c548c520b2
+INFO:root:Count of different bits: 80
+INFO:root:Count rounds: 
+INFO:root:Output original:  5d928eeb1e73c4cc0433b306ebdaf30c93ac7162
+INFO:root:Output changed:   cf8c26710770dcec9f1ae078e088c543a2a04998
+INFO:root:Count of different bits: 69
+INFO:root:Count rounds: 
+INFO:root:Output original:  9b8f5c8de2e964ce8fe9fdbec8ab923c90fdf6f1
+INFO:root:Output changed:   049d8f1eaea71ff5d95fda6de552b9d5ad4f6568
+INFO:root:Count of different bits: 89
+INFO:root:Count rounds: 
+INFO:root:Output original:  4fe3d4d4460eab1dbf683fb0d2041be77cbbc180
+INFO:root:Output changed:   72a63f1446d166f8565b83509199e106a819c3af
+INFO:root:Count of different bits: 81
+INFO:root:Count rounds: 
+INFO:root:Output original:  d480f9c7f76886919a4b9ee37b686b5acbd1cfca
+INFO:root:Output changed:   da5955ca7a15abdad26c6545d89780e8404c13f7
+INFO:root:Count of different bits: 91
+INFO:root:Count rounds: 
+INFO:root:Output original:  faebbc90890666e99e20534dacd28095a2ae6176
+INFO:root:Output changed:   c891a82b1d37d169219ffd5f83d1583ecfc75fb6
+INFO:root:Count of different bits: 82
+INFO:root:Count rounds: 
+INFO:root:Output original:  85ae179af8a96f40486638c1d6203f5852727198
+INFO:root:Output changed:   b4f127ef0debc462aaf3755371482f442b97c6e3
+INFO:root:Count of different bits: 80
+INFO:root:Count rounds: 
+INFO:root:Output original:  9d027be2c7ac415e2934b5c939c195b613c3b23e
+INFO:root:Output changed:   e31cfd8d9f54fe89e43b323da05f5df6e41dbd79
+INFO:root:Count of different bits: 92
+INFO:root:Count rounds: 
+INFO:root:Output original:  22c8657c033608b3a85aa2e1d9c12fffe33c0317
+INFO:root:Output changed:   7b118d1be1a7ccfe0c7855ea583f8fb907ad1418
+INFO:root:Count of different bits: 76
+INFO:root:Count rounds: 
+INFO:root:Output original:  bb706de1be28276ab2c5dee42017911459e35546
+INFO:root:Output changed:   7e3bb829e1a582851ce195bfd1008eb332851e60
+INFO:root:Count of different bits: 88
+INFO:root:Count rounds: 
+INFO:root:Output original:  4b9d1d43063c7cd6c83e6b3abeebf3022ef19cd4
+INFO:root:Output changed:   a7e1e3470e8f62ce56517f5fdc12eecd95b724b2
+INFO:root:Count of different bits: 83
+INFO:root:Count rounds: 
+INFO:root:Output original:  432e0babf522066de324536d97e1a4718fe17c8d
+INFO:root:Output changed:   1b1b3b6c20526216bdf7664292caa565fc51c1fe
+INFO:root:Count of different bits: 78
+INFO:root:------------
+INFO:root:Test #3
+INFO:root:Input string:   8VEZ7Ftp80cSauCROSS6z3wPRRSrC8Qu3O8gYimqZHmeRFprPu
+INFO:root:Changed string: 8VEZ7Ftp80cSauCROSS6z3wPRRSrC8Qu3O8gYimqZHmeRFprPt
+INFO:root:Count rounds: 
+INFO:root:Output original:  ce8a4602df9b57123175b9fc2064a8ec87a5c3e0
+INFO:root:Output changed:   ce8a4602df9b57123175b9fc2064a8ec87a5c3e0
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  9e56df56b62c5b087d2abf753807154439d59973
+INFO:root:Output changed:   9e56df56b62c5b087d2abf753807154439d59973
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  2f63e0895bd4c45362087fe597b562d20882a772
+INFO:root:Output changed:   2f63e0895bd4c45362087fe597b562d20882a772
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  1cbbe346a9631429fe5e93f90650d7a7b608bb0b
+INFO:root:Output changed:   18b8e346a9431429fe5e53f90650d7a7b608bb0b
+INFO:root:Count of different bits: 6
+INFO:root:Count rounds: 
+INFO:root:Output original:  a1fc366a197081c926971b30300885e99c99e21a
+INFO:root:Output changed:   11e3688ed52fc15965ef0baf2a0585edbc69f21a
+INFO:root:Count of different bits: 57
+INFO:root:Count rounds: 
+INFO:root:Output original:  03f94b0fe78bd0d1893305a26232ef28843e08dd
+INFO:root:Output changed:   3cecc3a47332eab26d8663ed1dd231a568e32a46
+INFO:root:Count of different bits: 88
+INFO:root:Count rounds: 
+INFO:root:Output original:  a42105f0991e87a5498de13875a608ea402b5b7f
+INFO:root:Output changed:   e77eef97256774b063c89adc64abde45020b1be6
+INFO:root:Count of different bits: 78
+INFO:root:Count rounds: 
+INFO:root:Output original:  6cb66b6326f8028c9a62dabbd25b9dbb9869586a
+INFO:root:Output changed:   e42387d850591814b592449522ed9101af4ff9f7
+INFO:root:Count of different bits: 81
+INFO:root:Count rounds: 
+INFO:root:Output original:  85819d2e70f9f305fd88c958ece15fc99c1ae65f
+INFO:root:Output changed:   ba83957667306b8b485e98d5f1abe96fbbc20755
+INFO:root:Count of different bits: 73
+INFO:root:Count rounds: 
+INFO:root:Output original:  38d20b074a4414153ff709a1e9eac2a3e1cda59d
+INFO:root:Output changed:   ace3e6c5a58b7623481836a11dac0f3a5a6dc07a
+INFO:root:Count of different bits: 89
+INFO:root:Count rounds: 
+INFO:root:Output original:  51fc5ca627b132d288773790f9ab771e3e989400
+INFO:root:Output changed:   1f14c1fa3bd6c7c406afb918f590782331e3d418
+INFO:root:Count of different bits: 77
+INFO:root:Count rounds: 
+INFO:root:Output original:  27bba46f7477ed874ad58e8bb8ba99fed2d07785
+INFO:root:Output changed:   df2e6634654d96e36136bfb246d29582d53b3896
+INFO:root:Count of different bits: 82
+INFO:root:Count rounds: 
+INFO:root:Output original:  07f0dfac7098c5c40c38df223f3c9f1bb1d41f18
+INFO:root:Output changed:   81a2b1ca2ff15b7a0236932332e5cc04640d45e6
+INFO:root:Count of different bits: 84
+INFO:root:Count rounds: 
+INFO:root:Output original:  00dd4b6d95ebfa0fb45f7e322710c453b7b69df2
+INFO:root:Output changed:   0024785ed6d4ae0d3b76113d123d173aff687f7a
+INFO:root:Count of different bits: 76
+INFO:root:Count rounds: 
+INFO:root:Output original:  1552e908cb3768b4d9a66b8d14c98c62085eba31
+INFO:root:Output changed:   85f140e94b32342d4edea785aa9ee08aeb99371f
+INFO:root:Count of different bits: 76
+INFO:root:Count rounds: 
+INFO:root:Output original:  0bff55bf580f0ba8017bb89a532041bbbac96af5
+INFO:root:Output changed:   d506a82173b5e10f919e001fa2fe617012b07bb0
+INFO:root:Count of different bits: 87
+INFO:root:Count rounds: 
+INFO:root:Output original:  c1fd085570bcfe64c92cd0661f6ddeedb0362fbd
+INFO:root:Output changed:   65c66f07bd54da68b91693c12e5de9c8b48137e0
+INFO:root:Count of different bits: 71
+INFO:root:------------
+INFO:root:Test #4
+INFO:root:Input string:   6ObuQVbggIpYdR4JzBy531hykEFzuM21SIIynEHjZFvSlJQFkM
+INFO:root:Changed string: 6ObuQVbggIpYdR4JzBy531hykEFzuM21SIIynEHjZFvSlJQFkL
+INFO:root:Count rounds: 
+INFO:root:Output original:  ce8a4602df9b57123175b9fc2064a8ec87a5c3e0
+INFO:root:Output changed:   ce8a4602df9b57123175b9fc2064a8ec87a5c3e0
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  e821173c05bbd154120d855eae53f999f953e0ba
+INFO:root:Output changed:   e821173c05bbd154120d855eae53f999f953e0ba
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  333ca901237285ae85432e1cf73bd543e250a41b
+INFO:root:Output changed:   333ca901237285ae85432e1cf73bd543e250a41b
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  10cf3f4da040680c3acb7f534ce8550ad18312af
+INFO:root:Output changed:   0ccd3f4da020680c3acb3f534ce8550ad18312af
+INFO:root:Count of different bits: 7
+INFO:root:Count rounds: 
+INFO:root:Output original:  c1bab010bdf01e8b2a5a68691204f8c255559754
+INFO:root:Output changed:   cabe8c27912f626bc97057f14ffee8be354d7754
+INFO:root:Count of different bits: 72
+INFO:root:Count rounds: 
+INFO:root:Output original:  2c6ab631a3f9fb26aa9c2b99a75ea767d5968b96
+INFO:root:Output changed:   7a2961794d2d384b1b835141589c9503299e235b
+INFO:root:Count of different bits: 84
+INFO:root:Count rounds: 
+INFO:root:Output original:  a036f57328c68efba4c34b7043c199b277052031
+INFO:root:Output changed:   40fd80d8b1043d867948a3f08b48b1e453437962
+INFO:root:Count of different bits: 76
+INFO:root:Count rounds: 
+INFO:root:Output original:  0277d1c6e2916b521a43261b9b551b684474fc54
+INFO:root:Output changed:   4e27a49cc59a929f30ac4333d2ca5066d6843e57
+INFO:root:Count of different bits: 76
+INFO:root:Count rounds: 
+INFO:root:Output original:  3002cc287fe448d35f0080c19108b28efec6c674
+INFO:root:Output changed:   de690491d0cecc855dd21d0afa54f12222e58052
+INFO:root:Count of different bits: 79
+INFO:root:Count rounds: 
+INFO:root:Output original:  ce8e70014030964dcdd02da575351d069518d5a0
+INFO:root:Output changed:   633e6dd138617281560c07ef4508d68ce9645fb6
+INFO:root:Count of different bits: 77
+INFO:root:Count rounds: 
+INFO:root:Output original:  60a02d4929c6d185361726e47681c111e5fdc7ae
+INFO:root:Output changed:   271a4056a99a332d62ce207e1c88a8ac1280c753
+INFO:root:Count of different bits: 81
+INFO:root:Count rounds: 
+INFO:root:Output original:  ba441c362c0e98c1e5e8581fb38f4288865992ec
+INFO:root:Output changed:   8ee6b2f0b98806c76738a23ca67c019e5a8521a5
+INFO:root:Count of different bits: 76
+INFO:root:Count rounds: 
+INFO:root:Output original:  16457a8ea1e81a5dbf3e67fe86c41140f14dcf09
+INFO:root:Output changed:   a033a49e9aa0926a72d5a7b6ce13a44032c4a009
+INFO:root:Count of different bits: 72
+INFO:root:Count rounds: 
+INFO:root:Output original:  fb7b0ee111c143417e171d1f1d50980cd794bc27
+INFO:root:Output changed:   c3b1cc9afb7283c3dd54b5f745e852e1b4660380
+INFO:root:Count of different bits: 82
+INFO:root:Count rounds: 
+INFO:root:Output original:  0e968f2de7d7ae958b68ba655054412477382d24
+INFO:root:Output changed:   35410afbe5765b005e578296447f36886c584767
+INFO:root:Count of different bits: 82
+INFO:root:Count rounds: 
+INFO:root:Output original:  a2876e16b626d88ef5851094a8c34e8a636e396d
+INFO:root:Output changed:   93e1ebb9e659527d74d46b5de3242be82866cbfd
+INFO:root:Count of different bits: 78
+INFO:root:Count rounds: 
+INFO:root:Output original:  20701f55a58ec314113bbe63157305dec05c01c3
+INFO:root:Output changed:   e0a6d6cbcaff6d85a6fe4233b8dcae20f5c61a54
+INFO:root:Count of different bits: 92
+INFO:root:------------
+INFO:root:Test #5
+INFO:root:Input string:   ygjUKkB6sdtSQFDY68M2h0kYs2BJP91vtDb8Dzj1UtXDitOU92
+INFO:root:Changed string: ygjUKkB6sdtSQFDY68M2h0kYs2BJP91vtDb8Dzj1UtXDitOU93
+INFO:root:Count rounds: 
+INFO:root:Output original:  ce8a4602df9b57123175b9fc2064a8ec87a5c3e0
+INFO:root:Output changed:   ce8a4602df9b57123175b9fc2064a8ec87a5c3e0
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  f3511bebe83671f13e43ac27c5997087ca19e2b2
+INFO:root:Output changed:   f3511bebe83671f13e43ac27c5997087ca19e2b2
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  df9005d8143c822927a2729f38a2e24d7fb51a3f
+INFO:root:Output changed:   df9005d8143c822927a2729f38a2e24d7fb51a3f
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  78e20bbbf532c065c82263a87c583023643de2b4
+INFO:root:Output changed:   7ce20bbbf552c065c822a3a87c583023643de2b4
+INFO:root:Count of different bits: 5
+INFO:root:Count rounds: 
+INFO:root:Output original:  402f413cecf3678cd072d545ec621037eacefaa6
+INFO:root:Output changed:   1e23ad4a8ceb27dc4ff0e4c4e95c1033cabefaa6
+INFO:root:Count of different bits: 49
+INFO:root:Count rounds: 
+INFO:root:Output original:  3635f372d16ce5d4e53ade338b4a8552d69400a8
+INFO:root:Output changed:   d12ff0f673b2af09a93734efd651ea8c7545113f
+INFO:root:Count of different bits: 83
+INFO:root:Count rounds: 
+INFO:root:Output original:  2cb8594f158bec1cca6db111e2689898e80159ca
+INFO:root:Output changed:   3859afd8146da254556778269885df26c75d77be
+INFO:root:Count of different bits: 84
+INFO:root:Count rounds: 
+INFO:root:Output original:  d3d28fc0406caa55e8a2dcc2a2ec3bbbd01c5b7a
+INFO:root:Output changed:   2195ffbcc5daeb8b0b6967a0d7971990b7879ceb
+INFO:root:Count of different bits: 87
+INFO:root:Count rounds: 
+INFO:root:Output original:  64e9d862751db2b83cfa4db16221b8eb8c9f3fce
+INFO:root:Output changed:   8589529b6aa0d2af21308eccb151b9f8aa231a68
+INFO:root:Count of different bits: 77
+INFO:root:Count rounds: 
+INFO:root:Output original:  12db3c1a61c80e94efafb3f9351a299be8bcdfca
+INFO:root:Output changed:   dcc4bcb1311bf1ddc7ede2d4dadd5f423dd89885
+INFO:root:Count of different bits: 84
+INFO:root:Count rounds: 
+INFO:root:Output original:  6374dff08874d21c7627f50440902c72e3ebc52f
+INFO:root:Output changed:   3b770aa79747686a7feb2e01848411f53e0fc3fe
+INFO:root:Count of different bits: 78
+INFO:root:Count rounds: 
+INFO:root:Output original:  10d883399a81d4dee0f4c44c79102e98eaa2ad9d
+INFO:root:Output changed:   f8e06ad98695d3484fadc7fd2001bf4d93822cba
+INFO:root:Count of different bits: 69
+INFO:root:Count rounds: 
+INFO:root:Output original:  58d18efc3d6f3ecaebcf8705600db7f154f1d066
+INFO:root:Output changed:   0eba01ad386f5007c8b2a9fa80a1ed1e0be00d1b
+INFO:root:Count of different bits: 88
+INFO:root:Count rounds: 
+INFO:root:Output original:  9dca33f6c26b9a8171709a6fd0429ef81babccb9
+INFO:root:Output changed:   40d0e5fecf9223fbcfd9e4102de3a78f2be7d6e7
+INFO:root:Count of different bits: 90
+INFO:root:Count rounds: 
+INFO:root:Output original:  a2e1e43847daf5334bd141e6d2d408a53c7d9a7d
+INFO:root:Output changed:   dcf5701fa3b474d4dc36aaceae52c1b8338eb229
+INFO:root:Count of different bits: 82
+INFO:root:Count rounds: 
+INFO:root:Output original:  2b72cf6898429a1b2bbdae6c580257a3498a3df7
+INFO:root:Output changed:   0792b235e1f7e41a76133ef531f73c92c54b9737
+INFO:root:Count of different bits: 80
+INFO:root:Count rounds: 
+INFO:root:Output original:  d89c628fd1f77a31dd61e24e511d3960a2f7e710
+INFO:root:Output changed:   1d7282dd530a82cd2e0d26d648c2f5488bab70f1
+INFO:root:Count of different bits: 84
+INFO:root:------------
+INFO:root:Test #6
+INFO:root:Input string:   sJ2krVgytRhDps9Z4ntdX31Ka8n6rDX2MMEag4H0uUX19dkWZl
+INFO:root:Changed string: sJ2krVgytRhDps9Z4ntdX31Ka8n6rDX2MMEag4H0uUX19dkWZm
+INFO:root:Count rounds: 
+INFO:root:Output original:  ce8a4602df9b57123175b9fc2064a8ec87a5c3e0
+INFO:root:Output changed:   ce8a4602df9b57123175b9fc2064a8ec87a5c3e0
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  40e3da4b26eeb27d5817e92e1e6a7a88489294b7
+INFO:root:Output changed:   40e3da4b26eeb27d5817e92e1e6a7a88489294b7
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  032de4db7f8f331e990b1054a1ccb401ee6c3cbe
+INFO:root:Output changed:   032de4db7f8f331e990b1054a1ccb401ee6c3cbe
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  f20aa6d580c82e446f17fbebd9acdad125cbd2b2
+INFO:root:Output changed:   f60aa6d580e82e446f183bebd9acdad125cbd2b2
+INFO:root:Count of different bits: 8
+INFO:root:Count rounds: 
+INFO:root:Output original:  180b651fd316d1074a36e637a782b6743f73dd49
+INFO:root:Output changed:   9e1b5734a0a690a88c02f5b6a092c6701f3bdd49
+INFO:root:Count of different bits: 50
+INFO:root:Count rounds: 
+INFO:root:Output original:  71d422931211cd7366e9cc8cf739054b58895b4c
+INFO:root:Output changed:   aa12527eacbe3a998c7c4428542917bd449e3b99
+INFO:root:Count of different bits: 84
+INFO:root:Count rounds: 
+INFO:root:Output original:  b8784ab9c49969bc4a2941a0a7652e5f495aaeae
+INFO:root:Output changed:   bd4587fad253565656ef20793ccedbc746a8114e
+INFO:root:Count of different bits: 86
+INFO:root:Count rounds: 
+INFO:root:Output original:  8da46a10e94389b738523309b84109890be1dfe2
+INFO:root:Output changed:   a1af0d2e1cd355d4e1765d17e0bf8e82d104bd6e
+INFO:root:Count of different bits: 82
+INFO:root:Count rounds: 
+INFO:root:Output original:  367f539266a94f139e9be24f0aed14f2fe5d5b1d
+INFO:root:Output changed:   0bcd68eb286e1e2be880c50325fec0688980e03a
+INFO:root:Count of different bits: 88
+INFO:root:Count rounds: 
+INFO:root:Output original:  3176001c9565d67c0626f0c03926cb01e89a861e
+INFO:root:Output changed:   bdde895dd47647f94f98c9901ea98ce35f8d4c7e
+INFO:root:Count of different bits: 70
+INFO:root:Count rounds: 
+INFO:root:Output original:  76f0ba39f67cd2630e286b505d2db174145e03f2
+INFO:root:Output changed:   2a0d9e61a04b022b47b6e0dd11ab7581b39b61f9
+INFO:root:Count of different bits: 76
+INFO:root:Count rounds: 
+INFO:root:Output original:  7025eb51c3a76889eff4985cfb0a630b27a7f6a6
+INFO:root:Output changed:   88f3eb857472e6abe8b7226dd5f0c3b701c5ec9a
+INFO:root:Count of different bits: 75
+INFO:root:Count rounds: 
+INFO:root:Output original:  d366e89f4e9eb1db74ee0e84c7bd1f99e9f3e637
+INFO:root:Output changed:   2c37a3a0479a60970932eb1cc83cf65262781168
+INFO:root:Count of different bits: 87
+INFO:root:Count rounds: 
+INFO:root:Output original:  ff8e56134746ba52f76b376d12d7500f2e25b88b
+INFO:root:Output changed:   fadd905e99072afdbe08d01779fd4ad26b8be2d7
+INFO:root:Count of different bits: 81
+INFO:root:Count rounds: 
+INFO:root:Output original:  0f5d1deba5496e24a41743668f980acefff2d384
+INFO:root:Output changed:   c67a0b52c45cd9e81f126f85b670a40ff05a632b
+INFO:root:Count of different bits: 80
+INFO:root:Count rounds: 
+INFO:root:Output original:  0f3fe86e6504003e8794791eb381368cca3db3f7
+INFO:root:Output changed:   e522af9b55c2aa03c3721f32aa1316c7f0083b3c
+INFO:root:Count of different bits: 74
+INFO:root:Count rounds: 
+INFO:root:Output original:  690d1b8054300ee4054350d324f37014fda1f199
+INFO:root:Output changed:   016828338deae82bd94a81924004353c19eb61b8
+INFO:root:Count of different bits: 76
+INFO:root:------------
+INFO:root:Test #7
+INFO:root:Input string:   tIXuJoa1Ct36heVzUazis1Eh43RlOS92Rqb3kJPXY1zLwSWaNA
+INFO:root:Changed string: tIXuJoa1Ct36heVzUazis1Eh43RlOS92Rqb3kJPXY1zLwSWaN@
+INFO:root:Count rounds: 
+INFO:root:Output original:  ce8a4602df9b57123175b9fc2064a8ec87a5c3e0
+INFO:root:Output changed:   ce8a4602df9b57123175b9fc2064a8ec87a5c3e0
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  d1f6825f026fd1f70bceac231c69e946c8d25e3a
+INFO:root:Output changed:   d1f6825f026fd1f70bceac231c69e946c8d25e3a
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  6af2eaa6c45963489bdd5fb4330c3d5cd5909163
+INFO:root:Output changed:   6af2eaa6c45963489bdd5fb4330c3d5cd5909163
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  1708a4118b155d43a7c662a1b9920bce5b323aab
+INFO:root:Output changed:   1308a4118af55d43a7c622a1b9920bce5b323aab
+INFO:root:Count of different bits: 6
+INFO:root:Count rounds: 
+INFO:root:Output original:  a2da9a4766c2eb4b5856e72098ef356b892e4166
+INFO:root:Output changed:   6ccb1c471cf2eb6b779517a09aeb456fa93e2166
+INFO:root:Count of different bits: 42
+INFO:root:Count rounds: 
+INFO:root:Output original:  95f033942eec9b49a413a47004a0cac15ccb173e
+INFO:root:Output changed:   6caa6cc5edb40ee99fbf31e0bf3a6a11c22f2765
+INFO:root:Count of different bits: 78
+INFO:root:Count rounds: 
+INFO:root:Output original:  36df2ccc42cccea0b17d0f7cc029446fd75a807b
+INFO:root:Output changed:   6653c7eaa638e6696e0d4b64c6edfdcd4bf5bed3
+INFO:root:Count of different bits: 74
+INFO:root:Count rounds: 
+INFO:root:Output original:  171f3afee510c0103405f7dbf0d3c34959f3b080
+INFO:root:Output changed:   2968ec0557321d46fc0d8a1ccaa880cd2ead18d8
+INFO:root:Count of different bits: 86
+INFO:root:Count rounds: 
+INFO:root:Output original:  3ce3157962be3c7a4aabf00646dcbc40a74ca588
+INFO:root:Output changed:   88f54429791b302d5f2a887eb2c264f03a9a6bf2
+INFO:root:Count of different bits: 76
+INFO:root:Count rounds: 
+INFO:root:Output original:  189cbb53eeec9ea307b412972ae28287f845ba8f
+INFO:root:Output changed:   6539d9549ab4d93c07d5e2534321b1cad198fcda
+INFO:root:Count of different bits: 75
+INFO:root:Count rounds: 
+INFO:root:Output original:  346d0e83937cec6f30464858e2d6a9afacb5e238
+INFO:root:Output changed:   bfef6a4e0aa0f25cdeb044063db1ada2b2fd5864
+INFO:root:Count of different bits: 81
+INFO:root:Count rounds: 
+INFO:root:Output original:  33efb5653e33ab6501c4541844f6edc13fbaccd3
+INFO:root:Output changed:   94273da8dfdb3ce9c7f083cdbf836e19396d8a16
+INFO:root:Count of different bits: 83
+INFO:root:Count rounds: 
+INFO:root:Output original:  53adecdc6a58999fc6b51f84e252ea3c5e17dfdc
+INFO:root:Output changed:   d4d43cc4e66bcae8e80b950138e536eb6de0b5e2
+INFO:root:Count of different bits: 89
+INFO:root:Count rounds: 
+INFO:root:Output original:  2afd0d299111aae6c7673e17081b96b57ac06da8
+INFO:root:Output changed:   78e764b7ea5297c060e05c6cc4dd1d738cda255a
+INFO:root:Count of different bits: 82
+INFO:root:Count rounds: 
+INFO:root:Output original:  8808baa958755762e88524ed6a20f46a4e98c7ae
+INFO:root:Output changed:   b60de22110eae71344944e28aad13e7655f311cf
+INFO:root:Count of different bits: 72
+INFO:root:Count rounds: 
+INFO:root:Output original:  ee70dccf6731251a6b99086b61ac8bd6613947c7
+INFO:root:Output changed:   71acb3b7dbcf695ea54ddaeace99600f9bcee148
+INFO:root:Count of different bits: 96
+INFO:root:Count rounds: 
+INFO:root:Output original:  dcf3f8d0ebbb5a648e62547abf0c3ce372d49efa
+INFO:root:Output changed:   d73d419bbdf387ef3c4291052be842f4b1a3f617
+INFO:root:Count of different bits: 85
+INFO:root:------------
+INFO:root:Test #8
+INFO:root:Input string:   wwPAQDOoLfdFualt2iR5rgFZDofe3GnQAeL7qPgjIL33vM7EGE
+INFO:root:Changed string: wwPAQDOoLfdFualt2iR5rgFZDofe3GnQAeL7qPgjIL33vM7EGD
+INFO:root:Count rounds: 
+INFO:root:Output original:  ce8a4602df9b57123175b9fc2064a8ec87a5c3e0
+INFO:root:Output changed:   ce8a4602df9b57123175b9fc2064a8ec87a5c3e0
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  9a5004bf78f5250032a9f65ab78ee335c99ddc2d
+INFO:root:Output changed:   9a5004bf78f5250032a9f65ab78ee335c99ddc2d
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  23c6769665255056dd4fa08e6905f4d37cb70664
+INFO:root:Output changed:   23c6769665255056dd4fa08e6905f4d37cb70664
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  9b44bb5baca8aed4cd284153fd2ebd42922f5311
+INFO:root:Output changed:   9744bb5bac88aed4cd280153fd2ebd42922f5311
+INFO:root:Count of different bits: 4
+INFO:root:Count rounds: 
+INFO:root:Output original:  e2616f8b5ddcbe9c7f177ccfd31504e50b22ba05
+INFO:root:Output changed:   1b4fab6800cc7efb3e156c50d912f4e1eb22ba05
+INFO:root:Count of different bits: 54
+INFO:root:Count rounds: 
+INFO:root:Output original:  c35c29fd296ec66d22573efb23ddaaf4aac0a4b5
+INFO:root:Output changed:   2a2c7286fae142808234bf283bd2282ff6d6f387
+INFO:root:Count of different bits: 79
+INFO:root:Count rounds: 
+INFO:root:Output original:  a8b0bb680d0fee6990446dc365887932bb98ace9
+INFO:root:Output changed:   918cb47719e3f75b06ff077c12d7b1f28eb86368
+INFO:root:Count of different bits: 81
+INFO:root:Count rounds: 
+INFO:root:Output original:  da9890f4b1473fd252e3ae6a43503455e6e80db9
+INFO:root:Output changed:   8eabaf8b52df8707e35fb4c36598db918466155d
+INFO:root:Count of different bits: 82
+INFO:root:Count rounds: 
+INFO:root:Output original:  4fb72c1dcc2c117813aba26946ca06d530e977a5
+INFO:root:Output changed:   a94ea144e460bc0002612022c31c9e9f060faa6d
+INFO:root:Count of different bits: 77
+INFO:root:Count rounds: 
+INFO:root:Output original:  8a2e0d66e3899adb39328630b62e435f73a0ade6
+INFO:root:Output changed:   a0994577303070f1dd9b7eedbd00fab891ffbaf8
+INFO:root:Count of different bits: 86
+INFO:root:Count rounds: 
+INFO:root:Output original:  66a69e55011dc8c2bc38bd9733fa67c63026cc17
+INFO:root:Output changed:   4b1648daee0af0f0a2caef408751ac8353d5fd62
+INFO:root:Count of different bits: 87
+INFO:root:Count rounds: 
+INFO:root:Output original:  9dff5603ccf6de2c854b67036d9e2516c8a0042c
+INFO:root:Output changed:   201d2044b7aaa98e75bd2de3168cea754a367471
+INFO:root:Count of different bits: 86
+INFO:root:Count rounds: 
+INFO:root:Output original:  5d52072a8966244688a1924ba016c6c687911885
+INFO:root:Output changed:   01408a6f7c0305d1cbe154481f7baae432855734
+INFO:root:Count of different bits: 74
+INFO:root:Count rounds: 
+INFO:root:Output original:  f3997004e6434da86418b6507341d899369151e4
+INFO:root:Output changed:   7da55a73137c4eaba9e0d8300adb27fa305c6aa8
+INFO:root:Count of different bits: 86
+INFO:root:Count rounds: 
+INFO:root:Output original:  f73eb2cf6daf17c702a21687651c0acb7dc24e8b
+INFO:root:Output changed:   6c43769eb9844346976b9ea46c284e5bd7134b3a
+INFO:root:Count of different bits: 66
+INFO:root:Count rounds: 
+INFO:root:Output original:  29b4f32d019e489f5bb3362d985d70bcea320db0
+INFO:root:Output changed:   ae286e0bfc3ada37184cedb98d39a9178fcd5e56
+INFO:root:Count of different bits: 89
+INFO:root:Count rounds: 
+INFO:root:Output original:  3ae24e2c1a0d6bd41d966bc4cf0cdc1c67840831
+INFO:root:Output changed:   160128a4cf258ae7681d75f5c76b76f5dd43d7d4
+INFO:root:Count of different bits: 82
+INFO:root:------------
+INFO:root:Test #9
+INFO:root:Input string:   gHfH4FG6p5Orf2y3indNdEvlpxxw0zCDB3QfEx1KWBjjtgtRim
+INFO:root:Changed string: gHfH4FG6p5Orf2y3indNdEvlpxxw0zCDB3QfEx1KWBjjtgtRil
+INFO:root:Count rounds: 
+INFO:root:Output original:  ce8a4602df9b57123175b9fc2064a8ec87a5c3e0
+INFO:root:Output changed:   ce8a4602df9b57123175b9fc2064a8ec87a5c3e0
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  b846992672d9ac1fa4c3f5cceed8115e859221ae
+INFO:root:Output changed:   b846992672d9ac1fa4c3f5cceed8115e859221ae
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  b73fb7159ae8e7ffa0ab71e7a89a4d4fc32ace46
+INFO:root:Output changed:   b73fb7159ae8e7ffa0ab71e7a89a4d4fc32ace46
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  0a17db6f459ad00ccb77e5b38bd8adc4b4cbebe2
+INFO:root:Output changed:   0614db6f457ad00ccb77a5b38bd8adc4b4cbebe2
+INFO:root:Count of different bits: 8
+INFO:root:Count rounds: 
+INFO:root:Output original:  228aa5df97044fe141208fdf1892ed71fbf35d1f
+INFO:root:Output changed:   2700fdcded901090bfe0ce611e89fd659bdb1d1e
+INFO:root:Count of different bits: 60
+INFO:root:Count rounds: 
+INFO:root:Output original:  5ce3406815c42a8a70d4b8053dede7d8b8bc377c
+INFO:root:Output changed:   2900ecd07332d68a8856e0f12c175286b7c7927e
+INFO:root:Count of different bits: 82
+INFO:root:Count rounds: 
+INFO:root:Output original:  0dfcc9d221be8f984efbd72d426db145c29b3f0b
+INFO:root:Output changed:   dea0e8b33768301179b8a07904cad1900cfde0ea
+INFO:root:Count of different bits: 84
+INFO:root:Count rounds: 
+INFO:root:Output original:  7c8b4ba5136e72d35da069baaabf7eabceeadc4d
+INFO:root:Output changed:   0e125e18770a0a33aa419630f096c6d18e4179c9
+INFO:root:Count of different bits: 80
+INFO:root:Count rounds: 
+INFO:root:Output original:  2eaf6279246ee0edbb11feaab9be48d3b52c9e9b
+INFO:root:Output changed:   e436139c45393f66ed2737b0c3795a3d2f746697
+INFO:root:Count of different bits: 83
+INFO:root:Count rounds: 
+INFO:root:Output original:  27a9ba659df6b642363f5b0c4a7823c4998e1d5e
+INFO:root:Output changed:   2c835871b8c0f038852888776108eee03197900e
+INFO:root:Count of different bits: 73
+INFO:root:Count rounds: 
+INFO:root:Output original:  59b7f9742cc7465210c1441a563bd15bf5a847a5
+INFO:root:Output changed:   9d41d8bbb1deb3e1a6fa6e9014ad9f57053823c8
+INFO:root:Count of different bits: 78
+INFO:root:Count rounds: 
+INFO:root:Output original:  e01ef8c6962cb50d1963ba3e9ed70c60eedcbff5
+INFO:root:Output changed:   bc360fd79f5b0011e120327164c38228741813b0
+INFO:root:Count of different bits: 74
+INFO:root:Count rounds: 
+INFO:root:Output original:  af6692f2f304c13bf15ed4c69719742e43ab11b0
+INFO:root:Output changed:   1ce8abec10c38d783e5b7be293cbdfeb3814cd22
+INFO:root:Count of different bits: 84
+INFO:root:Count rounds: 
+INFO:root:Output original:  a39288e21d5b96adfa96bef30afe8ed74ff4c9c6
+INFO:root:Output changed:   6eeb4c022ac1f42ed3bf049c856979e5055c3e25
+INFO:root:Count of different bits: 86
+INFO:root:Count rounds: 
+INFO:root:Output original:  051f6fb750e00fb67601912e46ab57e83e602cd9
+INFO:root:Output changed:   08ecfda2dfd139dde43a45dae337ea06660b6958
+INFO:root:Count of different bits: 82
+INFO:root:Count rounds: 
+INFO:root:Output original:  49a9d6bdf6522e49917abe32c81ebf2445410f79
+INFO:root:Output changed:   717ba5db993f0d53b1b5ef8e2406ac09814b35db
+INFO:root:Count of different bits: 74
+INFO:root:Count rounds: 
+INFO:root:Output original:  0712c619eaa34e70c5fe876092489277ad01a215
+INFO:root:Output changed:   783ab7c343f76a98122215d188cd8ee454f46b73
+INFO:root:Count of different bits: 82
+INFO:root:------------
+INFO:root:Test #10
+INFO:root:Input string:   hpw35OB0BfC5GXsRFDFzLKBuWvJi3JcqeZHSv8ijUqH0LqSy33
+INFO:root:Changed string: hpw35OB0BfC5GXsRFDFzLKBuWvJi3JcqeZHSv8ijUqH0LqSy32
+INFO:root:Count rounds: 
+INFO:root:Output original:  ce8a4602df9b57123175b9fc2064a8ec87a5c3e0
+INFO:root:Output changed:   ce8a4602df9b57123175b9fc2064a8ec87a5c3e0
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  aa03eb829dfd9366ca28fd96b85ad77545dc25e9
+INFO:root:Output changed:   aa03eb829dfd9366ca28fd96b85ad77545dc25e9
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  78296b17b6083c3ee900012bca9ee7a92c0a6e2a
+INFO:root:Output changed:   78296b17b6083c3ee900012bca9ee7a92c0a6e2a
+INFO:root:Count of different bits: 0
+INFO:root:Count rounds: 
+INFO:root:Output original:  31d53fd8675a700c0d09622be46e54f7ef10f6eb
+INFO:root:Output changed:   2dd73fd8673a700c0d09222be46e54f7ef10f6eb
+INFO:root:Count of different bits: 7
+INFO:root:Count rounds: 
+INFO:root:Output original:  acf775008f55ea9394deccaa62c14e6776d30db7
+INFO:root:Output changed:   0d5d9efeea650a53b512bb2b63c33e5b16eafdb7
+INFO:root:Count of different bits: 64
+INFO:root:Count rounds: 
+INFO:root:Output original:  88ffa4f29898d0c05fe23c99e73d1c161b54e01b
+INFO:root:Output changed:   4bd3e8261852a61c360d4528a94ec401e7967bf9
+INFO:root:Count of different bits: 84
+INFO:root:Count rounds: 
+INFO:root:Output original:  c0cf7c4942c61574ea74a701278b24abca4a8e01
+INFO:root:Output changed:   36d3f48b2872ff1aac1612199753c2abf0f61ea8
+INFO:root:Count of different bits: 72
+INFO:root:Count rounds: 
+INFO:root:Output original:  028ecccc4330ae841231d74becc1204b4d68af04
+INFO:root:Output changed:   3ae750d11239b2809234a63ff64f80582d68ba7a
+INFO:root:Count of different bits: 58
+INFO:root:Count rounds: 
+INFO:root:Output original:  c2bd9eb1b6ed97da65c33981e02be750866e09a4
+INFO:root:Output changed:   d6b70db2c02910461d7b52b89bd9bc4212e198e8
+INFO:root:Count of different bits: 75
+INFO:root:Count rounds: 
+INFO:root:Output original:  a889e92562641a1963edf9a8140bb857ed45f29d
+INFO:root:Output changed:   442ee52c93b3d45833b6efc06ca10f949c7fb0b0
+INFO:root:Count of different bits: 77
+INFO:root:Count rounds: 
+INFO:root:Output original:  bb6730a71e245f6ab8349c9dc107687918ba01a8
+INFO:root:Output changed:   58fd7e6c5c73676fa0d0b81254e610cc378b0475
+INFO:root:Count of different bits: 76
+INFO:root:Count rounds: 
+INFO:root:Output original:  6e86bab5b4c38b8c4c367f2664ff857e74d5ffce
+INFO:root:Output changed:   92db01c0049d4bc81f722e24a81315a06b50afa3
+INFO:root:Count of different bits: 76
+INFO:root:Count rounds: 
+INFO:root:Output original:  3ef973fc9b1430688b20c16bef5dbda45a461d6b
+INFO:root:Output changed:   d70531843a8c2843ab559b7a1fcdbe3369ed8a03
+INFO:root:Count of different bits: 71
+INFO:root:Count rounds: 
+INFO:root:Output original:  add31e0f05767ce75b44f795367642a63c185a07
+INFO:root:Output changed:   7cd08d7068db799acca6d97319f984a5b6b409e1
+INFO:root:Count of different bits: 85
+INFO:root:Count rounds: 
+INFO:root:Output original:  517e86f24f726c8deabcb3828303ce043f5766ee
+INFO:root:Output changed:   4fc19a9920c32e868befb1cdbc1de49b5a59c4ff
+INFO:root:Count of different bits: 78
+INFO:root:Count rounds: 
+INFO:root:Output original:  fb458da9044c5af24756729bfbf032ace6b6279d
+INFO:root:Output changed:   0f8f023b4d3dcb11e4b8c5a4d4f91fca35dcf25b
+INFO:root:Count of different bits: 87
+INFO:root:Count rounds: 
+INFO:root:Output original:  deccace20f209f7149ee7933b59cee1779d798a6
+INFO:root:Output changed:   701b6c26ee2298b0db63efdfc121c5fe4be985d4
+INFO:root:Count of different bits: 78
+INFO:root:------------
