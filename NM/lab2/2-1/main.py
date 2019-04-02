@@ -51,6 +51,8 @@ def iteration_method(init_dict):
         logging.info("Iter #{0}".format(cnt_iter))
 
         x = phi(x_prev)
+        logging.info("x = {0}".format(x))
+
         finish_iter = abs(x - x_prev) * q / (1 - q)
         sign = sign_str(finish_iter, eps)
         logging.info("{0}{1}{2}".format(finish_iter, sign, eps))
