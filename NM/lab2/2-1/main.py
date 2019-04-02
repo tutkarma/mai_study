@@ -97,7 +97,7 @@ if __name__ == '__main__':
     logging.basicConfig(filename="2-1.log", level=logging.INFO)
 
     init_dict = {
-                    'eps': int(args.eps) if args.eps else EPS,
+                    'eps': float(args.eps) if args.eps else EPS,
                     'interval': (0, 0.7)
                 }
 
