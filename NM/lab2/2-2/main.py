@@ -177,6 +177,6 @@ if __name__ == '__main__':
     print("Count iteration: {0}".format(cnt_iter))
 
     x, cnt_iter = newton_method(init_dict, LU=True)
-    print("Newton method with lu decomposition:")
+    print("Newton method with solve linear system:")
     print("x = {0}".format(x))
     print("Count iteration: {0}".format(cnt_iter))
