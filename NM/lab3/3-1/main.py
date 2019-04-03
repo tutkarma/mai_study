@@ -2,7 +2,6 @@ import argparse
 import logging
 import operator
 from functools import reduce
-from math import pi
 
 from utils import read_data, save_to_file
 
@@ -34,7 +33,7 @@ def get_coefs(x, y):
     return coefs
 
 
-def Lagrange_polynomial(points, x):
+def Lagrange_interpolation(points, x):
     res = 0
     res_str = 'L(x) = '
     for i in range(len(points)):
@@ -48,7 +47,7 @@ def Lagrange_polynomial(points, x):
     return res
 
 
-def Newton_polynomial(points, x):
+def Newton_interpolation(points, x):
     y = [f(i) for i in points]
     coefs = get_coefs(points, y)
     cnt = len(coefs) - 1
@@ -78,16 +77,16 @@ if __name__ == '__main__':
         logging.info("x: {0}".format(x))
 
         val = f(x)
-        logging.info("Lagrange polynomial")
-        val_by_lagrange = Lagrange_polynomial(points[i], x)
+        logging.info("Lagrange interpolation")
+        val_by_lagrange = Lagrange_interpolation(points[i], x)
         abs_err = abs(val - val_by_lagrange)
         logging.info("Value: {0}".format(val))
         logging.info("Lagrange: {0}".format(val_by_lagrange))
         logging.info("Absolute error: {0}\n".format(abs_err))
         res_lagr.append((val_by_lagrange, abs_err))
 
-        logging.info("Newton polynomial")
-        val_by_newton = Newton_polynomial(points[i], x)
+        logging.info("Newton interpolation")
+        val_by_newton = Newton_interpolation(points[i], x)
         abs_err = abs(val - val_by_newton)
         logging.info("Value: {0}".format(val))
         logging.info("Newton: {0}".format(val_by_newton))
