@@ -3,6 +3,10 @@ import logging
 from math import exp, log
 
 
+import lu
+from matrix import Matrix, Vector
+
+
 EPS = 0.01
 
 
@@ -71,6 +75,15 @@ def det(mat):
     return mat[0][0] * mat[1][1] - mat[0][1] * mat[1][0]
 
 
+def delta_x(x):
+    mat = Matrix.from_list(jacobi(x))
+    B = Vector.from_list([-f1(x), -f2(x)])
+    LU, P = lu.LU_decomposition(mat)
+    new_B = lu.get_new_B(B, P)
+    delta = lu.LU_solve(LU, new_B)
+    return delta.get_data()
+
+
 def iteration_method(init_dict):
     logging.info("Iteration method")
     interval, eps = init_dict['interval'], init_dict['eps']
@@ -134,6 +147,38 @@ def newton_method(init_dict):
     return tuple(x), cnt_iter
 
 
+def newton_method2(init_dict):
+    logging.info("Newton method with lu decomposition")
+    interval, eps = init_dict['interval'], init_dict['eps']
+    cnt_iter = 0
+
+    inter_x1, inter_x2 = interval[0], interval[1]
+    logging.info("Eps: {0}".format(eps))
+    logging.info("Intervals: [{0}, {1}]".format(inter_x1, inter_x2))
+
+    x_prev = [(inter_x1[1] - inter_x1[0]) / 2,
+              (inter_x2[1] - inter_x2[0]) / 2]
+    logging.info("x0 = {0}".format(x_prev))
+
+    while True:
+        cnt_iter += 1
+        logging.info("Iter #{0}".format(cnt_iter))
+        delta = delta_x(x_prev)
+        x = [x_prev[0] + delta[0],
+             x_prev[1] + delta[1]]
+        logging.info("x = {0}".format(x))
+
+        finish_iter = max([abs(i - j) for i, j in zip(x, x_prev)])
+        sign = sign_str(finish_iter, eps)
+        logging.info("{0}{1}{2}".format(finish_iter, sign, eps))
+        if finish_iter <= eps:
+            break
+
+        x_prev = x
+
+    return tuple(x), cnt_iter
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--eps', help='Accuracy')
@@ -153,5 +198,10 @@ if __name__ == '__main__':
 
     x, cnt_iter = newton_method(init_dict)
     print("Newton method:")
+    print("x = {0}".format(x))
+    print("Count iteration: {0}".format(cnt_iter))
+
+    x, cnt_iter = newton_method2(init_dict)
+    print("Newton method with lu decomposition:")
     print("x = {0}".format(x))
     print("Count iteration: {0}".format(cnt_iter))
