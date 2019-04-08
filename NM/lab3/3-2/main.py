@@ -1,9 +1,16 @@
 import argparse
 import logging
 
+import matplotlib.pyplot as plt
+import numpy as np
+
 from tma import tma
 from matrix import TridiagonalMatrix, Vector
 from utils import read_data, save_to_file
+
+
+def f(a, b, c, d, x):
+    return a + b * x + c * (x ** 2) + d * (x ** 3)
 
 
 def get_a(f):
@@ -15,7 +22,7 @@ def get_b(f, h, c):
     n = len(f) - 1
     for i in range(1, n):
         b.append((f[i] - f[i - 1]) / h[i] - 1/3 * h[i] * (c[i + 1] + 2 * c[i]))
-    b.append(f[n] - f[n - 1] / h[n] - 2/3 * h[n] * c[n])
+    b.append((f[n] - f[n - 1]) / h[n] - 2/3 * h[n] * c[n])
     return b
 
 
@@ -59,8 +66,24 @@ def spline_interpolation(points, values, x):
 
     i = find_interval(points, x)
     logging.info("i = {0}: {1} <= {2} <= {3}".format(i, points[i], x, points[i + 1]))
-    res = a[i + 1] + b[i + 1] * (x - points[i]) + c[i + 1] * ((x - points[i]) ** 2) + d[i + 1] * ((x - points[i]) ** 3)
-    return res
+    res = f(a[i + 1], b[i + 1], c[i + 1], d[i + 1], x - points[i])
+    return res, a, b, c, d
+
+
+def draw_plot(points, vals, a, b, c, d):
+    x, y = [], []
+    n = len(points) - 1
+    for i in range(n):
+        x1 = np.linspace(points[i], points[i + 1], 10, endpoint=True)
+        y1 = [f(a[i + 1], b[i + 1], c[i + 1], d[i + 1], j - points[i]) for j in x1]
+        x.append(x1)
+        y.append(y1)
+
+    plt.scatter(points, vals, color='r')
+    for i in range(n):
+        plt.plot(x[i], y[i], color='b')
+
+    plt.show()
 
 
 if __name__ == '__main__':
@@ -75,7 +98,8 @@ if __name__ == '__main__':
     init_dict = read_data(args.input, need_args)
     points, vals, x = init_dict['points'], init_dict['values'], init_dict['x']
 
-    val = spline_interpolation(points, vals, x)
+    val, a, b, c, d = spline_interpolation(points, vals, x)
     logging.info("Value: {0}".format(val))
 
+    draw_plot(points, vals, a, b, c, d)
     save_to_file(args.output, Spline=[val])
