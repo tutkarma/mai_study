@@ -64,19 +64,22 @@
     )
 )
 
-; последних, потому что список коэффициентов перевернут
+; последних, потому что список коэффициентов перевернут (an ... a1)
 (defun get-last-n-elems (count list)
     (last list count)
 )
 
 
 (defun combinations (count list)
-  (cond
-    ((zerop count) '(()))
-    ((endp list)   '())
-    (t (nconc (mapcar (let ((item (first list))) (lambda (comb) (cons item comb)))
-                      (combinations (1- count) (rest list)))
-              (combinations count (rest list))))))
+    (cond
+        ((zerop count) '(()))
+        ((endp list)   '())
+        (t (nconc (mapcar (let ((item (first list)))
+                                (lambda (comb) (cons item comb)))
+                                (combinations (1- count) (rest list)))
+              (combinations count (rest list))))
+    )
+)
 
 
 (defun mult-list (list)
@@ -98,13 +101,24 @@
 
 
 (defun main ()
-    (let ((p1 (make-instance 'polynom ;
+    (let ((p1 (make-instance 'polynom
           :var1 'x
-          :terms (list (make-term :order 4 :coeff 7)
-                       (make-term :order 3 :coeff 3)
-                       (make-term :order 0 :coeff 1)))))
-    (get-d p1 (list-coefs (terms p1)))
-    )
-)
+          :terms (list (make-term :order 2 :coeff 5)
+                       (make-term :order 1 :coeff 3.3)
+                       (make-term :order 0 :coeff -7))))
+         (p2 (make-instance 'polynom
+          :var1 'x
+          :terms (list (make-term :coeff 1 :order 3)
+                       (make-term :coeff 2 :order 1)
+                       (make-term :coeff 1 :order 0))))
+         (p3 (make-instance 'polynom
+          :var1 'x
+          :terms (list (make-term :order 5 :coeff -2)
+                       (make-term :order 3 :coeff 4)
+                       (make-term :order 1 :coeff -6)))))
 
-(print (main))
+    (print (get-d p1 (list-coefs (terms p1))))
+    (print (get-d p2 (list-coefs (terms p2))))
+    (print (get-d p3 (list-coefs (terms p3))))
+    (values))
+)
