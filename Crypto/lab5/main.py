@@ -90,8 +90,10 @@ def case2():
     response = urllib.request.urlopen(url)
     text1 = response.read().decode()
     s = 0
-    for _ in range(CNT_RANDOM_TEXTS):
+    for i in range(CNT_RANDOM_TEXTS):
         text2 = gen_random_letters(len(text1))
+        with open('./tests/case2_text_{0}'.format(i + 1), 'w') as f:
+            f.write(text2)
         s += match_perc(text1, text2)
     s /= CNT_RANDOM_TEXTS
     print("Text length: {0}".format(len(text1)))
@@ -106,6 +108,8 @@ def case3():
     s = 0
     for _ in range(CNT_RANDOM_TEXTS):
         text2 = gen_random_words(len(text1))
+        with open('./tests/case3_text_{0}'.format(i + 1), 'w') as f:
+            f.write(text2)
         s += match_perc(text1, text2)
     s /= CNT_RANDOM_TEXTS
     print("Text length: {0}".format(len(text1)))
@@ -117,7 +121,11 @@ def case4():
     s = 0
     for _ in range(CNT_RANDOM_TEXTS):
         text1 = gen_random_letters(LEN_RANDOM_TEXT)
+        with open('./tests/case4_text1_{0}'.format(i + 1), 'w') as f:
+            f.write(text1)
         text2 = gen_random_letters(LEN_RANDOM_TEXT)
+        with open('./tests/case4_text2_{0}'.format(i + 1), 'w') as f:
+            f.write(text2)
         s += match_perc(text1, text2)
     s /= CNT_RANDOM_TEXTS
     print("Text length: {0}".format(LEN_RANDOM_TEXT))
@@ -129,7 +137,11 @@ def case5():
     s = 0
     for _ in range(CNT_RANDOM_TEXTS):
         text1 = gen_random_words(LEN_RANDOM_TEXT)
+        with open('./tests/case5_text1_{0}'.format(i + 1), 'w') as f:
+            f.write(text1)
         text2 = gen_random_words(LEN_RANDOM_TEXT)
+        with open('./tests/case5_text2_{0}'.format(i + 1), 'w') as f:
+            f.write(text2)
         s += match_perc(text1, text2)
     s /= CNT_RANDOM_TEXTS
     print("Text length: {0}".format(LEN_RANDOM_TEXT))
