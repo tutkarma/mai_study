@@ -34,11 +34,14 @@ def Simpson_method(y, h):
 
 
 def Runge_Romberg_method(res):
+    anal_val = 1.8574186872187473
     k = res[0]['h'] / res[1]['h']
-    err_rec = abs(res[0]['Rectangle'] - res[1]['Rectangle']) / (k ** 2 - 1)
-    err_trap = abs(res[0]['Trapeze'] - res[1]['Trapeze']) / (k ** 2 - 1)
-    err_sim = abs(res[0]['Simpson'] - res[1]['Simpson']) / (k ** 4 - 1)
+    anal_val = 1.8574186872187473
+    err_rec = [abs(res[0]['Rectangle'] - res[1]['Rectangle']) / (k ** 2 - 1), abs(res[0]['Rectangle'] - anal_val) / (k ** 2 - 1)]
+    err_trap = [abs(res[0]['Trapeze'] - res[1]['Trapeze']) / (k ** 2 - 1), abs(res[0]['Trapeze'] - anal_val) / (k ** 2 - 1)]
+    err_sim = [abs(res[0]['Simpson'] - res[1]['Simpson']) / (k ** 4 - 1), abs(res[0]['Simpson'] - anal_val) / (k ** 4 - 1)]
     return {'Rectangle': err_rec, 'Trapeze': err_trap, 'Simpson': err_sim}
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -52,6 +55,7 @@ if __name__ == '__main__':
     init_dict = read_data(args.input, need_args)
     x0, x, steps = init_dict['x0'], init_dict['x'], init_dict['h']
 
+    anal_val = 1.8574186872187473
     save_res = []
     for h in steps:
         logging.info("a: {0}".format(x0))
