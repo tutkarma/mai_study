@@ -86,18 +86,37 @@ def finite_difference_method(f, p, q, a, b, alpha, beta, delta, gamma, y0, y1, h
     return x, y.get_data()
 
 
-def draw_plot(res, res2):
-    plt.scatter(res[0], res[1], color='r', alpha=0.6, label='Shooting method')
-    plt.scatter(res2[0], res2[1], color='b', alpha=0.6, label='Finite difference method')
-    plt.legend()
-    plt.grid(True)
+def Runge_Romberg_method(res):
+    k = res[0]['h'] / res[1]['h']
+    err_shooting = []
+    for i in range(len(res[0]['Shooting']['y'])):
+        err_shooting.append(abs(res[0]['Shooting']['y'][i] - res[1]['Shooting']['y'][i]) / (k ** 1 - 1))
+
+    err_fd = []
+    for i in range(len(res[0]['FD']['y'])):
+        err_fd.append(abs(res[0]['FD']['y'][i] - res[1]['FD']['y'][i]) / (k ** 1 - 1))
+
+    return {'Shooting': err_shooting, 'FD': err_fd}
+
+
+def draw_plot(res, *h):
+    n = len(res)
+    for i in range(n):
+        plt.subplot(n, 1, i + 1)
+        plt.scatter(res[i]["Shooting"]["x"], res[i]["Shooting"]["y"], color='r', alpha=0.6, label='Shooting method')
+        plt.scatter(res[i]["FD"]["x"], res[i]["FD"]["y"], color='b', alpha=0.6, label='Finite difference method')
+        plt.legend()
+        plt.title('h{0} = '.format(i + 1) + str(h[i]))
+        plt.xlabel('x')
+        plt.ylabel('y')
+        plt.grid(True)
     plt.show()
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--input', required=True, help='Input file')
-    #parser.add_argument('--output', required=True, help='Output file')
+    parser.add_argument('--output', required=True, help='Output file')
     args = parser.parse_args()
 
     logging.basicConfig(filename="4-2.log", level=logging.INFO)
@@ -106,9 +125,36 @@ if __name__ == '__main__':
     init_dict = read_data(args.input, need_args)
     a, b, alpha, beta = init_dict['a'], init_dict['b'], init_dict['alpha'], init_dict['beta']
     delta, gamma, y0, y1 = init_dict['delta'], init_dict['gamma'], init_dict['y0'], init_dict['y1']
-    h, eps = init_dict['h'], init_dict['eps']
+    st, eps = init_dict['h'], init_dict['eps']
+    logging.info("Interval: [{0}, {1}]".format(a, b))
+    logging.info("Alpha = {0}, beta = {1}, delta = {2}, gamma = {3}, \
+        y0 = {4}, y1 = {5}".format(alpha, beta, delta, gamma, y0, y1))
 
-    res = shooting_method(func, g, a, b, alpha, beta, delta, gamma, y0, y1, h, eps)
-    res2 = finite_difference_method(f, p, q, a, b, alpha, beta, delta, gamma, y0, y1, h)
+    save_res = []
+    steps = [st, st / 2]
+    for h in steps:
+        logging.info("Step: {0}".format(h))
+        logging.info("Shooting method")
+        res = shooting_method(func, g, a, b, alpha, beta, delta, gamma, y0, y1, h, eps)
+        for x, y in zip(res[0], res[1]):
+            logging.info("x: {0}, y: {1}".format(round(x, 3), y))
 
-    draw_plot(res, res2)
+        logging.info("Finite difference method")
+        res2 = finite_difference_method(f, p, q, a, b, alpha, beta, delta, gamma, y0, y1, h)
+        for x, y in zip(res2[0], res[1]):
+            logging.info("x: {0}, y: {1}".format(round(x, 3), y))
+
+        save_res.append({
+                        "h": h,
+                        "Shooting": {'x': res[0], 'y': res[1]},
+                        "FD": {'x': res2[0], 'y': res2[1]}
+                        })
+
+    errors = Runge_Romberg_method(save_res)
+    logging.info("Errors")
+    logging.info("Shooting error: {0}".format(errors['Shooting']))
+    logging.info("FD error: {0}".format(errors['FD']))
+
+    draw_plot(save_res, st, st / 2)
+
+    save_to_file(args.output, h1=save_res[0], h2=save_res[1], errors=errors)
