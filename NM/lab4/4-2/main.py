@@ -99,12 +99,16 @@ def Runge_Romberg_method(res):
     return {'Shooting': err_shooting, 'FD': err_fd}
 
 
-def draw_plot(res, *h):
+def draw_plot(res, exact, *h):
     n = len(res)
     for i in range(n):
         plt.subplot(n, 1, i + 1)
-        plt.scatter(res[i]["Shooting"]["x"], res[i]["Shooting"]["y"], color='r', alpha=0.6, label='Shooting method')
-        plt.scatter(res[i]["FD"]["x"], res[i]["FD"]["y"], color='b', alpha=0.6, label='Finite difference method')
+        plt.scatter(res[i]["Shooting"]["x"], res[i]["Shooting"]["y"], color='r', alpha=0.4, label='Shooting method')
+        plt.plot(res[i]["Shooting"]["x"], res[i]["Shooting"]["y"], color='r', alpha=0.4)
+        plt.scatter(res[i]["FD"]["x"], res[i]["FD"]["y"], color='b', alpha=0.4, label='Finite difference method')
+        plt.plot(res[i]["FD"]["x"], res[i]["FD"]["y"], color='b', alpha=0.4)
+        plt.scatter(exact[i][0], exact[i][1], color='g', alpha=0.4, label='Exact solution')
+        plt.plot(exact[i][0], exact[i][1], color='g', alpha=0.4)
         plt.legend()
         plt.title('h{0} = '.format(i + 1) + str(h[i]))
         plt.xlabel('x')
@@ -150,11 +154,18 @@ if __name__ == '__main__':
                         "FD": {'x': res2[0], 'y': res2[1]}
                         })
 
+    exact = []
+    for h in steps:
+        x_exact = [i for i in np.arange(a, b + h, h)]
+        y_exact = [exact_func(i) for i in x_exact]
+        exact.append((x_exact, y_exact))
+
+
     errors = Runge_Romberg_method(save_res)
     logging.info("Errors")
     logging.info("Shooting error: {0}".format(errors['Shooting']))
     logging.info("FD error: {0}".format(errors['FD']))
 
-    draw_plot(save_res, st, st / 2)
+    draw_plot(save_res, exact, st, st / 2)
 
     save_to_file(args.output, h1=save_res[0], h2=save_res[1], errors=errors)
