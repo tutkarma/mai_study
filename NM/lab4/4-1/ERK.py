@@ -2,6 +2,7 @@ import argparse
 import logging
 from math import exp
 
+import matplotlib.pyplot as plt
 import numpy as np
 
 from utils import read_data, save_to_file
@@ -32,7 +33,7 @@ def Euler_method(f, a, b, h, y0, y_der):
     z = y_der
     for i in range(n):
         z += h * f(x[i], y[i], z)
-        y_i = y[i] + h * z
+        y_i = y[i] + h * g(x[i], y[i], z)
         y.append(y_i)
     return x, y
 
@@ -63,7 +64,7 @@ def Adams_method(f, g, x, y, z, h):
     x = x[:4]
     y = y[:4]
     z = z[:4]
-    for i in range(3, n):
+    for i in range(3, n - 1):
         z_i = z[i] + h * (55 * f(x[i], y[i], z[i]) -
                           59 * f(x[i - 1], y[i - 1], z[i - 1]) +
                           37 * f(x[i - 2], y[i - 2], z[i - 2]) -
@@ -93,6 +94,25 @@ def Runge_Romberg_method(res):
         err_adams.append(abs(res[0]['Adams']['y'][i] - res[1]['Adams']['y'][i]) / (k ** 4 - 1))
 
     return {'Euler': err_euler, 'Runge': err_runge, 'Adams': err_adams}
+
+
+def draw_plot(res, *h):
+    n = len(res)
+    for i in range(n):
+        plt.subplot(n, 1, i + 1)
+        plt.scatter(res[i]["Euler"]["x"], res[i]["Euler"]["y"], color='r', alpha=0.4, label='Euler method')
+        plt.plot(res[i]["Euler"]["x"], res[i]["Euler"]["y"], color='r', alpha=0.4)
+        plt.scatter(res[i]["Runge"]["x"], res[i]["Runge"]["y"], color='b', alpha=0.4, label='Runge Kutta method')
+        plt.plot(res[i]["Runge"]["x"], res[i]["Runge"]["y"], color='b', alpha=0.4)
+        plt.scatter(res[i]["Adams"]["x"], res[i]["Adams"]["y"], color='g', alpha=0.4, label='Adams method')
+        plt.plot(res[i]["Adams"]["x"], res[i]["Adams"]["y"], color='g', alpha=0.4)
+
+        plt.legend()
+        plt.title('h{0} = '.format(i + 1) + str(h[i]))
+        plt.xlabel('x')
+        plt.ylabel('y')
+        plt.grid(True)
+    plt.show()
 
 
 if __name__ == '__main__':
@@ -144,4 +164,6 @@ if __name__ == '__main__':
     logging.info("Runge error: {0}".format(errors['Runge']))
     logging.info("Adams error: {0}".format(errors['Adams']))
 
+
+    draw_plot(save_res, steps[0], steps[1])
     save_to_file(args.output, h1=save_res[0], h2=save_res[1], errors=errors)
