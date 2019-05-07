@@ -14,6 +14,29 @@
 (defun order (term) (first term))
 (defun coeff (term) (second term))
 
+(defgeneric zerop1 (arg)
+ (:method ((n number))   ; (= n 0)
+  (zerop n)))
+
+(defgeneric minusp1 (arg)
+ (:method ((n number))   ; (< n 0)
+  (minusp n)))
+
+
+(defmethod print-object ((p polynom) stream)
+  (format stream "[МЧ (~s) ~:{~:[~:[+~;-~]~d~[~2*~;~s~*~:;~s^~d~]~;~]~}]"
+          (var1 p)
+          (mapcar (lambda (term)
+                    (list (zerop1 (coeff term))
+                          (minusp1 (coeff term))
+                          (if (minusp1 (coeff term))
+                              (abs (coeff term))
+                              (coeff term))
+                          (order term)
+                          (var1 p)
+                          (order term)))
+                  (terms p))))
+
 
 (defun list-coefs (p)
     (if p (cur-coef (first p) (second p) (list-coefs (rest p))))
@@ -37,11 +60,14 @@
 
 
 (defun get-d (p a)
-    (let  ((d (list (first a))))
-        (loop for i in (rest a) 
+    (let  ((b (list-coefs (terms p)))
+           (d (list (first (list-coefs (terms p)))))
+           )
+        (loop for i in (rest b) 
             do (nconc d (list (+ i (sum-mult-d-S d (remove-last-el a)))))
         )
-    (reverse d))
+    (reverse d)
+    )
 )
 
 
@@ -115,10 +141,31 @@
           :var1 'x
           :terms (list (make-term :order 5 :coeff -2)
                        (make-term :order 3 :coeff 4)
-                       (make-term :order 1 :coeff -6)))))
+                       (make-term :order 1 :coeff -6))))
+         (a1 (list 1 2 3))
+         (a2 (list 2 2 2 2))
+         (a3 (list 1 1 1 1 1 1)))
 
-    (print (get-d p1 (list-coefs (terms p1))))
-    (print (get-d p2 (list-coefs (terms p2))))
-    (print (get-d p3 (list-coefs (terms p3))))
+    (print "Polynom:")
+    (print p1)
+    (print "List:")
+    (print a1)
+    (print "Result:")
+    (print (get-d p1 a1))
+
+        (print "Polynom:")
+    (print p2)
+    (print "List:")
+    (print a2)
+    (print "Result:")
+    (print (get-d p2 a2))
+
+        (print "Polynom:")
+    (print p3)
+    (print "List:")
+    (print a3)
+    (print "Result:")
+    (print (get-d p3 a3))
+
     (values))
 )
