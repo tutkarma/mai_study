@@ -1,0 +1,5 @@
+num_cpu: 2.562
+cpu_freq: 2065.625
+gpu_memory: 2355.200
+hdd_size: 467.750
+ram: 6.062
