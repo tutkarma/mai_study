@@ -1,0 +1,91 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T2B]{fontenc}
+\usepackage[english,russian]{babel}
+
+\frenchspacing
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage[table]{xcolor}  
+\usepackage{array}
+\usepackage{color}
+\usepackage{xcolor}
+
+\usepackage{hyperref}
+
+
+\newcommand{\MYhref}[3][blue]{\href{#2}{\color{#1}{#3}}}%
+
+\usepackage{listings}
+\usepackage{alltt}
+\usepackage{csquotes}
+\DeclareQuoteStyle{russian}
+	{\guillemotleft}{\guillemotright}[0.025em]
+	{\quotedblbase}{\textquotedblleft}
+\ExecuteQuoteOptions{style=russian}
+
+\usepackage{graphicx}
+
+\usepackage{listings}
+\lstset{tabsize=2,
+	breaklines,
+	columns=fullflexible,
+	flexiblecolumns,
+	numbers=left,
+	numberstyle={\footnotesize},
+	extendedchars,
+	inputencoding=utf8}
+
+\usepackage{longtable}
+
+\def\@xobeysp{ }
+\def\verbatim@processline{\hspace{1.2cm}\raggedright\the\verbatim@line\par}
+
+\oddsidemargin=-0.4mm
+\textwidth=160mm
+\topmargin=4.6mm
+\textheight=210mm
+
+\parindent=0pt
+\parskip=3pt
+
+\definecolor{lightgray}{gray}{0.9}
+
+
+\renewcommand{\thesubsection}{\arabic{subsection}}
+
+\lstdefinestyle{customc}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=C,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{gray},
+  identifierstyle=\color{black},
+  stringstyle=\color{blue},
+}
+
+\lstdefinestyle{customasm}{
+  belowcaptionskip=1\baselineskip,
+  frame=L,
+  xleftmargin=\parindent,
+  language=[x86masm]Assembler,
+  basicstyle=\footnotesize\ttfamily,
+  commentstyle=\itshape\color{purple!40!black},
+}
+
+\lstset{escapechar=@,style=customc}
+
+
+\newcommand{\CWPHeader}[1]{\addtocounter{section}{-1}\section{#1}}
+
+% Заголовок курсовой работы
+% Единственный аргумент --- ее тема
+\newcommand{\CWHeader}[1]{\section*{#1}}
+
+\newcommand{\CWProblem}[1]{\par\textbf{Задача: }#1}
