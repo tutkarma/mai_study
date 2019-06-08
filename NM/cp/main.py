@@ -1,11 +1,10 @@
-from mpi4py import MPI
-import numpy as np
 import argparse
-import logging
 import json
-import math
 
 from utils import save_to_file
+
+from mpi4py import MPI
+import numpy as np
 
 
 def read_data(filename, need_args):
@@ -21,6 +20,7 @@ def read_data(filename, need_args):
                 init_dict[arg] = np.array(data[arg], dtype=np.float64)
             else:
                 init_dict[arg] = data[arg]
+
     return init_dict
 
 
@@ -29,8 +29,8 @@ def sign(n):
 
 
 def t(A):
-    return math.sqrt(sum([A[i, j] ** 2 for i in range(A.shape[0]) 
-        for j in range(i + 1, A.shape[0]) if i != j]))
+    return np.sqrt(sum([A[i, j] ** 2 for i in range(A.shape[0]) 
+        for j in range(i + 1, A.shape[0])]))
 
 
 def indexes_max_elem(A):
@@ -86,19 +86,16 @@ def parallel_jacobi_rotate(comm, A, ind_j, ind_k):
         row_j_part = np.zeros(size)
         row_k_part = np.zeros(size)
         row_j_new_part = np.zeros(size)
-        #row_j_comm.Scatter([row_j, size, MPI.FLOAT], [row_j_part, size, MPI.FLOAT], root=0)
-        #row_j_comm.Scatter([row_k, size, MPI.FLOAT], [row_k_part, size, MPI.FLOAT], root=0)
+
         row_j_comm.Scatter(row_j, row_j_part, root=0)
         row_j_comm.Scatter(row_k, row_k_part, root=0)
 
         for i in range(size):
             row_j_new_part[i] = c * row_j_part[i] + s * row_k_part[i]
 
-        #row_j_comm.Gather([row_j_new_part, size, MPI.FLOAT], [row_j_new, size, MPI.FLOAT], root=0)
         row_j_comm.Gather(row_j_new_part, row_j_new, root=0)
         if row_j_rank == 0:
             comm.Send([row_j_new, sz, MPI.FLOAT], dest=0, tag=0)
-            #comm.Send(row_j_new, dest=0, tag=0)
         row_j_comm.Free()
 
     row_k_rank = row_k_size = -1
@@ -110,18 +107,16 @@ def parallel_jacobi_rotate(comm, A, ind_j, ind_k):
         row_j_part = np.zeros(size)
         row_k_part = np.zeros(size)
         row_k_new_part = np.zeros(size)
-        #row_k_comm.Scatter([row_j, size, MPI.FLOAT], [row_j_part, size, MPI.FLOAT], root=0)
-        #row_k_comm.Scatter([row_k, size, MPI.FLOAT], [row_k_part, size, MPI.FLOAT], root=0)
+
         row_k_comm.Scatter(row_j, row_j_part, root=0)
         row_k_comm.Scatter(row_k, row_k_part, root=0)
 
         for i in range(size):
             row_k_new_part[i] = s * row_j_part[i] - c * row_k_part[i]
-        #row_k_comm.Gather([row_k_new_part, size, MPI.FLOAT], [row_k_new, size, MPI.FLOAT], root=0)
+
         row_k_comm.Gather(row_k_new_part, row_k_new, root=0)
         if row_k_rank == 0:
             comm.Send([row_k_new, sz, MPI.FLOAT], dest=0, tag=0)
-            #comm.Send(row_k_new, dest=0, tag=0)
         row_k_comm.Free()
 
     if rank == 0:
@@ -152,6 +147,7 @@ def jacobi_parallel(comm, A, eps):
     eps = comm.bcast(eps, root=0)
     norm = comm.bcast(norm, root=0)
 
+    k = 1
     while norm > eps:
         elapsed_time -= MPI.Wtime()
         A = parallel_jacobi_rotate(comm, A, j, i)
@@ -160,6 +156,7 @@ def jacobi_parallel(comm, A, eps):
         elapsed_time += MPI.Wtime()
         norm = comm.bcast(norm, root=0)
         i, j = indexes_max_elem(A)
+        k += 1
 
     return np.diag(A).tolist()
 
@@ -170,9 +167,7 @@ if __name__ == "__main__":
     parser.add_argument('--output', required=True, help='Output file')
     args = parser.parse_args()
 
-    logging.basicConfig(filename="cp.log", level=logging.INFO)
-
-    start = end = elapsed_time = 0
+    elapsed_time = 0
     need_args = ('matrix', 'eps')
     init_dict = read_data(args.input, need_args)
     A, eps = init_dict['matrix'], init_dict['eps']
