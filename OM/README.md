@@ -56,3 +56,9 @@ Syntax: main.py [--methods=#] [--max-iter=#] [--input=<filename>]
     Example:
         --output=log.txt
 ```
+
+### РГР (17-18) ###
+
+https://math.semestr.ru/simplex/simplex.php
+
+Формула симплекс метода для 17 базовая, для 18 двухфазная.
