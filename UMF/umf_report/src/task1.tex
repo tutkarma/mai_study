@@ -1,0 +1,302 @@
+\section{Задача №1}
+\textbf{Постановка задачи}:
+Сформулировать и решить задачу о нагреве конечного стержня $x\in[0;l]$ с начальным распределением $T_{0} = 300(a^{2} = 10^{-6})$ и наличием конвективного члена $\left( +b \dfrac{\partial u}{\partial x}, b = 10^{-6} \right)$, когда левый конец теплоизолирован, а на правом задана постоянная температура, равная $500$. Исследовать ортогональность и нормировку собственных функций, построить графики $u(x, t)$, $l = 0,1$м. 
+
+\textbf{Решение}:
+Сформулируем задачу:
+$$
+\begin{cases}
+u_{t} = a^{2}u_{xx} + bu_{x},&\text{$x\in(0;l); t > 0$}\\
+u(x, 0) = T_{0} = 300,&\text{$x\in(0;l); t = 0$;}\\
+u_{x}(0, t) = 0,&\text{$x = 0; t > 0$;}\\
+u(l, t) = T_{1} = 500,&\text{$x = l; t > 0$;}
+\end{cases}
+\eqno (I)
+$$
+
+Для решения задачи $(I)$ необходимо избавиться от конвентивного члена $bu_{x}$. Для этого искомое решение $u(x, t)$ будем искать в виде
+$$ u(x, t) = v(x, t) e^{\mu t + \lambda x} $$
+В дальнейшем вместо $e^{\mu t + \lambda x}$ будем писать $E$.
+
+$$ u_{t} = v_{t} E + \mu Ev = E(v_{t} + \mu v) $$
+$$ u_{x} = v_{x} E + \lambda Ev = E(v_{x} + \lambda v) $$
+$$ u_{xx} = (v_{xx} + \lambda v_{x})E + \lambda E(v_{x} + \lambda v) = E(v_{xx} + 2\lambda v_{x} + \lambda^{2}v) $$
+
+Подставляем $u_{t}, u_{x}$ и $u_{xx}$ в уравнение $(1)$.
+$$ E(v_{t} + \mu v) = a^{2}E(v_{xx} + 2\lambda v_{x} + \lambda^{2}v) + bE(v_{x} + \lambda v) $$
+
+$$ a^{2}v_{xx} - v_{t} + (2\lambda a^{2} + b)v_{x} + (a^{2}\lambda^{2} + b\lambda - \mu)v = 0 $$
+
+Теперь выберем $\lambda$ и $\mu$ так, чтобы коэффициенты перед $v_{x}$ и $v$ стали равны $0$.
+$$
+\begin{cases}
+2\lambda a^{2} + b = 0,\\
+a^{2}\lambda^{2} + b\lambda - \mu = 0
+\end{cases}
+\Rightarrow
+\begin{cases}
+\lambda = \dfrac{-b}{2a^{2}},\\
+\mu = a^{2}\lambda^{2} + b\lambda = \dfrac{a^{2}b^{2}}{4a^{4}} - \dfrac{b^{2}}{2a^{2}} = -\dfrac{b^{2}}{4a^{2}}
+\end{cases}
+$$
+
+Сформулируем краевые и начальные условия:
+$$ u(x, 0) = v(x, 0) e^{\mu \cdot 0 + \lambda x} = v(x, 0)e^{\lambda x} = T_{0} = 300 $$
+$$ v(x, 0) = T_{0} e^{-\lambda x} $$
+$$ u_{x}(0, t) = e^{\mu t + \lambda \cdot 0} (v_{x}(0, t) + \lambda v(0, t)) = 0 $$
+$$ v_{x}(0, t) + \lambda v(0, t) = 0$$
+
+$$ u(l, t) = e^{\mu t + \lambda l} v(l, t) = T_{1} = 500 $$
+$$ v(l, t) = T_{1} e^{\mu t - \lambda l}$$
+
+Получаем начально-краевую задачу для $v(x, t)$:
+$$
+\begin{cases}
+a^{2}v_{xx} = v_{t},&\text{$x\in(0;l); t > 0$}\\
+v(x, 0) = T_{0}e^{-\lambda x},&\text{$x\in(0;l); t = 0$;}\\
+v_{x}(0, t) + \lambda v(0, t) = 0,&\text{$x = 0; t > 0$;}\\
+v(l, t) = T_{1} e^{-\mu t - \lambda l},&\text{$x = l; t > 0$;}
+\end{cases}
+\eqno (II)
+$$
+
+Будем искать $v(x, t)$ в виде
+$$ v(x, t) = \omega(x, t) + \nu_{1}(x, t) + \nu_{2}(x, t) $$
+
+$$
+\begin{cases}
+\omega_{xx} = 0,\\
+\omega_{x}(0, t) + \lambda \omega(0, t) = 0,\\
+\omega(l, t) = T_{1}e^{-\mu t - \lambda l}
+\end{cases}
+\eqno (III)
+$$
+
+$$
+\begin{cases}
+a^{2} \nu_{1xx} = \nu_{1t},\\
+\nu_{1}(x, 0) = T_{0}e^{\lambda x} - \omega(x, 0),\\
+\nu_{1x}(0, t) + \lambda \nu_{1}(0, t) = 0,\\
+\nu_{1}(l, t) = 0
+\end{cases}
+\eqno (IV)
+$$
+
+$$
+\begin{cases}
+\nu_{2t} = a^{2} \nu_{2xx} - \omega_{t},\\
+\nu_{2t}(x, 0) = 0,\\
+\nu_{2x}(0, t) + \lambda \nu_{2}(0, t) = 0, \\
+\nu_{2}(l, t) = 0
+\end{cases}
+\eqno (V)
+$$
+
+Решаем систему $III$
+
+$$
+\begin{cases}
+\omega_{xx} = 0,\\
+\omega_{x}(0, t) + \lambda \omega(0, t) = 0,\\
+\omega(l, t) = T_{1}e^{-\mu t - \lambda l}
+\end{cases}
+$$
+
+Будем искать $\omega(x, t)$ в виде
+$$ \omega(x, t) = c_{1}(t)x + c_{2}(t) $$
+
+Подставляем в кравые условия
+$$ \omega_{x}(0, t) + \lambda \omega(0, t) = c_{1}(t) + \lambda c_{2}(t) $$
+
+$$ \omega(l, t) = c_{1}(t)l + c_{2}(t) = T_{1}e^{-\mu t - \lambda l}$$
+$$ -\lambda l c_{2}(t) + c_{2}(t) = T_{1}e^{-\mu t - \lambda l}$$
+$$ (1 - \lambda l) c_{2}(t) = T_{1}e^{-\mu t - \lambda l}$$
+$$ c_{2}(t) = \dfrac{T_{1}e^{-\mu t - \lambda l}}{1 - \lambda l}$$
+
+$$ \Rightarrow c_{1}(t) = -\lambda c_{2}(t) $$
+$$ c_{1}(t) = -\lambda \dfrac{T_{1}e^{-\mu t - \lambda l}}{1 - \lambda l}$$
+
+$$ \omega(x, t) = -\lambda \dfrac{T_{1}e^{-\mu t - \lambda l}}{1 - \lambda l} x + \dfrac{T_{1}e^{-\mu t - \lambda l}}{1 - \lambda l}$$
+
+$$ \omega(x, 0) = -\lambda \dfrac{T_{1}e^{- \lambda l}}{1 - \lambda l} x + \dfrac{T_{1}e^{- \lambda l}}{1 - \lambda l}$$
+
+$$ \omega_{t} = \dfrac{\lambda \mu T_{1}e^{-\mu t - \lambda l}}{1 - \lambda l} x - \dfrac{\mu T_{1}e^{-\mu t - \lambda l}}{1 - \lambda l} $$
+
+Решим задачу $IV$.
+Запишем её в виде:
+$$
+\begin{cases}
+\nu_{1t} = a^{2} \nu_{1xx},\\
+\nu_{1}(x, 0) = \varphi(x),\\
+\nu_{1x}(0, t) + \lambda \nu_{1}(0, t) = 0, \\
+\nu_{1}(l, t) = 0
+\end{cases}
+\eqno (VI)
+$$
+
+$$ \varphi(x) = T_{0} e^{-\lambda x} \omega(x, 0) = T_{0} e^{-\lambda x} - \dfrac{T_{1} e^{-\lambda l}(1 - \lambda x)}{1 - \lambda l}$$
+
+Решение будем искать в виде
+$$ \nu_{1}(x, t) = X(x) T(t)$$
+
+Подставим в уравнение $(2)$
+$$ X(x)T'(t) = a^{2}T(t)X''(x)$$
+$$ \dfrac{X''(x)}{X(x)} = \dfrac{T'(t)}{a^{2}T(t)} = \alpha^{2}$$
+
+Будем решать задачу Штурма — Лиувилля о нахождении собственных значений $\alpha_{n}$ и собственных функций $X_{n}(x)$.
+$$
+\begin{cases}
+X''(x) - \alpha^{2}X(x) = 0,\\
+X'(0) + \lambda X(0) = 0,\\
+X(l) = 0
+\end{cases}
+$$
+
+\begin{enumerate}[label=\arabic*)]
+\item $\alpha^{2} > 0$
+
+$$ X''(x) - \alpha^{2}X(x) = 0 $$
+$$ X(x) = c_{1}e^{-\alpha x} + c_{2}e^{\alpha x} $$
+$$ X'(x) + \alpha X(x) = -c_{1}e^{-\alpha x}(\lambda + \alpha) + c_{2}e^{\alpha x} (\alpha - \lambda)$$
+$$ X'(x) = -\alpha c_{1}e^{-\alpha x} + \alpha c_{2}e^{\alpha x}$$
+
+$$
+\begin{cases}
+-(\alpha + \lambda)c_{1} + (\alpha - \lambda)c_{2} = 0,\\
+-\alpha e^{-\alpha x}c_{1} + \alpha e^{\alpha x} c_{2} = 0
+\end{cases}
+$$
+
+Определитель данной системы отличен от нуля
+$$ \Rightarrow c_{1} = 0, c_{2} = 0 \Rightarrow X(0) \equiv 0 \Rightarrow \alpha^{2} > 0 \quad \text{не подходит}$$
+
+\item $\alpha^{2} = 0$
+$$ X''(x) = 0 \Rightarrow X'(x) = c_{1} \Rightarrow X(x) = c_{1}x + c_{2} $$
+$$ X'(0) + \lambda X(0) = c_{1} + \lambda c_{2} = 0 $$
+$$ X'(l) = l_{1} = 0$$
+$$c_{1} = 0, c_{2} = 0 $$
+$$ \Rightarrow \alpha^{2} = 0$$
+Не подходит.
+
+\item $\alpha^{2} < 0$
+
+$$ X''(x) + \alpha^{2}X(x) = 0 $$
+$$ X(x) = c_{1}\sin{\alpha x} + c_{2}\cos{\alpha x} $$
+$$ X'(0) + \lambda X(0) = \alpha c_{1} + \lambda c_{2} = 0 \Rightarrow c_{1} = -\dfrac{\lambda}{\alpha}c_{2} $$
+$$ X(l) = c_{1}\sin{\alpha l} + c_{2}\cos{\alpha l} = 0 $$
+$$ -\dfrac{\lambda}{\alpha} \sin{\alpha l} + \cos{\alpha l} = 0$$
+$$ -\dfrac{\lambda}{\alpha} \tg{\alpha l} + 1 = 0 $$
+$$ \tg{\alpha_{n} l} = \dfrac{\alpha_{n}}{\lambda} $$
+
+Трансцендетное уравнение решается численными методами.
+
+$$ X_{n}(x) = -\dfrac{\lambda}{\alpha_{n}} \sin{\alpha_{n} x} + \cos{\alpha_{n} x}$$
+
+Теперь решим уравнение.
+$$ T'(t) + \alpha^{2}a^{2}T(t) = 0 $$
+Его решением является
+$$ T_{n}(t) = c_{n}e^{-a^{2}\lambda_{n}^{2}t} $$
+
+Получаем
+$$ \nu_{1n}(x, t) = X_{n}(x)T_{n}(t) = c_{n} \left( -\dfrac{\lambda}{\alpha_{n}} \sin{\alpha_{n}x} + \cos{\alpha_{n}x} \right)e^{-a^{2}\lambda_{n}^{2}t} $$
+$$ \nu_{1}(x, t) = \sum_{n=1}^{\infty} \nu_{1n}(x, t) = \sum_{n=1}^{\infty} c_{n} \left( -\dfrac{\lambda}{\alpha_{n}} \sin{\alpha_{n}x} + \cos{\alpha_{n}x} \right)e^{-a^{2}\alpha_{n}^{2}t} $$
+
+Определим константы $c_{n}$. Для этого разложим функцию $\varphi(x)$ в ряд по собственным функциям $X_{n}(x)$:
+$$ \varphi(x) = \sum_{n=1}^{\infty} \varphi_{n} X_{n}(x) $$
+$$ \varphi_{n} = \dfrac{1}{||X_{n}||^{2}} \int\limits_0^l \varphi(\xi) X_{n}(\xi)d\xi $$
+
+и подставим это в начальное условие:
+$$ \nu_{1}(x, 0) = \sum_{n=1}^{\infty} c_{n}X_{n}(x) = \varphi(x) = \sum_{n=1}^{\infty}  \varphi_{n} X_{n}(x) \Rightarrow c_{n} = \varphi_{n} $$
+
+$$ \nu_{1}(x, t) = \sum_{n=1}^{\infty} \varphi_{n} \left( -\dfrac{\lambda}{\alpha_{n} \sin{\alpha_{n}x} + \cos{\alpha_{n}x}} \right) e^{-a^{2}\alpha_{n}^{2}t}  $$
+$$ \varphi_{n} = \dfrac{1}{||X_{n}||^{2}} \int\limits_0^l \varphi(\xi) X_{n}(\xi)d\xi$$
+\end{enumerate}
+
+Решим задачу $V$.
+Запишем задачу $V$ в виде:
+$$
+\begin{cases}
+\nu_{2t} = a^{2} \nu_{2xx} + f(x, t),\\
+\nu_{2t}(x, 0) = 0,\\
+\nu_{2x}(0, t) + \lambda \nu_{2}(0, t) = 0, \\
+\nu_{2}(l, t) = 0
+\end{cases}
+\eqno (VII)
+$$
+
+$$ f(x, t) = -\omega_{t} = -\dfrac{\mu T_{1}e^{-\mu t - \lambda l} (\lambda \alpha - 1)}{1 - \lambda l} $$
+
+Переобозначим $\nu$ как $\mu$. Решение будем искать в виде
+$$ \mu_{2}(x, t) = \sum_{n=1}^{\infty} \mu_{2n}(t) X_{n}(x) $$
+
+Разложим $f(x, t)$ в ряд по собственным функциям $X_{n}(x)$.
+$$ f(x, t) = \sum_{n=1}^{\infty} f_{n}(t)X_{n}(x)$$
+$$ f_{n}(t) = \dfrac{1}{||X_{n}||^{2}} \int\limits_0^l f(\xi, t)X_{n}(\xi)d\xi $$
+
+Подставим $\mu_{2}(x, t)$ и $f(x, t)$ в $(3)$ и учтём, что 
+$$X''_{n}(x) = (-\lambda \cos{\alpha_{n} x} - \alpha_{n} \sin{\alpha_{n} x})' = \lambda \alpha_{n} \sin{\alpha_{n} x} - \alpha_{n}^{2} \cos{\alpha_{n} x} = - \alpha_{n}^{2} X_{n}(x)$$
+
+Получим:
+
+$$ \sum_{n=1}^{\infty} \mu'_{2n}(t) X_{n}(x) = a^{2} \sum_{n=1}^{\infty} \mu_{2n}(t) X''_{n}(x) + \sum_{n=1}^{\infty} f_{n}(t)X_{n}(x) $$
+
+$$ \sum_{n=1}^{\infty} \{ \mu'_{2n}(t) + a^{2} \alpha_{n}^{2} \mu_{2n}(t) - f_{n}(t) \} X_{n}(x) = 0 \Leftrightarrow $$
+
+$$ \Leftrightarrow \mu'_{2n}(t) + a^{2} \alpha_{n}^{2} \mu_{2n}(t) - f_{n}(t) = 0$$
+
+Решением этого ОДУ является функция
+$$ \mu_{2n}(t) = \int\limits_0^t f_{n}(\tau) e^{-a^{2}\alpha_{n}^{2}(t - \tau)} d\tau $$
+
+Решением задачи $V$ является:
+$$ \mu_{2}(x, t) = \sum_{n=1}^{\infty} \int\limits_0^t f_{n}(\tau) e^{-a^{2}\alpha_{n}^{2}(t - \tau)}X_{n}(x) $$
+
+Решение задачи $II$:
+$$ v(x, t) = \omega(x, t) + \nu_{1}(x, t) + \nu_{2}(x, t) = $$
+$$ = T_{1}e^{-\mu t - \lambda l} \dfrac{(1 - \lambda x)}{1 - \lambda l} + \sum_{n=1}^{\infty} \varphi_{n} \left( -\dfrac{\lambda}{\alpha_{n}} \sin{\alpha_{n} x} + \cos{\alpha_{n} x} \right) e^{-a^{2}\alpha_{n}^{2}t} + \sum_{n=1}^{\infty} \int\limits_0^t f_{n}(\tau) e^{-a^{2}\alpha_{n}^{2}(t - \tau)} X_{n}(x)d\tau $$
+
+$$ \varphi_{n} = \dfrac{1}{||X_{n}||^{2}} \int\limits_0^l \varphi(\xi) X_{n}(\xi) d\xi$$
+
+$$ f_{n}(t) = \dfrac{1}{||X_{n}||^{2}} \int\limits_0^l f(\xi, t) X_{n}(\xi) d\xi $$
+
+$$ \varphi(x) = T_{0}e^{-\lambda x} - \omega(x, 0) = T_{0}e^{-\lambda x} - T_{1}e^{-\lambda l} \dfrac{(1 - \lambda x)}{1 - \lambda l}$$
+
+$$ f(x, t) = -\omega_{t} = \mu T_{1}e^{-\mu t - \lambda l} \dfrac{(1 - \lambda x)}{1 - \lambda l} $$
+
+\textbf{Ответ}:
+
+$$ v(x, t) = \omega(x, t) + \nu_{1}(x, t) + \nu_{2}(x, t) = $$
+$$ = T_{1}e^{-\mu t - \lambda l} \dfrac{(1 - \lambda x)}{1 - \lambda l} + \sum_{n=1}^{\infty} \varphi_{n} \left( -\dfrac{\lambda}{\alpha_{n}} \sin{\alpha_{n} x} + \cos{\alpha_{n} x} \right) e^{-a^{2}\alpha_{n}^{2}t} + \sum_{n=1}^{\infty} \int\limits_0^t f_{n}(\tau) e^{-a^{2}\alpha_{n}^{2}(t - \tau)} X_{n}(x)d\tau $$
+
+$$ \varphi_{n} = \dfrac{1}{||X_{n}||^{2}} \int\limits_0^l \varphi(\xi) X_{n}(\xi) d\xi$$
+
+$$ f_{n}(t) = \dfrac{1}{||X_{n}||^{2}} \int\limits_0^l f(\xi, t) X_{n}(\xi) d\xi $$
+
+$$ \varphi(x) = T_{0}e^{-\lambda x} - \omega(x, 0) = T_{0}e^{-\lambda x} - T_{1}e^{-\lambda l} \dfrac{(1 - \lambda x)}{1 - \lambda l}$$
+
+$$ f(x, t) = -\omega_{t} = \mu T_{1}e^{-\mu t - \lambda l} \dfrac{(1 - \lambda x)}{1 - \lambda l} $$
+
+Решение задачи $I$. Решением задачи $I$ является функция
+$$ u(x, t) = v(x, t) e^{\mu t + \lambda x}$$
+$$ \mu = -\dfrac{b^{2}}{4a^{2}}$$
+$$ \lambda = -\dfrac{b}{2a^{2}}$$
+$$ u(x, t) = v(x, t)e^{\mu t + \lambda x}$$
+
+\textbf{Проверка}:
+
+$$ V(x, 0) = T_{0}e^{-\lambda x} = T_{1}e^{-\lambda l} \dfrac{1 - \lambda x}{1 - \lambda l} + \sum_{n=1}^{\infty} \varphi_{n} X_{n}(x) +  \sum_{n=1}^{\infty} \int\limits_0^0 d\tau X_{n}(x) = $$
+$$ = T_{1}e^{-\lambda l} \dfrac{1 - \lambda x}{1 - \lambda l} + T_{0}e^{-\lambda x} - T_{1}e^{-\lambda l} \dfrac{1 - \lambda x}{1 - \lambda l} = T_{0}e^{-\lambda x}$$
+
+$$ V_{x}(0, t) + \lambda V(0, t) = \dfrac{-\lambda T_{1} e^{-\mu t - \lambda l}}{1 - \lambda l} + \sum_{n=1}^{\infty} \varphi_{n} X'(0) e^{-a^{2}\alpha_{n}^{2}t} + \sum_{n=1}^{\infty} \int\limits_0^t f_{n}(x) e^{-a^{2}\alpha_{n}^{2}(t - \tau)} d\tau X'_{n}(0) + $$
+$$ + \dfrac{\lambda T_{1} e^{-\mu t - \lambda l}}{1 - \lambda l} + \lambda \sum_{n=1}^{\infty} \varphi_{n} X'(0)e^{-a^{2}\alpha_{n}^{2}t} + \lambda \sum_{n=1}^{\infty} \int\limits_0^t f_{n}(\tau) e^{-a^{2}\alpha_{n}^{2}(t - \tau)} d\tau X(0) = 0 $$
+
+$$ X'(0) = (-\lambda \cos{\alpha_{n}x} - \alpha_{n}\sin{\alpha_{n}x})_{x = 0} = -\lambda$$
+
+$$ \Rightarrow v_{x}(0, t) + \lambda v(0, t) = 0$$
+
+$$ v(l, t) = T_{1}e^{-\mu t - \lambda l} = T_{1} e^{-\mu t - \lambda l} + \sum_{n=1}^{\infty} \varphi_{n} X_{n}(l)e^{-a^{2}\alpha_{n}^{2}t} + \sum_{n=1}^{\infty} \int\limits_0^t f_{n}(\tau) e^{-a^{2}\alpha_{n}^{2}(t - \tau)} X_{n}(l) $$
+
+Из задачи Штурма — Лиувилля следует, что $X_{n}(l) = 0$
+$$ \Rightarrow v(l, t) = T_{1} e^{-\mu t - \lambda l}$$
+
+
+\pagebreak

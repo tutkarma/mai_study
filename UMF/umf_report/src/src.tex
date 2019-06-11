@@ -1,0 +1,114 @@
+\section{Описание}
+Требуется написать реализацию алгоритма сортировки подсчётом. Турум-пум-пум...
+
+Как сказано в \cite{Kormen}: \enquote{основная идея сортировки подсчетом заключается в том, чтобы для каждого входного 
+элемента $x$ определить количество элементов, которые меньше $x$}.
+
+Или можно так:\\
+Основная идея сортировки подсчетом заключается в том, чтобы для каждого входного 
+элемента $x$ определить количество элементов, которые меньше $x$ \cite{Kormen}.
+
+\pagebreak
+
+\section{Исходный код}
+Здесь должно быть подробное описание программы и основные этапы написания кода.
+
+На каждой непустой строке входного файла располагается пара \enquote{ключ-значение}, поэтому создадим новую 
+структуру $KV$, в которой будем хранить ключ и значение. И так далее.
+
+\begin{lstlisting}[language=C]
+#include "stdio.h"
+#include "stdlib.h"
+
+struct KV{
+	int key;
+	char value;
+} KV;
+
+void sort(struct KV * B, struct KV * Res, int max, int size){
+	int C[max+1];
+	for(int i = 0; i <= max; i++)
+		C[i] = 0;
+	for(int i = 0; i < size; i++){
+		int idx = B[i].key;
+		C[idx]++;
+	}
+	for(int i = 1; i <= max; i++)
+		C[i] = C[i] + C[i-1];
+
+	for(int i = size-1; i >= 0; i--){
+		int idx = B[i].key;
+		int pos = C[idx];
+		Res[pos-1] = B[i];
+		C[idx]--;
+	}
+}
+
+int main()
+{
+	int key;
+	char value;
+	struct KV * A = NULL;
+	int size = 0;
+	int max = 0;
+
+	while (scanf("%d\t%c",&key, &value) != EOF)
+	{
+		size++;
+		A = (struct KV *)realloc(A, size*sizeof(struct KV));
+		A[size-1].key = key;
+		A[size-1].value = value;
+		if(key > max)
+			max = key;
+	}
+	
+	struct KV Res[size];
+	sort(A, Res, max, size);
+	for(int i = 0; i < size; i++)
+		printf("%d\t%c\n", Res[i].key, Res[i].value);
+	    
+    free(A);
+
+}
+	
+\end{lstlisting}
+
+В случае, если код не помещается на одну-две страницы $A4$, тогда следует сделать табличку следующего вида:
+\begin{longtable}{|p{7.5cm}|p{7.5cm}|}
+\hline
+\rowcolor{lightgray}
+\multicolumn{2}{|c|} {main.c}\\
+\hline
+void sort(struct KV \& B, struct KV \& Res, int max, int size)&Функция сортировки подсчётом\\
+\hline
+\rowcolor{lightgray}
+\multicolumn{2}{|c|} {file1.c}\\
+\hline
+void function\_name()&Функция, \enquote{которая почти всегда работает, но неясно, что она делает}.\\
+\hline
+\end{longtable}
+В этом случае структуры или классы должны быть полностью приведены в листинге (без реализации методов).
+\begin{lstlisting}[language=C]
+struct KV{
+	int key;
+	char value;
+} KV;
+\end{lstlisting}
+\pagebreak
+
+\section{Консоль}
+\begin{alltt}
+a.kukhticev$ gcc -pedantic -Wall -std=c99 -Werror -Wno-sign-compare -lm da10.c -o da10 --some_long_argument=true
+a.kukhticev$ cat test1 
+87	a
+13	b
+89	c
+13	d
+a.kukhticev$ ./da10 < test1 
+13	b
+13	d
+87	a
+89	c
+\end{alltt}
+\pagebreak
+
