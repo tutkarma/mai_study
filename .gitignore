@@ -1,4 +1,5 @@
 *.asc
 *.fas
 img/
+images/
 __pycache__/
