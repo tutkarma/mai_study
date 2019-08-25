@@ -2,6 +2,13 @@
 
 http://bit.ly/faq8k806 -- все собранные материалы
 
+Я продолбала пароль от гугол диска, зато наши коллеги сделали свои подборочки:
+
+[Материалы за 2-4 курс](https://drive.google.com/drive/folders/1ce3Zp3_0Rz6i9gCnOapfzFf9MskNv3k_). Спасибо [Андрею Голубеву](https://vk.com/anhromoff).
+
+[ФАН](https://drive.google.com/drive/folders/12ZhQheVG7M6zQklADIxqLETzgXtwd5oT). Спасибо [Анастасии Берендаковой](https://vk.com/i_am_ss).
+
+
 ### 1 курс ###
 
 [1curse](1curse) -- тут только 2 семестр.
