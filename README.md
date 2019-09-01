@@ -8,6 +8,7 @@ http://bit.ly/faq8k806 -- все собранные материалы
 
 [ФАН](https://drive.google.com/drive/folders/12ZhQheVG7M6zQklADIxqLETzgXtwd5oT). Спасибо [Анастасии Берендаковой](https://vk.com/i_am_ss).
 
+[ТВиМС и ТСП](https://drive.google.com/drive/folders/1MywlOWjFaKRl0UwxR0sZDPsFj_fswTgZ). Спасибо [Анастасии Берендаковой](https://vk.com/i_am_ss).
 
 ### 1 курс ###
 
