@@ -2,18 +2,20 @@ import json
 
 import numpy as np
 from werkzeug.exceptions import BadRequest
-from flask import Blueprint, request, Response
+from flask import Blueprint, request, Response, jsonify
+from flask_cors import CORS
 
 from solver.labs.lab5 import ParabolicSolver
 
 
 labs = Blueprint('labs', __name__)
+CORS(labs)
 
 
-@labs.route('/<int(min=5, max=8):lab_id>', methods=['GET'])
+@labs.route('/<int(min=5, max=8):lab_id>', methods=['POST'])
 def get_solution(lab_id):
-    # data = request.get_json(force=True)
-    data = []
+    data = request.get_json(force=True)
+
     # error = validate_task(data)
     # if error is not None:
     #     raise BadRequest(error)
@@ -27,14 +29,16 @@ def get_solution(lab_id):
     elif lab_id ==8:
         resp = solve_lab8(data)
 
+
     return Response(
-        resp,
+        json.dumps(resp),
         status=200
     )
 
 
 def solve_lab5(data):
-    equation_type = 'implicit'
+    equation_type = data['equation_type']
+    N, K, T = int(data['N']), int(data['K']), int(data['T'])
     params = {
         'a': 1,
         'b': 0,
@@ -50,15 +54,16 @@ def solve_lab5(data):
         'phil': lambda t: -np.exp(-0.5 * t),
         'solution': lambda x, t: np.exp(-0.5 * t) * np.sin(x),
         'bound_type': 'a1p2',
-        'K': 100,
-        'N': 10,
-        'T': 5
     }
 
+
     p1d7 = ParabolicSolver(params, equation_type)
-    res = p1d7.solve(10, 100, 5)
-    print(res)
-    return res
+    resp = {
+        'numerical': p1d7.solve(N, K, T).tolist(),
+        'analytic': p1d7.solve_analytic(N, K, T).tolist()
+    }
+
+    return resp
 
 
 def solve_lab6(data):

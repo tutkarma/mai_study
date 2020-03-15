@@ -35,7 +35,7 @@ class ParabolicSolver:
         self.sigma = self.tau / (self.h ** 2)
         return self.solve_func(N, K, T)
 
-    def solve_analytical(self, N, K, T):
+    def solve_analytic(self, N, K, T):
         self.h = self.data.l / N;
         self.tau = T / K;
         self.sigma = self.tau / (self.h ** 2)
@@ -98,7 +98,7 @@ class ParabolicSolver:
     def _explicit_solve(self, N, K, T):
         u = np.zeros((K, N))
         for i in range(1, N - 1):
-            u[0][j] = self.data.psi(i * self.h)
+            u[0][i] = self.data.psi(i * self.h)
         u[0][-1] = 0
 
         for k in range(1, K):
