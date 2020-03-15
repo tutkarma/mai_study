@@ -1,0 +1,60 @@
+<mat-card class="lab">
+  <mat-card-title>Лабораторная 5</mat-card-title>
+  <mat-card-content>
+    <mat-card>
+      <mat-card-title>Задание</mat-card-title>
+      <mat-card-content>
+        <div mathjax>
+          \( \dfrac {{ '{ \\partial u}' }} {{ '{ \\partial t}' }} =
+          \dfrac {{ '{ \\partial^2 u}' }} {{ '{ \\partial x^2}' }} + 0.5 exp(-0.5t) cos x, \)
+        </div>
+
+        <div mathjax>
+          \( u_x(0,t) = exp(-0.5t), \)
+        </div>
+
+        <div mathjax>
+          \( u_x( \pi,t) = -exp(-0.5t), \)
+        </div>
+
+        <div mathjax>
+          \( u(x,0) = sin x, \)
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title> Решение </mat-card-title>
+      <mat-card-content>
+        <label> N
+          <input #n type="number" min="0" value="30" required>
+        </label>
+        <label> K
+          <input #k type="number" min="0" value="100" required>
+        </label>
+        <label> T
+          <input #t type="number" min="0" value="1" required>
+        </label>
+        <mat-form-field>
+            <mat-label>Метод</mat-label>
+                <mat-select [(value)]="method">
+                <mat-option value="implicit">Implicit</mat-option>
+                <mat-option value="explicit">Explicit</mat-option>
+                <mat-option value="crank_nicholson">Crank Nicholson</mat-option>
+                </mat-select>
+        </mat-form-field>
+        <button (click)="solve(n.value, k.value, t.value)"> Решить </button>
+
+<!--         <div id="sigma">
+          <div mathjax>
+            \( \sigma = \)
+          </div>
+          <p style="padding-left: 5px">{{sigma}}</p>
+        </div> -->
+
+        <div id="plotNumerical"> </div>
+        <div id="plotAnalytic"> </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+</mat-card>
