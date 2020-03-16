@@ -4,11 +4,11 @@ import { ApiClientService } from '../api-client.service';
 declare var Plotly: any;
 
 @Component({
-  selector: 'app-lab5',
-  templateUrl: './lab5.component.html',
-  styleUrls: ['./lab5.component.css']
+  selector: 'app-lab6',
+  templateUrl: './lab6.component.html',
+  styleUrls: ['./lab6.component.css']
 })
-export class Lab5Component implements OnInit {
+export class Lab6Component implements OnInit {
 
   method = 'implicit';
   dataNumerical: any
@@ -24,7 +24,7 @@ export class Lab5Component implements OnInit {
           T: T,
           equation_type: this.method
       };
-      this.apiClient.executeSolver(5, data)
+      this.apiClient.executeSolver(6, data)
                     .subscribe(data => {
                       console.log(data);
                       this.dataNumerical = data['numerical'];
@@ -68,7 +68,7 @@ export class Lab5Component implements OnInit {
       Plotly.newPlot('plotAnalytic', dataPlotAnalytic, layoutAnalytic);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }

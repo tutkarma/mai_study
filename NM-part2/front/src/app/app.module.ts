@@ -14,11 +14,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Lab5Component } from './lab5/lab5.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Lab6Component } from './lab6/lab6.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    Lab5Component
+    Lab5Component,
+    Lab6Component
   ],
   imports: [
     BrowserModule,
