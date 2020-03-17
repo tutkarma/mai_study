@@ -7,6 +7,7 @@ from flask_cors import CORS
 
 from solver.labs.lab5 import ParabolicSolver
 from solver.labs.lab6 import HyperbolicSolver
+from solver.labs.lab7 import EllipticSolver
 
 
 labs = Blueprint('labs', __name__)
@@ -16,10 +17,6 @@ CORS(labs)
 @labs.route('/<int(min=5, max=8):lab_id>', methods=['POST'])
 def get_solution(lab_id):
     data = request.get_json(force=True)
-
-    # error = validate_task(data)
-    # if error is not None:
-    #     raise BadRequest(error)
 
     if lab_id == 5:
         resp = solve_lab5(data)
@@ -100,8 +97,32 @@ def solve_lab6(data):
 
     return resp
 
+
 def solve_lab7(data):
-    pass
+    equation_type = data['equation_type']
+    N, l, eps = int(data['N']), int(data['l']), float(data['eps'])
+
+    params = {
+        'x': (0, np.pi / 2),
+        'y': (0, np.pi / 2),
+        'a': 1,
+        'b': 0,
+        'c': 0,
+        'd': -2,
+        'phi0': lambda y: np.cos(y),
+        'phi1': lambda y: 0,
+        'phi2': lambda x: np.cos(x),
+        'phi3': lambda x: 0,
+        'solution': lambda x, y: np.cos(x) * np.cos(y),
+    }
+
+    e2d7 = EllipticSolver(params, equation_type)
+    resp = {
+        'numerical': e2d7.solve(N, l, eps).tolist(),
+        'analytic': e2d7.solve_analytic(N, l, eps).tolist()
+    }
+
+    return resp
 
 
 def solve_lab8(data):
