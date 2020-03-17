@@ -1,0 +1,15 @@
+mat-card {
+  margin: 20px;
+}
+
+#plotNumerical {
+  display: flex;
+}
+
+#plotAnalytic {
+  display: flex;
+}
+
+#sigma {
+  display: flex;
+}
