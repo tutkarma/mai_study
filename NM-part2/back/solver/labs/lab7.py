@@ -1,5 +1,7 @@
 import numpy as np
 
+from solver.labs.utils import norm_inf
+
 
 class EquationData:
     def __init__(self, params):
@@ -26,8 +28,8 @@ class EllipticSolver:
 
     def solve(self, N, l, eps):
         self.h = l / N;
-        u1 = np.zeros((N, N), dtype=np.float64)
-        u2 = np.zeros((N, N), dtype=np.float64)
+        u1 = np.zeros((N, N))
+        u2 = np.zeros((N, N))
 
         for j in range(0, N):
             y = j * self.h
@@ -57,7 +59,7 @@ class EllipticSolver:
 
 
     def _simple_solve(self, N, l, eps, u1, u2):
-        while self.norm_inf(np.abs(u2 - u1)) >= eps:
+        while norm_inf(np.abs(u2 - u1)) >= eps:
             for i in range(1, N - 1):
                 for j in range(1, N - 1):
                     u2[i][j] = 1 / 4 * (u1[i + 1][j] + u1[i - 1][j] +
@@ -68,7 +70,7 @@ class EllipticSolver:
 
 
     def _leibmann_solve(self, N, l, eps, u1, u2):
-        while self.norm_inf(np.abs(u2 - u1)) >= eps:
+        while norm_inf(np.abs(u2 - u1)) >= eps:
             for i in range(1, N - 1):
                 for j in range(1, N - 1):
                     u2[i][j] = self.b * u1[i + 1][j] + self.c * u1[i - 1][j] + \
@@ -79,7 +81,7 @@ class EllipticSolver:
         return u1
 
     def _seidel_solve(self, N, l, eps, u1, u2):
-        while self.norm_inf(np.abs(u2 - u1)) >= eps:
+        while norm_inf(np.abs(u2 - u1)) >= eps:
             for i in range(1, N - 1):
                 for j in range(1, N - 1):
                     u2[i][j] = self.b * u1[i + 1][j] + self.c * u2[i - 1][j] + \
@@ -90,7 +92,7 @@ class EllipticSolver:
 
     def _sor_solve(self, N, l, eps, u1, u2):
         omega = 1.5
-        while self.norm_inf(np.abs(u2 - u1)) >= eps:
+        while norm_inf(np.abs(u2 - u1)) >= eps:
             for i in range(1, N - 1):
                 for j in range(1, N - 1):
                     u2[i][j] = self.b * u1[i + 1][j] + self.c * u2[i - 1][j] + \
@@ -99,15 +101,3 @@ class EllipticSolver:
                     u2[i][j] = omega * u2[i][j] + (1 - omega) * u1[i][j]
             u1, u2 = u2, u1
         return u1
-
-    @staticmethod
-    def norm_inf(A):
-        n = len(A)
-        norm = -1
-        for j in range(n):
-            sum_ = 0
-            for i in range(n):
-                sum_ += A[i][j]
-            norm = sum_ if norm < sum_ else norm
-        return norm
-

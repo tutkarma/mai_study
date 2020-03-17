@@ -20,3 +20,14 @@ def tma(a, b, c, d):
         x[i] = p[i] * x[i + 1] + q[i]
 
     return x
+
+
+def norm_inf(A):
+        n = len(A)
+        norm = -1
+        for j in range(n):
+            sum_ = 0
+            for i in range(n):
+                sum_ += A[i][j]
+            norm = sum_ if norm < sum_ else norm
+        return norm
