@@ -39,17 +39,10 @@ def solve_lab5(data):
     N, K, T = int(data['N']), int(data['K']), int(data['T'])
 
     params = {
-        'a': 1,
-        'b': 0,
-        'c': 0,
         'l': np.pi,
-        'alpha': 1,
-        'beta': 0,
-        'gamma': 1,
-        'delta': 0,
-        'psi': np.sin,
+        'psi': lambda x: np.sin(x),
         'f': lambda x, t: 0.5 * np.exp(-0.5 * t) * np.cos(x),
-        'phi0': lambda t: np.exp(-0.5 * t),
+        'phi0': lambda t: -np.exp(-0.5 * t), # если брать значение из методички, то график строится неправильно
         'phil': lambda t: -np.exp(-0.5 * t),
         'solution': lambda x, t: np.exp(-0.5 * t) * np.sin(x),
         'bound_type': 'a1p2',

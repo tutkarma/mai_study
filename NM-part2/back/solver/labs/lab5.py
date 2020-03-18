@@ -5,15 +5,8 @@ from solver.labs.utils import tma
 
 class EquationData:
     def __init__(self, params):
-        self.a = params['a']
-        self.b = params['b']
-        self.c = params['c']
         self.l = params['l']
         self.f = params['f']
-        self.alpha = params['alpha']
-        self.beta = params['beta']
-        self.gamma = params['gamma']
-        self.delta = params['delta']
         self.psi = params['psi']
         self.phi0 = params['phi0']
         self.phil = params['phil']
@@ -38,7 +31,6 @@ class ParabolicSolver:
     def solve_analytic(self, N, K, T):
         self.h = self.data.l / N;
         self.tau = T / K;
-        self.sigma = self.tau / (self.h ** 2)
         u = np.zeros((K, N))
         for k in range(K):
             for j in range(N):
@@ -97,22 +89,21 @@ class ParabolicSolver:
 
     def _explicit_solve(self, N, K, T):
         u = np.zeros((K, N))
-        for i in range(1, N - 1):
-            u[0][i] = self.data.psi(i * self.h)
-        u[0][-1] = 0
+        for j in range(1, N - 1):
+            u[0][j] = self.data.psi(j * self.h)
 
         for k in range(1, K):
-            u[k][0] = self.phi0(k * self.tau)
+            u[k][0] = self.data.phi0(k * self.tau)
             for j in range(1, N - 1):
                 u[k][j] = self.sigma * u[k - 1][j + 1] + \
                     (1 - 2 * self.sigma) * u[k - 1][j] + \
                     self.sigma * u[k - 1][j - 1] + \
-                    self.tau * self.data.f(j * self.h)
+                    self.tau * self.data.f(j * self.h, k * self.tau)
 
             if self.data.bound_type == 'a1p1':
                 u[k][-1] = u[k][-2] + self.data.phil(k * self.tau) * self.h
             elif self.data.bound_type == 'a1p2':
-                u[k][-1] = (self.data.phil(k * self.tau) * 2 * self.h - u[k][-3] + 4 * u[k][-2]) / 3
+                u[k][-1] = self.data.phil(k * self.tau) #(self.data.phil(k * self.tau) * 2 * self.h - u[k][-3] + 4 * u[k][-2]) / 3
             elif self.data.bound_type == 'a1p3':
                 u[k][-1] = (self.data.phil(k * self.tau) + u[k][-2] / self.h + 2 * self.tau * u[k - 1][-1] / self.h) / (1 / self.h + 2 * self.tau / self.h)
 
@@ -126,9 +117,8 @@ class ParabolicSolver:
         d = np.zeros(N)
         tmp_imp = np.zeros(N)
         u = np.zeros((K, N))
-        for i in range(1, N - 1):
-            u[0][j] = self.data.psi(i * self.h)
-        u[0][-1] = 0
+        for j in range(1, N - 1):
+            u[0][j] = self.data.psi(j * self.h)
 
         for k in range(1, K):
             for j in range(1, N - 1):
@@ -167,15 +157,15 @@ class ParabolicSolver:
 
             tmp_imp = tma(a, b, c, d)
 
-        tmp_exp = np.zeros(N)
-        tmp_exp[0] = self.data.phi0(0)
-        for j in range(1, N - 1):
-            tmp_exp[j] = self.sigma * u[k - 1][j + 1] + \
-                        (1 - 2 * self.sigma) * u [k - 1][j] + \
-                        self.sigma * u[k - 1][j - 1] + self.tau * self.data.f(j * self.h, k * self.tau)
-        tmp_exp[-1] = 0
+            tmp_exp = np.zeros(N)
+            tmp_exp[0] = self.data.phi0(self.tau)
+            for j in range(1, N - 1):
+                tmp_exp[j] = self.sigma * u[k - 1][j + 1] + \
+                            (1 - 2 * self.sigma) * u[k - 1][j] + \
+                            self.sigma * u[k - 1][j - 1] + self.tau * self.data.f(j * self.h, k * self.tau)
+            tmp_exp[-1] = self.data.phil(self.tau)
 
-        for j in range(N):
-            u[k][j] = theta * tmp_imp[j] + (1 - theta) * tmp_exp[j]
+            for j in range(N):
+                u[k][j] = theta * tmp_imp[j] + (1 - theta) * tmp_exp[j]
 
         return u
