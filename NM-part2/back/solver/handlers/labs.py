@@ -8,6 +8,7 @@ from flask_cors import CORS
 from solver.labs.lab5 import ParabolicSolver
 from solver.labs.lab6 import HyperbolicSolver
 from solver.labs.lab7 import EllipticSolver
+from solver.labs.lab8 import Parabolic2DSolver
 
 
 labs = Blueprint('labs', __name__)
@@ -24,7 +25,7 @@ def get_solution(lab_id):
         resp = solve_lab6(data)
     elif lab_id == 7:
         resp = solve_lab7(data)
-    elif lab_id ==8:
+    elif lab_id == 8:
         resp = solve_lab8(data)
 
     return Response(
@@ -89,10 +90,10 @@ def solve_lab6(data):
         'solution': lambda x, t: np.exp(-t - x) * np.sin(x) * np.sin(2 * t),
     }
 
-    p2d7 = HyperbolicSolver(params, equation_type)
+    h2d7 = HyperbolicSolver(params, equation_type)
     resp = {
-        'numerical': p2d7.solve(N, K, T).tolist(),
-        'analytic': p2d7.solve_analytic(N, K, T).tolist()
+        'numerical': h2d7.solve(N, K, T).tolist(),
+        'analytic': h2d7.solve_analytic(N, K, T).tolist()
     }
 
     return resp
@@ -126,4 +127,25 @@ def solve_lab7(data):
 
 
 def solve_lab8(data):
-    pass
+    equation_type = data['equation_type']
+    N1, N2, K, T = int(data['N1']), int(data['N2']), int(data['K']), int(data['T'])
+
+    params = {
+        'f': lambda x, y, t: -x * y * np.sin(t),
+        'l1': 1,
+        'l2': 1,
+        'psi': lambda x, y: x * y,
+        'phi0': lambda x, t: 0,
+        'phi1': lambda y, t: y * np.cos(t),
+        'phi2': lambda x, t: 0,
+        'phi3': lambda x, t: x * np.cos(t),
+        'solution': lambda x, y, t: x * y * np.cos(t)
+    }
+
+    p2d7 = Parabolic2DSolver(params, equation_type)
+    resp = {
+        'numerical': p2d7.solve(N1, N2, K, T).tolist(),
+        'analytic': p2d7.solve_analytic(N1, N2, K, T)
+    }
+
+    return resp
