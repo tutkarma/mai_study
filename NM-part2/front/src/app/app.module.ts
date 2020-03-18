@@ -16,13 +16,15 @@ import { Lab5Component } from './lab5/lab5.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Lab6Component } from './lab6/lab6.component';
 import { Lab7Component } from './lab7/lab7.component';
+import { Lab8Component } from './lab8/lab8.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     Lab5Component,
     Lab6Component,
-    Lab7Component
+    Lab7Component,
+    Lab8Component
   ],
   imports: [
     BrowserModule,
