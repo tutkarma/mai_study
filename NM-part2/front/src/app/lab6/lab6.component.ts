@@ -66,7 +66,23 @@ export class Lab6Component implements OnInit {
           type: 'surface'
       }];
       Plotly.newPlot('plotAnalytic', dataPlotAnalytic, layoutAnalytic);
+
+      const traceNumerical = {
+        y: this.dataNumerical.map(s => this.sum(s) / s.length),
+        type: 'scatter',
+        name: this.method
+      };
+
+      const traceAnalytic = {
+        y: this.dataAnalytic.map(s => this.sum(s) / s.length),
+        type: 'scatter',
+        name: 'analytic'
+      };
+
+      Plotly.newPlot('solution-comparison', [traceNumerical, traceAnalytic]);
   }
+
+  sum = arr => arr.reduce((a, b) => a + b, 0);
 
   ngOnInit(): void {
   }
