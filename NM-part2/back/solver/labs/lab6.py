@@ -37,13 +37,13 @@ class HyperbolicSolver:
     def solve(self, N, K, T):
         self.h = self.data.l / N;
         self.tau = T / K;
-        self.sigma = self.tau ** 2 / (self.h ** 2)
+        self.sigma = (self.tau ** 2) / (self.h ** 2)
         return self.solve_func(N, K, T)
 
     def solve_analytic(self, N, K, T):
         self.h = self.data.l / N;
         self.tau = T / K;
-        self.sigma = self.tau ** 2 / (self.h ** 2)
+        self.sigma = (self.tau ** 2) / (self.h ** 2)
         u = np.zeros((K, N))
         for k in range(K):
             for j in range(N):
@@ -53,20 +53,19 @@ class HyperbolicSolver:
     def _implicit_solve(self, N, K, T):
         u = np.zeros((K, N))
 
-        for i in range(0, N):
-            u[0][i] = self.data.psi1(i * self.h)
+        for j in range(N):
+            x = j * self.h
+            u[0][j] = self.data.psi1(x)
 
-        for i in range(0, N):
-            x = i + self.h
             if self.data.approximation == 'p1':
-                u[1][i] = self.data.psi1(x) + self.data.psi2(x) * self.tau + self.data.psi1_dir2(x) * self.tau ** 2 / 2
+                u[1][j] = self.data.psi1(x) + self.data.psi2(x) * self.tau + self.data.psi1_dir2(x) * self.tau ** 2 / 2
             elif self.data.approximation == 'p2':
                 k = self.tau ** 2 / 2
-                u[1][i] = (1 + self.data.c * k) * self.data.psi2(x) + \
-                self.data.a * k * self.data.psi1_dir2(x) + \
-                self.data.b * k * self.data.psi1_dir1(x) + \
-                (self.tau - self.data.d * k) * self.data.psi1(x) + \
-                k * self.data.f()
+                u[1][j] = (1 + self.data.c * k) * self.data.psi2(x) + \
+                    self.data.a * k * self.data.psi1_dir2(x) + \
+                    self.data.b * k * self.data.psi1_dir1(x) + \
+                    (self.tau - self.data.d * k) * self.data.psi1(x) + \
+                    k * self.data.f()
 
         a = np.zeros(N)
         b = np.zeros(N)
@@ -105,11 +104,9 @@ class HyperbolicSolver:
                 d[0] = self.h / self.tau ** 2 * (u[k - 2][0] - 2 * u[k - 1][0]) - self.h * self.data.f() + \
                     -self.data.d * self.h / (2 * self.tau) * u[k - 2][0] + \
                     (2 * self.data.a - self.data.b * self.h) / self.data.alpha * self.data.phi0(k * self.tau)
-
                 a[-1] =-b[0]
-
                 d[-1] = self.h / self.tau ** 2 * (-u[k - 2][0] + 2 * u[k - 1][0]) + self.h * self.data.f() + \
-                    seld.data.d * self.h / (2 * self.tau) * u[k - 2][0] + \
+                    self.data.d * self.h / (2 * self.tau) * u[k - 2][0] + \
                     (2 * self.data.a + self.data.b * self.h) / self.data.alpha * self.data.phil(k * self.tau)
 
             u[k] = tma(a, b, c, d)
@@ -155,20 +152,20 @@ class HyperbolicSolver:
     def _explicit_solve(self, N, K, T):
         u = np.zeros((K, N))
 
-        for i in range(0, N):
-            u[0][i] = self.data.psi1(i * self.h)
+        for j in range(N):
+            x = j * self.h
+            u[0][j] = self.data.psi1(x)
 
-        for i in range(0, N):
-            x = i + self.h
             if self.data.approximation == 'p1':
-                u[1][i] = self.data.psi1(x) + self.data.psi2(x) * self.tau + self.data.psi1_dir2(x) * self.tau ** 2 / 2
+                u[1][j] = self.data.psi1(x) + self.data.psi2(x) * self.tau + \
+                    self.data.psi1_dir2(x) * self.tau ** 2 / 2
             elif self.data.approximation == 'p2':
                 k = self.tau ** 2 / 2
-                u[1][i] = (1 + self.data.c * k) * self.data.psi2(x) + \
-                self.data.a * k * self.data.psi1_dir2(x) + \
-                self.data.b * k * self.data.psi1_dir1(x) + \
-                (self.tau - self.data.d * k) * self.data.psi1(x) + \
-                k * self.data.f()
+                u[1][j] = (1 + self.data.c * k) * self.data.psi2(x) + \
+                    self.data.a * k * self.data.psi1_dir2(x) + \
+                    self.data.b * k * self.data.psi1_dir1(x) + \
+                    (self.tau - self.data.d * k) * self.data.psi1(x) + \
+                    k * self.data.f()
 
         if self.data.bound_type == 'a1p2':
             left_bound = self._left_bound_a1p2
@@ -180,17 +177,15 @@ class HyperbolicSolver:
             left_bound = self._left_bound_a2p2
             right_bound = self._right_bound_a2p2
 
-        omega = self.tau ** 2 * self.data.b / (2 * self.h)
-        xi = self.data.d * self.tau / 2
-        c = 1 / (1 + xi)
         for k in range(2, K):
             t = k * self.tau
             for j in range(1, N - 1):
-                u[k][j] = c * ((xi - 1) * u[k - 2][j] +
-                         (self.sigma - omega) * u[k - 1][j - 1] +
-                         (self.data.c * self.tau ** 2 - 2 * self.sigma + 2) * u[k - 1][j] +
-                         (self.sigma + omega) * u[k - 1][j + 1] +
-                         self.tau ** 2 * self.data.f())
-                u[k][0] = left_bound(u, k, t)
-                u[k][-1] = right_bound(u, k, t)
+                u[k][j] = self.sigma * u[k - 1][j + 1] + \
+                    (2 - 2 * self.sigma) * u[k - 1][j] + \
+                    self.sigma * u[k - 1][j - 1] - \
+                    u[k - 2][j]
+
+            u[k][0] = left_bound(u, k, t)
+            u[k][-1] = right_bound(u, k, t)
+
         return u

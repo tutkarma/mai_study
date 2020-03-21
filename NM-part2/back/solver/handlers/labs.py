@@ -77,10 +77,10 @@ def solve_lab6(data):
         'psi1_dir1': lambda x: -np.exp(-x) * np.sin(x) - np.exp(-x) * np.cos(x),
         'psi1_dir2': lambda x:  2 * np.exp(-x) * np.sin(x),
         'phi0': lambda t: np.exp(-t) * np.cos(2 * t),
-        'phil': lambda x: 0,
+        'phil': lambda t: 0,
         'bound_type': 'a1p2',
         'approximation': 'p1',
-        'solution': lambda x, t: np.exp(-t - x) * np.sin(x) * np.sin(2 * t),
+        'solution': lambda x, t: np.exp(-t - x) * np.cos(x) * np.cos(2 * t),
     }
 
     h2d7 = HyperbolicSolver(params, equation_type)
