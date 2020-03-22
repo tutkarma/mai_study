@@ -1,16 +1,10 @@
 import numpy as np
 
-from solver.labs.utils import norm_inf
+from solver.labs.utils import norm_inf, norm_inf_vec
 
 
 class EquationData:
     def __init__(self, params):
-        self.x = params['x']
-        self.y = params['y']
-        self.a = params['a']
-        self.b = params['b']
-        self.c = params['c']
-        self.d = params['d']
         self.phi0 = params['phi0']
         self.phi1 = params['phi1']
         self.phi2 = params['phi2']
@@ -26,29 +20,6 @@ class EllipticSolver:
         except:
             raise Exception("This type does not exist")
 
-    def solve(self, N, l, eps):
-        self.h = l / N;
-        u1 = np.zeros((N, N))
-        u2 = np.zeros((N, N))
-
-        for j in range(0, N):
-            y = j * self.h
-            u1[0][j] = u2[0][j] = self.data.phi0(y)
-            u1[-1][j] = u2[-1][j] = self.data.phi1(y)
-
-        for i in range(0, N):
-            x = i * self.h
-            u1[i][0] = u2[i][0] = self.data.phi2(x)
-            u1[i][-1] = u2[i][-1] = self.data.phi3(x)
-
-        self.a = -(2 / self.h ** 2 + 2 * self.data.a / self.h ** 2 + self.data.d)
-        self.b = self.data.b / (2 * self.h) - 1 / self.h ** 2
-        self.c = -(self.data.b / (2 * self.h) + 1 / self.h ** 2)
-        self.d = self.data.c / (2 * self.h) - self.data.a / self.h ** 2
-        self.e = -(self.data.a / self.h ** 2 + self.data.c / (2 * self.h))
-
-        return self.solve_func(N, l, eps, u1, u2)
-
     def solve_analytic(self, N, l, eps):
         self.h = l / N;
         u = np.zeros((N, N))
@@ -57,47 +28,144 @@ class EllipticSolver:
                 u[x][y] = self.data.solution(x * self.h, y * self.h)
         return u
 
+    def solve(self, N, l, eps):
+        self.h = l / N
+        A, b = self._get_equation_system(N, l)
+        return self.solve_func(N, A, b, eps)
 
-    def _simple_solve(self, N, l, eps, u1, u2):
-        while norm_inf(np.abs(u2 - u1)) >= eps:
-            for i in range(1, N - 1):
-                for j in range(1, N - 1):
-                    u2[i][j] = 1 / 4 * (u1[i + 1][j] + u1[i - 1][j] +
-                                    u1[i][j + 1] + u1[i][j - 1])
+    def _leibmann_solve(self, N, A, b, eps):
+        n = len(A)
+        alpha, beta = self._find_equivalent_system(A, b)
+        alpha_norm = norm_inf(alpha)
+        x = np.zeros(n)
+        x[:] = beta
 
-            u1, u2 = u2, u1
-        return u1
+        while True:
+            next_x = np.zeros(n)
+            for i in range(n):
+                sum_ = 0
+                for j in range(n):
+                    sum_ += alpha[i][j] * x[j]
+                next_x[i] = beta[i] + sum_
+            diff_x = next_x - x
+            if alpha_norm < 1:
+                end_cond = alpha_norm / (1 - alpha_norm) * norm_inf_vec(diff_x)
+            elif alpha_norm == 1:
+                end_cond = norm_inf_vec(diff_x)
+            else:
+                break
+            x = next_x
+            if end_cond < eps:
+                break
+        u = self._vector_to_matrix(x, N - 1)
 
+        return u
 
-    def _leibmann_solve(self, N, l, eps, u1, u2):
-        while norm_inf(np.abs(u2 - u1)) >= eps:
-            for i in range(1, N - 1):
-                for j in range(1, N - 1):
-                    u2[i][j] = self.b * u1[i + 1][j] + self.c * u1[i - 1][j] + \
-                           self.d * u1[i][j + 1] + self.e * u1[i][j - 1]
-                    u2[i][j] /= self.a
+    def _seidel_solve(self, N, A, b, eps):
+        n = len(A)
+        alpha, beta = self._find_equivalent_system(A, b)
+        x = np.zeros(n)
+        x[:] = beta
 
-            u1, u2 = u2, u1
-        return u1
+        E = np.zeros((n, n))
+        B = np.zeros((n, n))
+        C = np.zeros((n, n))
 
-    def _seidel_solve(self, N, l, eps, u1, u2):
-        while norm_inf(np.abs(u2 - u1)) >= eps:
-            for i in range(1, N - 1):
-                for j in range(1, N - 1):
-                    u2[i][j] = self.b * u1[i + 1][j] + self.c * u2[i - 1][j] + \
-                           self.d * u1[i][j + 1] + self.e * u2[i][j - 1]
-                    u2[i][j] /= self.a
-            u1, u2 = u2, u1
-        return u1
+        for i in range(n):
+            for j in range(n):
+                if i == j:
+                    E[i][j] = 1
+                    C[i][j] = alpha[i][j]
+                elif i < j:
+                    C[i][j] = alpha[i][j]
+                else:
+                    B[i][j] = alpha[i][j]
 
-    def _sor_solve(self, N, l, eps, u1, u2):
-        omega = 1.5
-        while norm_inf(np.abs(u2 - u1)) >= eps:
-            for i in range(1, N - 1):
-                for j in range(1, N - 1):
-                    u2[i][j] = self.b * u1[i + 1][j] + self.c * u2[i - 1][j] + \
-                           self.d * u1[i][j + 1] + self.e * u2[i][j - 1]
-                    u2[i][j] /= self.a
-                    u2[i][j] = omega * u2[i][j] + (1 - omega) * u1[i][j]
-            u1, u2 = u2, u1
-        return u1
+        alpha_norm = norm_inf(alpha)
+
+        while True:
+            next_x = np.zeros(n)
+
+            for i in range(n):
+                sum_ = 0
+                for j in range(i):
+                    sum_ += alpha[i][j] * next_x[j]
+                for j in range(i, n):
+                    sum_ += alpha[i][j] * x[j]
+                next_x[i] = beta[i] + sum_
+
+            diff_x = next_x - x
+            if alpha_norm < 1:
+                end_cond = alpha_norm / (1 - alpha_norm) * norm_inf_vec(diff_x)
+            elif alpha_norm == 1:
+                end_cond = norm_inf_vec(diff_x)
+            else:
+                break
+            x = next_x
+            if end_cond < eps:
+                break
+
+        u = self._vector_to_matrix(x, N - 1)
+
+        return u
+
+    def _get_equation_system(self, N, l):
+        sz = N - 1
+        A = np.zeros((sz * sz, sz * sz))
+        b = np.zeros(sz * sz)
+        for i in range(sz):
+            for j in range(sz):
+                A[i * sz + j][i * sz + j] -= 4
+
+                if i + 1 == sz:
+                    A[i * sz + j][i * sz + j] += 1
+                else:
+                    A[i * sz + j][(i + 1) * sz + j] += 1
+
+                if i - 1 == -1:
+                    b[i * sz + j] -= self.data.phi0(j * self.h)
+                else:
+                    A[i * sz + j][(i - 1) * sz + j] += 1
+
+                if j + 1 == sz:
+                    A[i * sz + j][i * sz + j] += 1
+                else:
+                    A[i * sz + j][i * sz + (j + 1)] += 1
+
+                if j - 1 == -1:
+                    b[i * sz + j] -= self.data.phi2(i * self.h)
+                else:
+                    A[i * sz + j][i * sz + (j - 1)] += 1
+
+        return A, b
+
+    def _find_equivalent_system(self, A, b):
+        n = len(A)
+        alpha = np.zeros((n, n))
+        beta = np.zeros(n)
+        for i in range(n):
+            if A[i][i] == 0:
+                swap_flag = False
+                for j in range(i + 1, n):
+                    if A[j][i] != 0:
+                        A[i], A[j] = A[j], A[i]
+                        b[i], b[j] = b[j], b[i]
+                        swap_flag = True
+                        break
+                if not swap_flag:
+                    continue
+
+            beta[i] = b[i] / A[i][i]
+            for j in range(n):
+                if i == j:
+                    alpha[i][j] = 0
+                else:
+                    alpha[i][j] = -A[i][j] / A[i][i]
+
+        return alpha, beta
+
+    def _vector_to_matrix(self, vec, sz):
+        u = np.zeros((sz, sz))
+        for i in range(sz):
+            u[i] = vec[i * sz:(i + 1) * sz]
+        return u

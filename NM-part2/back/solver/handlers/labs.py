@@ -97,12 +97,6 @@ def solve_lab7(data):
     N, l, eps = int(data['N']), int(data['l']), float(data['eps'])
 
     params = {
-        'x': (0, np.pi / 2),
-        'y': (0, np.pi / 2),
-        'a': 1,
-        'b': 0,
-        'c': 0,
-        'd': -2,
         'phi0': lambda y: np.cos(y),
         'phi1': lambda y: 0,
         'phi2': lambda x: np.cos(x),
@@ -129,9 +123,9 @@ def solve_lab8(data):
         'l2': 1,
         'psi': lambda x, y: x * y,
         'phi0': lambda x, t: 0,
-        'phi1': lambda y, t: y * np.cos(t),
-        'phi2': lambda x, t: 0,
-        'phi3': lambda x, t: x * np.cos(t),
+        'phi1': lambda x, t: x * np.cos(t),
+        'phi2': lambda y, t: 0,
+        'phi3': lambda y, t: y * np.cos(t),
         'solution': lambda x, y, t: x * y * np.cos(t)
     }
 

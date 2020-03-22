@@ -23,11 +23,20 @@ def tma(a, b, c, d):
 
 
 def norm_inf(A):
-        n = len(A)
-        norm = -1
+    n = len(A)
+    norm = 0
+    for i in range(n):
+        sum_ = 0
         for j in range(n):
-            sum_ = 0
-            for i in range(n):
-                sum_ += A[i][j]
-            norm = sum_ if norm < sum_ else norm
-        return norm
+            sum_ += abs(A[i][j])
+        norm = sum_ if norm < sum_ else norm
+    return norm
+
+
+def norm_inf_vec(A):
+    n = len(A)
+    norm = 0
+    for i in range(n):
+        if abs(A[i]) > norm:
+            norm = abs(A[i])
+    return norm
