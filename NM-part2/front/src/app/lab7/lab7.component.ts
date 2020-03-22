@@ -11,7 +11,7 @@ declare var Plotly: any;
 })
 export class Lab7Component implements OnInit {
 
-  method = 'simple';
+  method = 'leibmann';
   dataNumerical: any
   dataAnalytic: any
 
