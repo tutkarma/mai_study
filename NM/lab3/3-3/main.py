@@ -39,7 +39,6 @@ def mls(n, x, y):
     return coefs.get_data()
 
 
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--input', required=True, help='Input file')
@@ -66,7 +65,6 @@ if __name__ == '__main__':
     F2 = [F(coefs2, i) for i in x]
     err2 = sum_squared_errors(F2, y)
     logging.info("Error: {0}".format(err2))
-
 
     plt.scatter(x, y, color='r')
     plt.plot(x, F1, color='b')

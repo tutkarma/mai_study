@@ -3,6 +3,15 @@ import logging
 
 from utils import read_data, save_to_file
 
+def f(x):
+    return x ** 3
+
+def first(x):
+    return 3 * x ** 2
+
+def second(x):
+    return 6 * x
+
 
 def find_interval(points, x):
     for i in range(0, len(points) - 1):
@@ -21,7 +30,7 @@ def first_derivative(x, y, x0):
 def second_derivative(x, y, x0):
     i = find_interval(x, x0)
     num1 = (y[i + 2] - y[i + 1]) / (x[i + 2] - x[i + 1])
-    num2 = (y[i + 1] - y[i]) / (x[i+ 1] - x[i])
+    num2 = (y[i + 1] - y[i]) / (x[i + 1] - x[i])
     return 2 * (num1 - num2) / (x[i + 2] - x[i])
 
 
@@ -37,6 +46,8 @@ if __name__ == '__main__':
     init_dict = read_data(args.input, need_args)
     points, values, x = init_dict['points'], init_dict['values'], init_dict['x']
 
+    values = [f(i) for i in points]
+
     logging.info("Numerical differentiation")
     logging.info("Points: {0}".format(points))
     logging.info("Values: {0}".format(values))
@@ -46,5 +57,13 @@ if __name__ == '__main__':
     second_der = second_derivative(points, values, x)
     logging.info("First derivative: {0}".format(first_der))
     logging.info("Second derivative: {0}".format(second_der))
+
+    check_first = first(x)
+    check_second = second(x)
+
+    print("First derivative: {0}".format(round(first_der, 3)))
+    print("Check: {0}".format(round(check_first, 3)))
+    print("Second derivative: {0}".format(round(second_der, 3)))
+    print("Check: {0}".format(round(check_second, 3)))
 
     save_to_file(args.output, first_der=first_der, second_der=second_der)

@@ -190,3 +190,11 @@ class TridiagonalMatrix:
         for i in range(len(self)):
             print("{0} {1} {2} {3}".format(self.a[i], 
                 self.b[i], self.c[i], D[i]))
+
+    @classmethod
+    def from_lists(cls, list_a, list_b, list_c):
+        mat = TridiagonalMatrix()
+        mat.a = list_a
+        mat.b = list_b
+        mat.c = list_c
+        return mat

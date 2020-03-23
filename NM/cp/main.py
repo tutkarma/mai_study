@@ -124,17 +124,15 @@ def parallel_jacobi_rotate(comm, A, ind_j, ind_k):
         comm.Recv([row_j_new, sz, MPI.FLOAT], source=1, tag=0, status=status)
         comm.Recv([row_k_new, sz, MPI.FLOAT], source=2, tag=0, status=status)
 
-        A[j, k] = (c ** 2 - s ** 2) * row_j[k] + s * c * (row_k[k] - row_j[j])
-        A[k, j] = A[j, k]
+        A[j, k] = A[k, j] = (c ** 2 - s ** 2) * row_j[k] + s * c * (row_k[k] - row_j[j])
         A[j, j] = c ** 2 * row_j[j] + 2 * s * c * row_j[k] + s ** 2 * row_k[k]
         A[k, k] = s ** 2 * row_j[j] - 2 * s * c * row_j[k] + c ** 2 * row_k[k]
 
+
         for i in range(sz):
             if i != j and i != k:
-                A[j, i] = row_j_new[i]
-                A[k, i] = row_k_new[i]
-                A[i, j] = A[j, i]
-                A[i, k] = A[k, i]
+                A[j, i] = A[i, j] = row_j_new[i]
+                A[k, i] = A[i, k] = row_k_new[i]
 
     return A
 
@@ -181,6 +179,6 @@ if __name__ == "__main__":
 
     if rank == 0:
         save_to_file(args.output, eigenvalues=eig)
-        print("Dimension {0}, time elapsed {1}\n".format(A.shape[0], elapsed_time))
+        print("Dimension {0}, time elapsed {1} sec.\n".format(A.shape[0], elapsed_time))
 
     MPI.Finalize()

@@ -99,6 +99,18 @@ def Runge_Romberg_method(res):
     return {'Shooting': err_shooting, 'FD': err_fd}
 
 
+def exact_error(res, exact):
+    err_shooting = []
+    for i in range(len(res[0]['Shooting']['y'])):
+        err_shooting.append(abs(res[0]['Shooting']['y'][i] - exact[0][1][i]))
+
+    err_fd = []
+    for i in range(len(res[0]['FD']['y'])):
+        err_fd.append(abs(res[0]['FD']['y'][i] - exact[0][1][i]))
+
+    return {'Shooting': err_shooting, 'FD': err_fd}
+
+
 def draw_plot(res, exact, *h):
     n = len(res)
     for i in range(n):
@@ -162,10 +174,11 @@ if __name__ == '__main__':
 
 
     errors = Runge_Romberg_method(save_res)
+    errors2 = exact_error(save_res, exact)
     logging.info("Errors")
     logging.info("Shooting error: {0}".format(errors['Shooting']))
     logging.info("FD error: {0}".format(errors['FD']))
 
     draw_plot(save_res, exact, st, st / 2)
 
-    save_to_file(args.output, h1=save_res[0], h2=save_res[1], errors=errors)
+    save_to_file(args.output, h1=save_res[0], h2=save_res[1], Errors_Runge=errors, Errors_exact=errors2)

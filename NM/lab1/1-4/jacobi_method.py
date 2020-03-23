@@ -1,10 +1,27 @@
 import argparse
 import logging
 import math
+import profile
 
 from matrix import Matrix, Vector
 from utils import read_data, save_to_file
-from benchmark import numpy_eig
+
+from numpy.linalg import solve, eig
+import numpy as np
+#from benchmark import numpy_eig
+
+def numpy_eigs(matrix, my_values, my_vectors):
+    print("My eigenvalues:")
+    print(my_values)
+    print("My eigenvectors:")
+    print(my_vectors)
+
+    a = np.array(matrix.get_data())
+    eig_np = eig(a)
+    print("Numpy eigenvalues:")
+    print(eig_np[0].round(3))
+    print("Numpy eigenvectors:")
+    print(eig_np[1].round(3))
 
 
 def t(A):
@@ -33,6 +50,7 @@ def jacobi_eigenvalue(A, eps):
     A_i = Matrix(A)
     eigenvectors = Matrix.identity(sz)
 
+    a = 0
     while True:
         U = Matrix.identity(sz)
         i, j = indexes_max_elem(A_i)
@@ -49,12 +67,13 @@ def jacobi_eigenvalue(A, eps):
 
         if t(A_i) < eps:
             break
+        a += 1
 
     eigenvalues = A_i.diag()
     return eigenvalues, eigenvectors
 
 
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--input', required=True, help='Input file')
     parser.add_argument('--output', required=True, help='Output file')
@@ -69,3 +88,6 @@ if __name__ == '__main__':
     values, vectors = jacobi_eigenvalue(A, eps)
     numpy_eigs(A, values, vectors)
     save_to_file(args.output, eigenvalues=values, eigenvectors=vectors)
+
+if __name__ == '__main__':
+    profile.run('main()')
