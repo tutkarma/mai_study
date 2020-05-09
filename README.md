@@ -12,6 +12,8 @@ http://bit.ly/faq8k806 -- все собранные материалы
 
 [ТВиМС и ТСП](https://drive.google.com/drive/folders/1MywlOWjFaKRl0UwxR0sZDPsFj_fswTgZ). Спасибо [Анастасии Берендаковой](https://vk.com/i_am_ss).
 
+[Информация по диплому](https://github.com/rkhomenko/diplom-info). Спасибо [Роману Хоменко](https://vk.com/rkhomenko1995).
+
 ### 1 курс ###
 
 [1curse](1curse) -- тут только 2 семестр.
