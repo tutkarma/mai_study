@@ -14,6 +14,8 @@ http://bit.ly/faq8k806 -- все собранные материалы
 
 [Информация по диплому](https://github.com/rkhomenko/diplom-info). Спасибо [Роману Хоменко](https://vk.com/rkhomenko1995).
 
+[Затеханный ГОСТ Гавриловой](https://github.com/kisasexypantera94/zanuda-gav). Спасибо [Доведу](https://vk.com/kisasexypantera94).
+
 ### 1 курс ###
 
 [1семестр](https://www.youtube.com/user/LrTmpCFD/videos) -- видео с разбором всех лаб и КП 1 семестра.
