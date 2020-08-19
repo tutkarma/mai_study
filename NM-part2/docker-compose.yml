@@ -1,0 +1,21 @@
+version: '2.4'
+
+services:
+  app:
+    build:
+      context: ./back
+      target: app
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./back:/mnt
+    working_dir: /mnt/
+
+  web:
+    build:
+      context: ./front
+    volumes:
+      - ./front:/app
+      - /app/node_modules
+    ports:
+      - "4200:4200"

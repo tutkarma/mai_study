@@ -50,7 +50,14 @@ class Parabolic2DSolver:
             for i in range(N2):
                 u_y[k][i] = self.data.solution(0.1, i * self.h2, k * self.tau)
 
-        return {'grid_x': u_x.tolist(), 'grid_y': u_y.tolist()}
+        u = np.zeros((K, N1, N2))
+        for k in range(K):
+            for j in range(N1):
+                for i in range(N2):
+                    u[k][j][i] = self.data.solution(j * self.h1, i * self.h2, k * self.tau)
+
+        return {'grid_x': u_x.tolist(), 'grid_y': u_y.tolist(), 'grid': u[int(len(u) // 2)].tolist()}
+
 
     def _alter_directions_solve(self, N1, N2, K, T):
         ax = np.zeros(N1)
@@ -73,17 +80,15 @@ class Parabolic2DSolver:
             by[j] = -(1 + 2 * self.omega)
             cy[j] = self.omega
 
-        u1 = np.zeros((N1, N2))
-        u2 = np.zeros((N1, N2))
+        prev_solution = np.zeros((N1, N2))
+        cur_solution = np.zeros((N1, N2))
         u3 = np.zeros((N1, N2))
-        ux = np.zeros(N1)
-        uy = np.zeros(N2)
 
         results = []
 
         for i in range(N1):
             for j in range(N2):
-                u1[i][j] = self.data.psi(i * self.h1, j * self.h2)
+                prev_solution[i][j] = self.data.psi(i * self.h1, j * self.h2)
 
         for k in range(1, N1):
             tk1 = (k + 0.5) * self.h1
@@ -93,26 +98,26 @@ class Parabolic2DSolver:
                 yj = j * self.h2
 
                 dx[0] = self.data.phi0(yj, tk2)
-                dx[-1] = self.h1 * self.data.phi1(yj, tk2)
+                dx[-1] = self.data.phi1(yj, tk2)
 
                 for i in range(1, N1 - 1):
                     xi = i * self.h1
-                    dx[i] = -self.omega * u1[i][j + 1] \
-                            + (2 * self.omega - 1) * u1[i][j] \
-                            - self.omega * u1[i][j - 1] \
+                    dx[i] = -self.omega * prev_solution[i][j + 1] \
+                            + (2 * self.omega - 1) * prev_solution[i][j] \
+                            - self.omega * prev_solution[i][j - 1] \
                             - self.h1 / 2 * self.data.f(xi, yj, tk2)
 
                 ux = tma(ax, bx, cx, dx)
                 for i in range(N1):
-                    u2[i][j] = ux[i]
+                    cur_solution[i][j] = ux[i]
 
             for i in range(N1):
-                u2[i][0] = 0
-                u2[i][-1] = 0
+                cur_solution[i][0] = 0
+                cur_solution[i][-1] = 0
 
             for i in range(N1):
-                u2[i][0] = self.data.phi2(i * self.h1, tk1)
-                u2[i][-1] = u2[i][-2] + self.h2 * self.data.phi3(i * self.h1, tk1)
+                cur_solution[i][0] = self.data.phi2(i * self.h1, tk1)
+                cur_solution[i][-1] = cur_solution[i][-2] + self.h2 * self.data.phi3(i * self.h1, tk1)
 
 
             for i in range(1, N1 - 1):
@@ -123,9 +128,9 @@ class Parabolic2DSolver:
 
                 for j in range(1, N2 - 1):
                     yj = j * self.h2
-                    dy[j] = -self.sigma * u2[i + 1][j] \
-                            + (2 * self.sigma - 1) * u2[i][j] \
-                            - self.sigma * u2[i - 1][j] \
+                    dy[j] = -self.sigma * cur_solution[i + 1][j] \
+                            + (2 * self.sigma - 1) * cur_solution[i][j] \
+                            - self.sigma * cur_solution[i - 1][j] \
                             - self.h1 / 2 * self.data.f(xi, yj, tk2)
 
                 uy = tma(ay, by, cy, dy)
@@ -142,9 +147,10 @@ class Parabolic2DSolver:
 
             results.append(np.copy(u3))
 
-            u1, u3 = u3, u1
+            prev_solution, u3 = u3, prev_solution
 
-        return results[-2]
+        return results[int(len(results) // 2)]
+
 
     def _fract_steps_solve(self, N1, N2, K, T):
         ax = np.zeros(N1)
