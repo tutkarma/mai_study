@@ -10,7 +10,7 @@
 интерфейс полностью из командной строки
 
 ```
-usage: konst.py [-h] {checker,solver} ...
+usage: check.py [-h] {checker,solver} ...
 
 Helps to pass 2 laboratory work of diskran.
 
