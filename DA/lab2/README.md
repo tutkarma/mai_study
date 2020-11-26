@@ -1,5 +1,7 @@
 # Лабораторная работа №2. Словарь #
 
+[Patricia](https://github.com/anxieuse/Algorithms-and-Data-Structures/tree/main/Lab2) -- самая православная реализация патриции по мнению [Леонида Короткевича](https://vk.com/id551766246) с визуализацией оной в реальном времени через graphviz.
+
 [check.py](check.py) -- чекер от [Константина](https://github.com/sakost)
 
 От автора:
