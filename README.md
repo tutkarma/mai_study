@@ -12,7 +12,15 @@ http://bit.ly/faq8k806 -- все собранные материалы
 
 [ТВиМС и ТСП](https://drive.google.com/drive/folders/1MywlOWjFaKRl0UwxR0sZDPsFj_fswTgZ). Спасибо [Анастасии Берендаковой](https://vk.com/i_am_ss).
 
+[Информация по диплому](https://github.com/rkhomenko/diplom-info). Спасибо [Роману Хоменко](https://vk.com/rkhomenko1995).
+
+[Затеханный ГОСТ Гавриловой](https://github.com/kisasexypantera94/zanuda-gav). Спасибо [Доведу](https://vk.com/kisasexypantera94).
+
 ### 1 курс ###
+
+[1семестр](https://www.youtube.com/user/LrTmpCFD/videos) -- видео с разбором всех лаб и КП 1 семестра.
+
+[Сдача экзамена](1curse/exam_rec.md) -- советы по сдаче экзамена.
 
 [1curse](1curse) -- тут только 2 семестр.
 
@@ -55,3 +63,5 @@ http://bit.ly/faq8k806 -- все собранные материалы
 [Mult](Mult) -- Мультимедиа
 
 [NM](NM-part2) -- Численные методы
+
+[CD](CD) -- БЖД

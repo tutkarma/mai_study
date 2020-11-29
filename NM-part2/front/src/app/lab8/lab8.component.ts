@@ -12,6 +12,7 @@ export class Lab8Component implements OnInit {
 
   method = 'alter_directions';
   dataNumerical: any
+  dataAnalytic: any
   dataAnalyticX: any
   dataAnalyticY: any
 
@@ -30,6 +31,7 @@ export class Lab8Component implements OnInit {
                     .subscribe(data => {
                       console.log(data);
                       this.dataNumerical = data['numerical'];
+                      this.dataAnalytic = data['analytic']['grid'];
                       this.dataAnalyticX = data['analytic']['grid_x'];
                       this.dataAnalyticY = data['analytic']['grid_y'];
       });
@@ -52,20 +54,37 @@ export class Lab8Component implements OnInit {
       }];
       Plotly.newPlot('plotNumerical', dataPlotNumerical, layoutNumerical);
 
-    const dataTraceX = {
-      y: this.dataAnalyticX.map(s => this.sum(s) / s.length),
-      type: 'scatter',
-      name: 'Analytic X'
-    };
+      const layoutAnalytic = {
+          title: 'analytic',
+          autosize: false,
+          width: 400,
+          height: 400,
+          margin: {
+            l: 65,
+            r: 50,
+            b: 65,
+            t: 90,
+          }
+      };
+      const dataPlotAnalytic = [{
+          z: this.dataAnalytic,
+          type: 'surface'
+      }];
+      Plotly.newPlot('plotAnalytic', dataPlotAnalytic, layoutAnalytic);
 
-    const dataTraceY = {
-      y: this.dataAnalyticY.map(s => this.sum(s) / s.length),
-      type: 'scatter',
-      name: 'Analytic Y'
-    };
+      const dataTraceX = {
+        y: this.dataAnalyticX.map(s => this.sum(s) / s.length),
+        type: 'scatter',
+        name: 'Analytic X'
+      };
 
-    Plotly.newPlot('solution-comparison-x', [[], dataTraceX]);
-    Plotly.newPlot('solution-comparison-y', [[], dataTraceY]);
+      const dataTraceY = {
+        y: this.dataAnalyticY.map(s => this.sum(s) / s.length),
+        type: 'scatter',
+        name: 'Analytic Y'
+      };
+
+      Plotly.newPlot('solution-comparison', [dataTraceX, dataTraceY]);
   }
 
   sum = arr => arr.reduce((a, b) => a + b, 0);
