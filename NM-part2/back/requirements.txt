@@ -1,4 +1,4 @@
 numpy==1.21.0
 Flask==1.1.1
-Werkzeug==0.16.0
+Werkzeug==2.2.3
 flask_cors
